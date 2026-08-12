@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import logoBlue from "../assets/tuojing-logo-blue.png";
 import mesh from "../assets/media/mesh.webp";
+import MorphText, { PHYSICAL } from "../components/MorphText";
 import LegacyProject from "./LegacyProject";
 import { findProject } from "./legacyProjects";
 import type { FeedEntry } from "./legacyContent";
@@ -135,7 +136,7 @@ function Entry({ entry, index }: { entry: FeedEntry; index: number }) {
     // 整条可点，指向仓库；内部的 arXiv / 数据集另开，用 stopPropagation 让它们各走各的
     <a
       href={`?p=${entry.slug}`}
-      className={`lg-reveal lg-reveal-${Math.min(index + 2, 6)} ${entryClasses[entry.variant]}`}
+      className={`shake-trigger lg-reveal lg-reveal-${Math.min(index + 2, 6)} ${entryClasses[entry.variant]}`}
     >
       <div className="relative flex items-baseline justify-between gap-1.5">
         <span
@@ -143,7 +144,17 @@ function Entry({ entry, index }: { entry: FeedEntry; index: number }) {
           className="absolute -left-[40px] top-[5px] size-[7px] rounded-sm bg-foreground outline outline-2 outline-background"
         />
         <div className="min-w-0 flex-1 text-[13px] font-semibold leading-5">
-          {entry.title}
+          {/* 只有冒号前的项目名抖 —— 后面的中文副标题保持不动 */}
+          {(() => {
+            const i = entry.title.indexOf("：");
+            if (i < 0) return <span className="shake-crazy">{entry.title}</span>;
+            return (
+              <>
+                <span className="shake-crazy">{entry.title.slice(0, i)}</span>
+                {entry.title.slice(i)}
+              </>
+            );
+          })()}
         </div>
         <div className="ml-1 shrink-0 text-xs text-accent">{entry.tag}</div>
       </div>
@@ -176,12 +187,13 @@ function HomePage() {
       <Mesh />
       <Container><div className="relative max-w-5xl">
         <PageLabel index={0} />
-        <h1 className="tj-display lg-reveal lg-reveal-1 mt-6 text-[clamp(2.25rem,5.2vw,4.5rem)] text-foreground">
+        <h1 className="tj-display lg-reveal lg-reveal-1 mt-6 text-[clamp(2.25rem,5vw,4.25rem)] text-foreground">
           {hero.headline[0]}
           <br />
           {hero.headline[1]}
-          <span className="hero-accent">{hero.headlineAccent}</span>
-          {hero.headlineTail}
+          {hero.digitalZh}与
+          {/* 物理世界：悬停触发物理特效（雾化 / 汽化 / 电击 / 磁场 / 结晶） */}
+          <MorphText a={hero.physicalZh} b={hero.physicalEn} pool={PHYSICAL} />
         </h1>
         <p className="lg-reveal lg-reveal-2 mt-8 max-w-2xl font-mono text-sm leading-[1.9] text-foreground/85">
           {mission.lead}
@@ -240,15 +252,15 @@ function TeamPage() {
           {team.members.map((m, i) => (
             <div
               key={m.name}
-              className={`feed-entry lg-reveal lg-reveal-${Math.min(2 + Math.floor(i / 3), 4)} flex flex-col gap-2.5 rounded-2xl border border-card-border bg-white/70 p-5 hover:border-card-border-hover`}
+              className={`shake-trigger feed-entry lg-reveal lg-reveal-${Math.min(2 + Math.floor(i / 3), 4)} flex flex-col gap-2.5 rounded-2xl border border-card-border bg-white/70 p-5 hover:border-card-border-hover`}
             >
               <div className="flex items-center gap-3">
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent to-deep font-serif text-sm font-bold text-white">
                   {m.initial}
                 </span>
                 <div className="min-w-0">
-                  <div className="truncate text-[13px] font-semibold leading-5">
-                    {m.name}
+                  <div className="text-[13px] font-semibold leading-5">
+                    <span className="shake-crazy">{m.name}</span>
                   </div>
                   <div className="truncate text-[11px] text-accent">{m.role}</div>
                 </div>

@@ -16,9 +16,12 @@ export const pages = [
 
 export const hero = {
   // 强调只给一个短语（Stripe：品牌色只作 CTA/链接与单点强调，不作正文色）
-  headline: ["拓展智能边界，", "连接数字世界与"],
-  headlineAccent: "物理世界",
-  headlineTail: "。",
+  headline: ["拓展智能边界，", "连接"],
+  // 数字侧走赛博特效，物理侧走物理特效 —— 特效本身就是这句话的注解
+  digitalZh: "数字世界",
+  digitalEn: "Digital World",
+  physicalZh: "物理世界",
+  physicalEn: "Physical World",
 };
 
 export const mission = {
