@@ -626,9 +626,10 @@ button:disabled,
   }
 }
 
-/* 更高频的一档：给首屏那种大字号用。
-   步数从 25 提到 34、时长从 0.24s 压到 0.13s —— 每步约 4ms，
-   远快过一帧，所以读起来是"高频震颤"而不是"来回晃"。 */
+/* 最高频的一档：给首屏那种大字号用。
+   34 帧 / 0.09s —— 每步约 2.6ms，一个 16ms 的帧里要跨过 6 个关键帧，
+   等于每帧都落在轨迹上的一个新位置，读作"随机震颤"而不是"来回晃"。
+   再压下去也不会更快了：帧率是上限。 */
 .shake-fast {
   display: inline-block;
   transform-origin: center center;
@@ -674,7 +675,7 @@ button:disabled,
 
 .shake-trigger:hover .shake-fast,
 .shake-fast:hover {
-  animation: tj-shake-fast 0.13s linear infinite;
+  animation: tj-shake-fast 0.09s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
