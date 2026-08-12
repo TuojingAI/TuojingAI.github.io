@@ -1,0 +1,528 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   四套皮共用一组变量名。切 <html> 上的 class 即换版本。
+   通道写成空格分隔 RGB，才能保留 Tailwind 的 <alpha-value>。
+   ============================================================ */
+
+/* —— 标本 SPECIMEN（暖纸白，编辑部气质）—— */
+:root,
+.v-specimen {
+  --c-canvas: 244 241 234;
+  --c-canvas-raised: 251 249 245;
+  --c-canvas-sunken: 234 229 218;
+  --c-ink: 26 23 20;
+  --c-ink-muted: 92 85 76;
+  --c-ink-faint: 115 107 100;
+  --c-ink-inverse: 244 241 234;
+  --c-rule: 222 215 201;
+  --c-rule-strong: 196 186 169;
+  --c-instrument: 15 90 110;
+  --c-instrument-wash: 221 232 234;
+  --c-instrument-ink: 244 241 234;
+  --c-unsafe: 168 50 30;
+  --c-figure-bg: 232 225 213;
+}
+
+/* —— 宣言 MANIFESTO（骨白海报，巨大黑字 + 信号朱红）——
+   朱红只做信号，不做底：Swiss 海报的用法，不是印章红。 */
+.v-manifesto {
+  --c-canvas: 234 232 225;
+  --c-canvas-raised: 244 243 238;
+  --c-canvas-sunken: 221 219 210;
+  --c-ink: 17 17 17;
+  --c-ink-muted: 74 74 72;
+  --c-ink-faint: 104 103 99;
+  --c-ink-inverse: 234 232 225;
+  --c-rule: 202 199 189;
+  --c-rule-strong: 17 17 17;
+  --c-instrument: 178 58 30;
+  --c-instrument-wash: 240 224 218;
+  --c-instrument-ink: 255 252 248;
+  --c-unsafe: 178 58 30;
+  --c-figure-bg: 221 219 210;
+}
+
+/* —— 图谱 ATLAS（暖纸白 + 仪表青，系统图）—— */
+.v-atlas {
+  --c-canvas: 246 244 239;
+  --c-canvas-raised: 252 251 248;
+  --c-canvas-sunken: 236 233 226;
+  --c-ink: 24 26 27;
+  --c-ink-muted: 88 94 96;
+  --c-ink-faint: 107 111 113;
+  --c-ink-inverse: 246 244 239;
+  --c-rule: 219 217 209;
+  --c-rule-strong: 186 184 174;
+  --c-instrument: 15 90 110;
+  --c-instrument-wash: 221 232 234;
+  --c-instrument-ink: 246 244 239;
+  --c-unsafe: 168 50 30;
+  --c-figure-bg: 236 233 226;
+}
+
+/* —— 影 CINEMA（近黑，影像主导）——
+   不用纯 #000：纯黑在 OLED 上和影像边缘会断层。 */
+.v-cinema {
+  --c-canvas: 12 12 13;
+  --c-canvas-raised: 24 24 26;
+  --c-canvas-sunken: 8 8 9;
+  --c-ink: 237 234 227;
+  --c-ink-muted: 165 162 154;
+  --c-ink-faint: 125 123 117;
+  --c-ink-inverse: 12 12 13;
+  --c-rule: 44 44 47;
+  --c-rule-strong: 72 72 76;
+  --c-instrument: 122 197 217;
+  --c-instrument-wash: 18 42 50;
+  --c-instrument-ink: 8 8 9;
+  --c-unsafe: 226 112 90;
+  --c-figure-bg: 20 20 22;
+}
+
+/* —— 境 FRONTIER（纯黑 + 单一高饱和强调色，参照 rimbot 的配色逻辑）——
+   强调色取自拓境自己的品牌蓝，提亮到深底可用；不用橙，那是日冕的。 */
+.v-frontier {
+  --c-canvas: 0 0 0;
+  --c-canvas-raised: 12 12 14;
+  --c-canvas-sunken: 0 0 0;
+  --c-ink: 255 255 255;
+  --c-ink-muted: 178 178 182;
+  --c-ink-faint: 132 132 138;
+  --c-ink-inverse: 0 0 0;
+  --c-rule: 38 38 42;
+  --c-rule-strong: 68 68 74;
+  /* 海蓝三段：深处 → 中景 → 高光。单一平色在纯黑上会显得薄。 */
+  --c-sea-deep: 7 46 84;
+  --c-sea: 15 111 196;
+  --c-sea-lit: 127 212 255;
+  --c-instrument: 74 172 236;
+  --c-instrument-wash: 8 32 58;
+  --c-instrument-ink: 0 0 0;
+  --c-unsafe: 235 97 6;
+  --c-figure-bg: 12 12 14;
+
+  color-scheme: dark;
+  /* 双栈：拉丁走 Manrope，中文穿透到 Noto Sans SC */
+  font-family: "Manrope", "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC",
+    "Microsoft YaHei", sans-serif;
+}
+
+/* 1920 基准的 vw 字号阶梯 —— rimbot 的整体等比缩放做法。
+   加 clamp 兜住超宽屏和小屏，避免 4K 上字大到荒唐、手机上小到读不了。 */
+.v-frontier .t-display {
+  font-size: clamp(2rem, 5.2vw, 5.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+}
+
+.v-frontier .t-display-en {
+  font-size: clamp(1.5rem, 3.5vw, 3.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.v-frontier .t-sec {
+  font-size: clamp(1.5rem, 2.8vw, 3rem);
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+.v-frontier .t-label {
+  font-size: clamp(0.75rem, 0.833vw, 0.9375rem);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+.v-frontier .t-body {
+  font-size: clamp(0.9375rem, 0.938vw, 1.0625rem);
+  line-height: 1.85;
+  font-weight: 400;
+}
+
+/* —— 简 QUIET（PI 的克制 + 苹果的优雅）——
+   底色直接取 PI 实测的 #F5F4EF 暖白纸：比纯白软，比米色冷，
+   而且正好托得住那张粉彩渲染（同一张图放纯黑上会穿帮，放暖白上很服帖）。
+   强调色用海蓝，只给链接和下划线，全站面积极小。 */
+.v-quiet {
+  --c-canvas: 245 244 239;
+  --c-canvas-raised: 250 249 246;
+  --c-canvas-sunken: 230 224 203;
+  --c-ink: 17 17 17;
+  --c-ink-muted: 90 88 82;
+  --c-ink-faint: 110 108 100; /* 4.78:1，小字可用 */
+  --c-ink-inverse: 245 244 239;
+  --c-rule: 224 221 210;
+  --c-rule-strong: 192 189 173;
+  --c-instrument: 21 86 140; /* 海蓝 6.96:1 */
+  --c-instrument-wash: 226 234 242;
+  --c-instrument-ink: 245 244 239;
+  --c-unsafe: 168 50 30;
+  --c-figure-bg: 230 224 203;
+
+  font-family: "Manrope", "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC",
+    "Microsoft YaHei", sans-serif;
+}
+
+/* 苹果式尺度：字号大、字重克制（600 不是 900）、字距收紧、行距松。
+   声音要小，但字要大 —— 这两件事不矛盾。 */
+.v-quiet .q-display {
+  font-size: clamp(2.25rem, 5vw, 4.25rem);
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+.v-quiet .q-h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  line-height: 1.24;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.v-quiet .q-h3 {
+  font-size: clamp(1.0625rem, 1.25vw, 1.25rem);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.v-quiet .q-lead {
+  font-size: clamp(1.0625rem, 1.35vw, 1.375rem);
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+.v-quiet .q-body {
+  font-size: 1.0625rem;
+  line-height: 1.9;
+  font-weight: 400;
+}
+
+.v-quiet .q-meta {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* PI 研究页规格（实测）：h1 = Signifier 衬线 60px / weight 400 / lh 1.25；
+   正文 = Source Sans 3 18px / lh 1.625 / weight 400。全页无一处粗体，
+   层级靠字号与字族拉开。中文没有 Signifier，所以：中文标题走无衬线 500，
+   英文副标题走 Source Serif 4 400 —— 衬线的优雅放在它成立的地方（拉丁），
+   不去碰中文大字号衬线（Songti SC 无 Bold 字面，浏览器会合成伪粗体）。 */
+.v-quiet .q-serif {
+  font-family: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.v-quiet .q-title {
+  font-size: clamp(1.875rem, 3.6vw, 3.25rem);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+
+.v-quiet .q-prose {
+  font-size: 1.0625rem;
+  line-height: 1.9;
+  font-weight: 400;
+}
+
+/* 图版：点阵底纹 + 左上角 mono 全大写标签 + 一圈细边。
+   PI 用它装所有示意图，是这套视觉里辨识度最高的一个器件。 */
+.v-quiet .q-plate {
+  background-color: rgb(var(--c-canvas-raised));
+  background-image: radial-gradient(
+    rgb(var(--c-rule-strong) / 0.55) 1px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
+  background-position: -1px -1px;
+}
+
+/* 资源按钮：虚线框 + 硬位移投影。
+   硬阴影在别处是 neo-brutalism 乱入，但 PI 只把它用在这一个器件上 ——
+   限定作用域就成立。 */
+.v-quiet .q-chip {
+  border: 1px dashed rgb(var(--c-ink) / 0.55);
+  box-shadow: 3px 3px 0 rgb(var(--c-ink));
+  transition:
+    box-shadow 160ms cubic-bezier(0.2, 0, 0, 1),
+    transform 160ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.v-quiet .q-chip:hover {
+  box-shadow: 1px 1px 0 rgb(var(--c-ink));
+  transform: translate(2px, 2px);
+}
+
+.v-quiet .q-chip:active {
+  box-shadow: 0 0 0 rgb(var(--c-ink));
+  transform: translate(3px, 3px);
+}
+
+/* 苹果式进场：慢、轻、只有 opacity + 很小的位移。这里用用户要的那条曲线。 */
+.js .v-quiet .rise,
+.js .rise.q {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js .v-quiet .rise.is-in,
+.js .rise.q.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* —— 拓境官网配色 ——
+   按 VoltAgent/awesome-design-md 里 Stripe 那份规格调过：
+   Stripe 的画布是白 + #f6f9fc 冷白带，边框是中性的 #e3e8ee。
+   原版把高饱和的 #E9F4FC 当主画布、#A9CFEA 当边框，是"发水"的来源。
+   现在：主画布降到低饱和冷白，原来那个蓝降级为次级色带，边框换中性发丝线。
+   品牌蓝 #0877FE 完全保留，但按 Stripe 的纪律只给 CTA 与链接。 */
+.v-legacy {
+  --c-canvas: 247 250 252;        /* #F7FAFC 冷白，取代原来的 #E9F4FC */
+  --c-canvas-raised: 255 255 255; /* 卡片纯白 */
+  --c-canvas-sunken: 233 244 252; /* #E9F4FC 降级为色带 */
+  --c-ink: 11 43 73;              /* #0B2B49 深 navy，不用纯黑 */
+  --c-ink-muted: 90 110 134;      /* #5A6E86 比原来更中性 */
+  --c-ink-faint: 90 110 134;
+  --c-ink-inverse: 255 255 255;
+  --c-rule: 227 232 238;          /* #E3E8EE Stripe 的中性发丝线 */
+  --c-rule-strong: 200 214 229;   /* #C8D6E5 */
+  --c-instrument: 8 119 254;      /* #0877FE 品牌蓝，只给 CTA 与链接 */
+  --c-instrument-wash: 233 244 252;
+  --c-instrument-ink: 255 255 255;
+  --c-legacy-deep: 11 98 214;     /* #0B62D6 */
+  --c-unsafe: 168 50 30;
+  --c-figure-bg: 233 244 252;
+}
+
+/* 显示级字体：Stripe / Linear 的共同签名 —— 轻字重 + 负字距。
+   Stripe 的 Don't 第一条：字重提到 300 以上，编辑气就塌了。
+   中文吃不消 -1.4px 那么狠，按字号用 em 收，效果等价。 */
+.v-legacy .tj-display {
+  font-weight: 300;
+  letter-spacing: -0.028em;
+  line-height: 1.28;
+}
+
+.v-legacy .tj-h2 {
+  font-weight: 300;
+  letter-spacing: -0.022em;
+  line-height: 1.3;
+}
+
+/* 原版首页大标题的蓝渐变文字，原样保留 */
+/* 原来的三段蓝渐变文字已移除：Stripe 的 Don't 里写明品牌色不作正文色使用。
+   强调改为只给标题里的一个短语上 accent（一屏一处）。 */
+.v-legacy .hero-accent {
+  color: rgb(var(--c-instrument));
+}
+
+.v-legacy .deep-card {
+  background: linear-gradient(135deg, #0b62d6, #0877fe 85%);
+}
+
+.v-legacy nav {
+  background: rgba(233, 244, 252, 0.55);
+  backdrop-filter: blur(20px) saturate(1.7);
+  -webkit-backdrop-filter: blur(20px) saturate(1.7);
+}
+
+.v-legacy .feed-entry {
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease,
+    background-color 300ms ease;
+}
+
+.v-legacy .feed-entry:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 2px 4px rgba(11, 43, 73, 0.05),
+    0 18px 44px rgba(11, 43, 73, 0.1);
+}
+
+/* 苹果式的过渡：稍慢、缓出，而不是原来的 300ms 弹性曲线 */
+.v-legacy .feed-entry {
+  transition:
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 260ms ease,
+    background-color 260ms ease;
+}
+
+/* 原版的整页翻页与进场 */
+/* 翻页：原来是 1050ms + blur(10~14px) + scale 1.1 的 keynote 效果，
+   厚重且 blur 每帧重绘代价高。科技公司这一档要的是干脆：
+   620ms、无 blur、缩放幅度收到 1.5% 以内。 */
+.v-legacy .pro-page {
+  transition:
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 420ms ease;
+}
+
+.v-legacy .lg-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 560ms ease,
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.v-legacy .page-active .lg-reveal {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.v-legacy .page-active .lg-reveal-1 { transition-delay: 70ms; }
+.v-legacy .page-active .lg-reveal-2 { transition-delay: 140ms; }
+.v-legacy .page-active .lg-reveal-3 { transition-delay: 210ms; }
+.v-legacy .page-active .lg-reveal-4 { transition-delay: 280ms; }
+.v-legacy .page-active .lg-reveal-5 { transition-delay: 350ms; }
+.v-legacy .page-active .lg-reveal-6 { transition-delay: 420ms; }
+
+@keyframes hint-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.v-legacy .hint-bob {
+  animation: hint-bob 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-legacy .pro-page,
+  .v-legacy .feed-entry { transition: none; }
+  .v-legacy .lg-reveal,
+  .v-legacy .page-active .lg-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .v-legacy .hint-bob { animation: none; }
+}
+
+:root {
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.v-cinema {
+  color-scheme: dark;
+}
+
+/* Gate 34：clip 而非 hidden —— hidden 会破坏后代的 sticky/fixed */
+html,
+body {
+  overflow-x: clip;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: rgb(var(--c-canvas));
+  font-feature-settings: "palt" 1;
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+  font-feature-settings: "palt" 1;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Gate 26：八态里的可见焦点。焦点环必须立刻出现，不能淡入。 */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid rgb(var(--c-instrument));
+  outline-offset: 3px;
+  border-radius: 2px;
+  transition: none;
+}
+
+a:active,
+button:active {
+  opacity: 0.72;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.u-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "palt" 1;
+}
+
+/* 进场：420ms / y12 / cubic-bezier(.2,0,0,1)。
+   故意不用 600ms+y20+easeOut —— 那条曲线是 PI / World Labs / Dyna 的共用签名。
+   隐藏初始态只在 .js 下生效，避免动画成为内容可见的前提。 */
+.js .rise {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 420ms cubic-bezier(0.2, 0, 0, 1),
+    transform 420ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.js .rise.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.rise-1 { transition-delay: 50ms; }
+.rise-2 { transition-delay: 100ms; }
+.rise-3 { transition-delay: 150ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .rise,
+  .js .rise.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

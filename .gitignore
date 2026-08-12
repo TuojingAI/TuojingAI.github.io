@@ -1,0 +1,11 @@
+node_modules
+dist
+.DS_Store
+*.local
+
+# 内部资料，不进公开仓库
+docs/
+work/
+
+# 本地开发配置（含本机路径）
+.claude/

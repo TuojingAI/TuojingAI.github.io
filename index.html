@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN" class="v-legacy">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#E9F4FC" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta
+      name="description"
+      content="拓境智能 Tuojing Intelligence — 面向真实物理世界的智能：世界模型与机器人操作、视触觉感知、物理资产与评测基础设施。让「仿真里有效」变成「真实世界里可信」。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="拓境智能 Tuojing Intelligence" />
+    <meta property="og:title" content="拓境智能 Tuojing Intelligence" />
+    <meta
+      property="og:description"
+      content="让「仿真里有效」变成「真实世界里可信」。世界模型与机器人操作、视触觉感知、物理资产与评测基础设施。"
+    />
+    <meta property="og:image" content="/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="拓境智能 Tuojing Intelligence" />
+    <meta
+      name="twitter:description"
+      content="拓展智能边界，连接数字世界与物理世界。"
+    />
+    <meta name="twitter:image" content="/og.jpg" />
+    <!-- Manrope 走拉丁、Noto Sans SC 走中文（同 rimbot 的 --family / --family-en 双栈思路）。
+         中文只取 400/500/700/900 四档，避免整包体积。 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>拓境智能 Tuojing Intelligence</title>
+  </head>
+  <body>
+    <!-- 在 CSS 应用前就打上标记：.rise 的隐藏初始态只在 JS 可用时生效 -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
