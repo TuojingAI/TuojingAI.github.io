@@ -191,7 +191,9 @@ function HomePage() {
           {hero.headline[0]}
           <br />
           {hero.headline[1]}
-          {hero.digitalZh}与
+          {/* 数字世界：悬停高频震颤，字本身不变 */}
+          <span className="shake-fast cursor-pointer">{hero.digitalZh}</span>
+          与
           {/* 物理世界：悬停触发物理特效（雾化 / 汽化 / 电击 / 磁场 / 结晶） */}
           <MorphText a={hero.physicalZh} b={hero.physicalEn} pool={PHYSICAL} />
         </h1>
