@@ -684,3 +684,35 @@ button:disabled,
     animation: none !important;
   }
 }
+
+/* 成员头像悬停切换：静止是蓝底姓氏圆，悬停淡出、卡通形象淡入 */
+.avatar-toon {
+  opacity: 0;
+  transform: scale(0.9) rotate(-6deg);
+  transition:
+    opacity 260ms cubic-bezier(0.2, 0, 0, 1),
+    transform 320ms cubic-bezier(0.34, 1.4, 0.5, 1);
+}
+
+.avatar-face {
+  transition:
+    opacity 220ms ease,
+    transform 320ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.shake-trigger:hover .avatar-toon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.shake-trigger:hover .avatar-face {
+  opacity: 0;
+  transform: scale(0.86);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-toon,
+  .avatar-face {
+    transition: none;
+  }
+}

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import logoBlue from "../assets/tuojing-logo-blue.png";
 import mesh from "../assets/media/mesh.webp";
 import MorphText, { PHYSICAL } from "../components/MorphText";
+import MemberAvatar from "../components/MemberAvatar";
 import LegacyProject from "./LegacyProject";
 import { findProject } from "./legacyProjects";
 import type { FeedEntry } from "./legacyContent";
@@ -257,9 +258,7 @@ function TeamPage() {
               className={`shake-trigger feed-entry lg-reveal lg-reveal-${Math.min(2 + Math.floor(i / 3), 4)} flex flex-col gap-2.5 rounded-2xl border border-card-border bg-white/70 p-5 hover:border-card-border-hover`}
             >
               <div className="flex items-center gap-3">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent to-deep font-serif text-sm font-bold text-white">
-                  {m.initial}
-                </span>
+                <MemberAvatar name={m.name} initial={m.initial} index={i} />
                 <div className="min-w-0">
                   <div className="text-[13px] font-semibold leading-5">
                     <span className="shake-crazy">{m.name}</span>
