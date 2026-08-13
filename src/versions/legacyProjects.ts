@@ -122,6 +122,96 @@ export const projects: Project[] = [
           },
         ],
       },
+      { kind: "h", text: "机器人数据的经济学" },
+      {
+        kind: "p",
+        text: "一个语言模型的单次预训练可以吃掉 15.6 万亿个 token（Llama 3）。机器人这一侧的数量级完全不同。DROID 是 76,000 条演示、350 小时交互数据；目前公开的最大单体真机数据集 AgiBot World 超过 100 万条轨迹、217 个任务；把全领域的公开数据池化起来，Open X-Embodiment 收录了 21 家机构、22 种本体、527 项技能，量级仍停在百万条轨迹。Physical Intelligence 在 π0 的博文里把这件事写成一句话：There is no such treasure trove of robot data.",
+      },
+      {
+        kind: "p",
+        text: "Fei-Fei Li 在 2025 年 11 月的 From Words to Worlds 里写，今天的大语言模型 remain wordsmiths in the dark; eloquent but inexperienced, knowledgeable but ungrounded，并直接指出 unlike language models, training data is scarce for today's robotic research。她给出的三个数据来源是互联网数据、合成仿真、以及真人演示的真实采集。更早在 TED2024，她的说法是 Simply seeing is not enough. Seeing is for doing and learning.",
+      },
+      {
+        kind: "p",
+        text: "NVIDIA 对同一个问题的表述是 GR00T N1 论文里的数据金字塔：底层是网络数据与人类视频，中层是物理仿真生成的合成数据，顶层是真机上采的数据；自下而上数量递减，与具体本体的绑定递增。World Labs 在 2026 年 6 月的世界模型功能分类学里把世界模型拆成 renderer、simulator、planner 三类，并写道 the simulator gets the least public attention, and is the most consequential of the three。两种表述指向同一层：把少量真实交互放大成可训练、可评估的东西。Real2SimReady 做的是这一层里的一段。",
+      },
+      { kind: "h", text: "仿真买到的到底是什么" },
+      {
+        kind: "list",
+        items: [
+          {
+            term: "可复制",
+            desc: "一次采集反复使用。DeepMind 的 DemoStart 给过一组直白的对照：同一个插接任务，在仿真里采 20 条演示约需半小时，而在真机上遥操作采到同等可用的数据用了 2,753 条轨迹、约 27 小时不间断操作。",
+          },
+          {
+            term: "可扰动",
+            desc: "位姿、干扰物、外部推挤可以按档位施加。MIT 的 RialTo 把真实场景扫描成数字孪生、在仿真里加固后回到真机，三档扰动下八任务平均 91% / 77% / 75%；同样起点、15 条演示的行为克隆基线是 25% / 11% / 5%。",
+          },
+          {
+            term: "可评测",
+            desc: "仿真可以当策略的筛选器，但要的是保序不是绝对值。SIMPLER 在六个通用策略上测得仿真与真机的排序相关性 Pearson 平均 0.924，同时说明即使做满视觉对齐，抽屉任务的真机与仿真成功率仍差 13.6 个百分点。",
+          },
+          {
+            term: "可承受失败",
+            desc: "在仿真里失败没有成本。RialTo 的消融显示，纯从零强化学习的策略会学会利用仿真器的建模误差，例如借铰链位置误差从底部顶开烤面包机，五个任务里有三个真机成功率为 0。这类失败必须在离硬件足够远的地方发生。",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        text: "同样要说清楚仿真不解决什么。Berkeley 的 HIL-SERL 在十三个接触密集任务上全程不用仿真，直接在真机上做人在环强化学习，多数任务一到两个半小时训到 100% 成功率，单张消费级显卡即可；Physical Intelligence 公开的 π0.5 与 π*0.6 两篇博客里，simulation 一词一次都没有出现。所以结论应当是收窄的：在单一固定工位、有夹具、能自动判定成功的场景里，直接在真机上练很可能更划算。real2sim 的价值落在规模、变体、评测，以及那些在真机上做不起或不安全的情况，而不落在「比真机训练便宜」。",
+      },
+      { kind: "h", text: "real2sim2real：环闭上才是判据" },
+      {
+        kind: "p",
+        text: "几何对齐不等于物理对齐。NVIDIA 对 SimReady 的定义里第一句就是，仅有视觉准确的三维资产是不够的，质量、摩擦、惯量张量、碰撞体都属于资产定义本身。Digital Cousins 给过一个方向相反、但更值得记住的实测：用目标柜子的精确数字孪生训练的策略，仿真里 100%、真机上只有 25%；用自动匹配的近似资产训练的，仿真 94%、真机 90%。RialTo 的消融方向恰恰相反，针对性重建远好于替换成大量合成资产。也就是说「重建越精确越好」和「多样性越大越好」这两句话各自都有论文反对，这个领域内部还没有共识。",
+      },
+      {
+        kind: "p",
+        text: "唯一站得住的推论因此只有一条：策略必须回到硬件上验。TRANSIC 在四个家具装配任务上真机每格 20 次试验、最终均值 81.25%，而不做任何补救、把仿真策略直接迁移过去的对照只有 11.25%。这类真机评测普遍每格只有 10 到 20 次试验，20 次上的 90% 与 95% 不构成差别；NVIDIA Research 在 2026 年 7 月也算过这笔账 —— 在 90% 成功率附近，70 次 rollout 的 95% 置信区间宽达 15.4 个百分点。一个永远不回到硬件的数字孪生，本质上只是图形学。",
+      },
+      {
+        kind: "p",
+        text: "接触与形变是这个环最难闭的地方。MuJoCo 官方文档承认 3.0 之前它本质上是刚体仿真器；NVIDIA 在 Isaac Sim 5.0 把原有 deformable body 标记为弃用并重建了这条 API；Omniverse PhysX 的可形变体仍标 Beta，限制清单里包含体可形变与面可形变均不支持静摩擦。已发表的可形变闭环成果高度集中在布料、绳索这类薄壳与线性物体上，体积型软体在接触、压缩、回弹上的公开真机成功率，我们这一轮检索没有找到可引用的数字。Real2SimReady 把可形变放进管线，是因为要交付的任务里有会变形的东西 —— 这是方向陈述，我们没有可以对外公布的闭环实测结果。",
+      },
+      { kind: "h", text: "这条路上已有的工作" },
+      {
+        kind: "list",
+        items: [
+          {
+            term: "UMI（2024-02）",
+            desc: "手持夹爪采集是这篇论文确立的公开做法，也给出了选择这条路的量化理由：在杯子摆放任务上，手持夹爪的采集速度比遥操作快三倍以上。Real2SimReady 的第一段沿用这条思路，不是另起一条。",
+          },
+          {
+            term: "MimicGen / DexMimicGen（2023-10 / 2024-10）",
+            desc: "从约 200 条人类演示生成 5 万余条。这条线后来成为 NVIDIA 的 Isaac GR00T-Mimic 与合成运动生成 Blueprint。",
+          },
+          {
+            term: "Digital Cousins / ACDC（2024-10，Fei-Fei Li 为末位作者）",
+            desc: "论证逐点几何对齐的数字孪生成本高且不产生跨域泛化，提出保留 affordance 的变体。几何对齐本身不是目的，用途决定它值不值得。",
+          },
+          {
+            term: "Real2Render2Real（2025-05，Berkeley）",
+            desc: "手机扫描加一条人类演示，派生大量训练数据并在真机上验证。它明确不做动力学仿真，这也是与本管线的实际分界：我们的第五段与第七段都发生在仿真里。",
+          },
+          {
+            term: "TwinAligner（2025-12）",
+            desc: "标题里就写着 Real2Sim2Real，同时处理视觉与动力学两侧的对齐，仿真训练后真机零样本。这条路线已经有人走通并交了真机数字。",
+          },
+          {
+            term: "SimFoundry（2026-06，斯坦福与 NVIDIA 合著）",
+            desc: "从单段视频零样本重建 sim-ready 数字孪生并自动派生变体，报告仿真评估预测真机表现的平均 Pearson 相关系数 0.911。sim-ready 是 NVIDIA Omniverse 生态里已有的资产术语，不是谁新提出的概念。",
+          },
+          {
+            term: "World Labs 的 R2S2R（2026-07）",
+            desc: "从一个真实任务重建可交互仿真，系统性变化外观、物体摆放、杂乱度、物理、机器人状态与相机视角，再在其中训练与评估策略；公开演示已覆盖线缆走线与弹性线缆插接等可形变任务。",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        text: "把这些摆出来是为了说清位置。Real2SimReady 的七段流程里没有一段是我们最先提出的，real-to-sim-to-real 早就是一个有名字的成熟方向，参与者里有斯坦福、NVIDIA、Berkeley、MIT，而且这几家彼此之间是合作关系而不是对立阵营 —— SimFoundry 的作者名单里同时有 Fei-Fei Li 和 NVIDIA GEAR 的核心成员。我们选择的路径是把手持夹爪的一次演示、与真实工位对齐的重建、候选动作的并行推演与比较，组织成一次可交付的技能。差异在输入形态与交付物，不在能力对比；这条管线目前没有公开的量化结果，所以这一节不给任何成功率、保序性或迁移能力的数字。",
+      },
       { kind: "h", text: "和其它四个项目的关系" },
       {
         kind: "p",
