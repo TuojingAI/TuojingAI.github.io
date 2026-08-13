@@ -55,6 +55,29 @@ function Body({ blocks }: { blocks: Block[] }) {
 
         if (b.kind === "fig") return <Plate key={i} fig={b.fig} />;
 
+        if (b.kind === "video")
+          return (
+            <figure key={i} className="my-8">
+              <div className="overflow-hidden border border-card-border bg-white">
+                <p className="border-b border-divider px-3 py-1.5 font-mono text-[10px] tracking-[0.14em] text-accent">
+                  {b.video.label}
+                </p>
+                {/* preload="none"：15 MB 的片子不能在首屏就开始下，等用户按播放 */}
+                <video
+                  src={b.video.src}
+                  poster={b.video.poster}
+                  controls
+                  playsInline
+                  preload="none"
+                  className="block h-auto w-full bg-black"
+                />
+              </div>
+              <figcaption className="mt-2 font-mono text-[11px] leading-relaxed text-muted-foreground">
+                {b.video.caption}
+              </figcaption>
+            </figure>
+          );
+
         if (b.kind === "list")
           return (
             <dl key={i} className="mt-5 flex flex-col">
@@ -92,8 +115,9 @@ function Body({ blocks }: { blocks: Block[] }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {b.rows.map((r) => (
-                    <tr key={r[0]} className="border-b border-divider last:border-0">
+                  {/* key 用行号不用 r[0]：多张表的首列有重复值（同一个模型的 VO / VT 两行） */}
+                  {b.rows.map((r, ri) => (
+                    <tr key={ri} className="border-b border-divider last:border-0">
                       {r.map((c, ci) => (
                         <td
                           key={ci}
@@ -175,17 +199,21 @@ export default function LegacyProject({ project }: { project: Project }) {
           </dd>
         </dl>
 
-        <p className="mt-6 font-mono text-[11px] leading-[1.9] text-muted-foreground">
-          {project.authors}
-        </p>
+        {project.authors && (
+          <p className="mt-6 font-mono text-[11px] leading-[1.9] text-muted-foreground">
+            {project.authors}
+          </p>
+        )}
         {/* 机构比作者再降一档：同字号但更淡，让作者名单先被读到 */}
-        <p className="mt-2 font-mono text-[11px] leading-[1.9] text-muted-foreground/70">
-          {project.affiliations}
-        </p>
+        {project.affiliations && (
+          <p className="mt-2 font-mono text-[11px] leading-[1.9] text-muted-foreground/70">
+            {project.affiliations}
+          </p>
+        )}
 
         {/* 资源按钮：虚线框 + 硬位移投影，PI 只把硬阴影用在这一个器件上 */}
         <div className="mt-7 flex flex-wrap gap-3">
-          {project.links.map((l) => (
+          {(project.links ?? []).map((l) => (
             <a
               key={l.href}
               href={l.href}

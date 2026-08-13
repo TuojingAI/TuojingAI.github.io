@@ -10,7 +10,8 @@ export const site = {
 export const pages = [
   { id: "home", label: "首页", labelEn: "Home" },
   { id: "research", label: "项目", labelEn: "Projects" },
-  { id: "team", label: "成员", labelEn: "Team" },
+  /* 成员页按老板要求先下线。team 数据整块保留在下方，恢复时把这一条与
+     Legacy.tsx 里的 TeamPage / pageNodes 一起加回来即可。 */
   { id: "join", label: "加入我们", labelEn: "Join Us" },
 ];
 
@@ -54,6 +55,17 @@ export type FeedEntry = {
    数字（1,628 demonstrations / 33 assets / 四个任务套件）取自 SoftVTBench README 自述。 */
 export const feed: FeedEntry[] = [
   {
+    slug: "real2simready",
+    title: "Real2SimReady：从一次人类演示到可执行的仿真世界",
+    titleEn: "From One Handheld Human Demonstration to a Physics-Ready World",
+    tag: "Pipeline",
+    desc: "操作者手持夹爪把任务自然地做一遍。管线把这一次演示还原成与真实环境对齐的数字孪生，在里面派生多条候选动作序列并行推演，最后交付一个可执行的机器人技能。页内有 80 秒演示片。",
+    meta: "内部管线 · 演示片",
+    href: "?p=real2simready",
+    links: [],
+    variant: "featured",
+  },
+  {
     slug: "softvtbench",
     title: "SoftVTBench：可形变物体操作的视触觉数据集与形变感知评测",
     titleEn: "A Deformation-Aware Visuo-Tactile Dataset and Benchmark",
@@ -69,7 +81,7 @@ export const feed: FeedEntry[] = [
         href: "https://huggingface.co/datasets/Arthur12137/SoftVTBench",
       },
     ],
-    variant: "featured",
+    variant: "card",
   },
   {
     slug: "gaussiandream",

@@ -13,15 +13,24 @@ import svMethod from "../assets/projects/softvtbench-method.webp";
 import svOod from "../assets/projects/softvtbench-ood.webp";
 import svTactile from "../assets/projects/softvtbench-tactile.webp";
 import svTeaser from "../assets/projects/softvtbench-teaser.webp";
+import r2srPoster from "../assets/media/real2simready-poster.webp";
+import r2srFilm from "../assets/media/real2simready.mp4";
 
 export type Figure = { src: string; label: string; caption: string };
+export type Video = {
+  src: string;
+  poster: string;
+  label: string;
+  caption: string;
+};
 
 export type Block =
   | { kind: "p"; text: string }
   | { kind: "h"; text: string }
   | { kind: "list"; items: { term: string; desc: string }[] }
   | { kind: "table"; head: string[]; rows: string[][]; note?: string }
-  | { kind: "fig"; fig: Figure };
+  | { kind: "fig"; fig: Figure }
+  | { kind: "video"; video: Video };
 
 export type Project = {
   slug: string;
@@ -29,17 +38,103 @@ export type Project = {
   titleEn: string;
   tag: string;
   date: string;
-  authors: string;
+  /* 论文型项目才有作者与机构；内部管线页没有署名，字段留空即不渲染 */
+  authors?: string;
   /* 机构按论文的编号顺序排列，去重后用 · 分隔 */
-  affiliations: string;
+  affiliations?: string;
   lede: string;
-  links: { label: string; href: string }[];
+  links?: { label: string; href: string }[];
   hero?: Figure;
   body: Block[];
   status: string;
 };
 
 export const projects: Project[] = [
+  {
+    /* 内部管线，不是论文。页面内容全部是这条 80 秒演示片里可以看到的东西；
+       片中烧录的读数（局部压缩率、质量回复率）不在正文复述 —— 它们的口径
+       没有公开定义，写成文字就变成了无从核对的主张。 */
+    slug: "real2simready",
+    title: "Real2SimReady：从一次人类演示到可执行的仿真世界",
+    titleEn:
+      "From One Handheld Human Demonstration to a Physics-Ready Simulated World",
+    tag: "Pipeline",
+    date: "2026 年 8 月",
+    lede: "操作者手持夹爪，自然地把任务做一遍。管线把这一次演示还原成与真实环境对齐的数字孪生，在里面生成多条候选动作序列并行推演，最后交付一个可执行的机器人技能。",
+    hero: {
+      src: r2srPoster,
+      label: "SIMULATION & EVALUATION",
+      caption:
+        "同一次演示派生出的三条候选执行方式，在仿真中并行展开后再做比较。",
+    },
+    status: "内部管线，持续建设中",
+    body: [
+      {
+        kind: "p",
+        text: "机器人操作的瓶颈不在模型，在数据。遥操作采一条轨迹的成本很高，而采回来的轨迹只对应一种执行方式、一套本体、一个物理条件。换一个夹爪、换一个初始摆放、换一个软硬程度，这条数据的价值就大幅衰减。",
+      },
+      {
+        kind: "p",
+        text: "Real2SimReady 想换一个起点：让人手持夹爪把任务自然地做一遍，剩下的交给管线。这一次演示先被还原成一个与真实环境几何对齐的仿真世界，然后在这个世界里派生出多条候选动作序列，并行推演、互相比较，最后留下一条可以直接执行的。数据的单位从「一条轨迹」变成「一个可反复推演的世界」。",
+      },
+      { kind: "h", text: "演示片" },
+      {
+        kind: "video",
+        video: {
+          src: r2srFilm,
+          poster: r2srPoster,
+          label: "REAL2SIMREADY · 80s",
+          caption:
+            "1920×1080，无音轨。七段：人类演示 · 场景理解 · 数字孪生 · 轨迹生成 · 仿真评估 · 选定策略 · 可形变物理。",
+        },
+      },
+      { kind: "h", text: "管线的七段" },
+      {
+        kind: "list",
+        items: [
+          {
+            term: "01　人类演示",
+            desc: "操作者手持夹爪，自然地完成一次双手任务。不需要遥操作台，不需要按分解动作摆拍，也不需要在采集时就想好机器人会怎么做。",
+          },
+          {
+            term: "02　场景理解",
+            desc: "同步识别双手、被操作物体，以及它们之间的空间关系。手和物体不是分开检测再拼起来的，接触关系本身是被一起解出来的。",
+          },
+          {
+            term: "03　数字孪生",
+            desc: "融合深度与三维几何，构建与真实环境对齐的场景。关键物体与动作被转成结构化、可计算的表示 —— 到这一步为止，场景不再是像素，而是可以被程序查询和改写的对象。",
+          },
+          {
+            term: "04　轨迹生成",
+            desc: "基于同一次示范，生成多个满足任务目标的候选动作序列。示范给的是目标和约束，不是唯一答案。",
+          },
+          {
+            term: "05　仿真评估",
+            desc: "每条候选在仿真环境中并行展开，再按任务目标比较结果。这一步是这条管线里唯一能大规模复制的部分，也是把「一次演示」放大成「多种可能」的地方。",
+          },
+          {
+            term: "06　选定策略",
+            desc: "一次演示 → 多条候选 → 一个可执行技能。",
+          },
+          {
+            term: "07　可形变物理",
+            desc: "真实世界不只有刚体。管线在接触、压缩与回弹上与真实观测作对照，而不是把所有东西都当成不会变形的刚块 —— 这一段与 SoftVTBench 的形变判据是同一个问题的两端：一个负责把形变造出来，一个负责判它有没有越界。",
+          },
+        ],
+      },
+      { kind: "h", text: "和其它四个项目的关系" },
+      {
+        kind: "p",
+        text: "首页那条「重建 → 生成 → 行动 → 评测」的循环，这条管线走的正是完整的一圈：ReconDrive 是把真实世界重建成可重放场景的能力，CounterScene 是在世界模型里生成没被观测到的情况，GaussianDream 是让策略在三维表示上行动，SoftVTBench 是判定这次行动有没有把东西弄坏。Real2SimReady 把这四件事接在一条数据管线上，输入是一次人类演示，输出是可以拿去训练和评测的仿真世界。",
+      },
+      { kind: "h", text: "现在的状态" },
+      {
+        kind: "p",
+        text: "这是内部管线，不是发表工作，也还没有开源。片子里呈现的是端到端已经跑通的链路；覆盖的任务、物体类别与本体范围仍在扩，跨本体迁移与形变标定的量化结果尚未对外公布。有合作意向可以直接联系。",
+      },
+    ],
+  },
+
   {
     slug: "softvtbench",
     title: "SoftVTBench：可形变物体操作的视触觉数据集与形变感知评测",

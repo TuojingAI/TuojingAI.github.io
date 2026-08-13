@@ -5,7 +5,6 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import logoBlue from "../assets/tuojing-logo-blue.png";
 import mesh from "../assets/media/mesh.webp";
 import MorphText, { PHYSICAL } from "../components/MorphText";
-import MemberAvatar from "../components/MemberAvatar";
 import LegacyProject from "./LegacyProject";
 import { findProject } from "./legacyProjects";
 import type { FeedEntry } from "./legacyContent";
@@ -18,7 +17,6 @@ import {
   mission,
   pages,
   site,
-  team,
 } from "./legacyContent";
 
 const FLIP_LOCK_MS = 720;
@@ -243,48 +241,6 @@ function ResearchPage() {
   );
 }
 
-function TeamPage() {
-  return (
-    <div className="relative isolate flex h-full flex-col justify-center pb-10 pt-24">
-      <Container><div className="relative w-full max-w-3xl">
-        <PageLabel index={2} />
-        <p className="lg-reveal lg-reveal-1 mt-4 max-w-2xl font-mono text-sm leading-relaxed text-foreground/85">
-          {team.intro}
-        </p>
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {team.members.map((m, i) => (
-            <div
-              key={m.name}
-              className={`shake-trigger feed-entry lg-reveal lg-reveal-${Math.min(2 + Math.floor(i / 3), 4)} flex flex-col gap-2.5 rounded-2xl border border-card-border bg-white/70 p-5 hover:border-card-border-hover`}
-            >
-              <div className="flex items-center gap-3">
-                <MemberAvatar name={m.name} initial={m.initial} index={i} />
-                <div className="min-w-0">
-                  <div className="text-[13px] font-semibold leading-5">
-                    <span className="shake-crazy">{m.name}</span>
-                  </div>
-                  <div className="truncate text-[11px] text-accent">{m.role}</div>
-                </div>
-              </div>
-              <p className="font-mono text-xs leading-relaxed text-muted-foreground">
-                {m.org}
-              </p>
-            </div>
-          ))}
-        </div>
-        <p className="lg-reveal lg-reveal-5 mt-5 font-mono text-xs text-muted-foreground">
-          {team.advisors}
-        </p>
-        {team.note && (
-          <p className="lg-reveal lg-reveal-5 mt-2 font-mono text-[11px] text-muted-foreground/70">
-            {team.note}
-          </p>
-        )}
-      </div></Container>
-    </div>
-  );
-}
-
 function JoinPage() {
   return (
     <div className="relative isolate flex h-full flex-col justify-center pb-10 pt-24">
@@ -292,7 +248,7 @@ function JoinPage() {
       {/* 居中、大字、极大留白 —— 和其余页面同底，不再有实色蓝块的硬切换 */}
       <Container><div className="relative mx-auto w-full max-w-2xl text-center">
         <p className="lg-reveal font-mono text-xs tracking-widest text-accent">
-          04 · 加入我们 Join Us
+          03 · 加入我们 Join Us
         </p>
 
         <h2 className="tj-display lg-reveal lg-reveal-1 mt-7 text-3xl text-foreground md:text-[44px]">
@@ -408,7 +364,7 @@ function Dots({
   );
 }
 
-const pageNodes = [HomePage, ResearchPage, TeamPage, JoinPage];
+const pageNodes = [HomePage, ResearchPage, JoinPage];
 
 // Apple-keynote style depth transition: passed pages fly toward the viewer,
 // upcoming pages surface from deeper in the scene.
