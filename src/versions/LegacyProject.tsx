@@ -178,6 +178,10 @@ export default function LegacyProject({ project }: { project: Project }) {
         <p className="mt-6 font-mono text-[11px] leading-[1.9] text-muted-foreground">
           {project.authors}
         </p>
+        {/* 机构比作者再降一档：同字号但更淡，让作者名单先被读到 */}
+        <p className="mt-2 font-mono text-[11px] leading-[1.9] text-muted-foreground/70">
+          {project.affiliations}
+        </p>
 
         {/* 资源按钮：虚线框 + 硬位移投影，PI 只把硬阴影用在这一个器件上 */}
         <div className="mt-7 flex flex-wrap gap-3">

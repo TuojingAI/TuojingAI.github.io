@@ -26,7 +26,7 @@ export const hero = {
 
 export const mission = {
   lead: "拓境智能是一家面向 Physical World AI 的公司。我们围绕空间智能与物理智能构建基础设施：让机器先看懂真实世界的几何与场景，再理解接触、力与形变如何运转，最终能在真实世界中可靠地行动。",
-  body: "我们的四个开源项目连成一条完整的路线：从真实视频重建可交互的 4D 场景（ReconDrive），到在生成式世界模型里做反事实因果推理、造出安全攸关场景（CounterScene），到把 3D 高斯世界模型接进机器人操作策略（GaussianDream），再到用视触觉衡量柔性物体操作的物理安全（SoftVTBench）。重建、生成、行动、评测——这是同一件事的四个面。",
+  body: "我们的四个开源项目连成一条完整的路线：从真实视频重建可交互的 4D 场景（ReconDrive），到在生成式世界模型里做反事实因果推理、造出安全攸关场景（CounterScene），到把 3D 高斯世界模型接进机器人操作策略（GaussianDream），再到用视触觉衡量可形变物体操作中的形变合规（SoftVTBench）。重建、生成、行动、评测——这是同一件事的四个面。",
   taglineZh: "拓展智能边界，连接数字世界与物理世界。",
   taglineEn: "Building intelligence for the physical world.",
 };
@@ -55,10 +55,10 @@ export type FeedEntry = {
 export const feed: FeedEntry[] = [
   {
     slug: "softvtbench",
-    title: "SoftVTBench：柔性物体操作的视触觉安全基准",
-    titleEn: "A Safety-Aware Visuo-Tactile Benchmark",
+    title: "SoftVTBench：可形变物体操作的视触觉数据集与形变感知评测",
+    titleEn: "A Deformation-Aware Visuo-Tactile Dataset and Benchmark",
     tag: "Benchmark",
-    desc: "把「完成任务」和「没有把东西弄坏」拆成两件事来衡量。它会揪出那些达成了目标、却在过程中滑落、掉落或过度挤压物体的轨迹。公开版含四个成对任务套件、33 个资产与多样化桌面场景，并给出区分「抓太松 / 物理安全 / 压得过狠」的安全交互区间。",
+    desc: "把「完成任务」和「没有把东西弄坏」合成一个指标来衡量：一条轨迹只有既达成目标、又全程未超出该物体标定的形变容差，才算成功。4,000 条专家演示、40 个任务、四个成对套件、50 个以上资产，每个可形变物体都配一个外观一致的刚体孪生。",
     meta: "arXiv 2607.04234 · 代码与数据集已开源",
     href: "https://github.com/TuojingAI/SoftVTBench",
     links: [
@@ -76,8 +76,8 @@ export const feed: FeedEntry[] = [
     title: "GaussianDream：机器人操作的前馈式 3D 高斯世界模型",
     titleEn: "A Feed-Forward 3D Gaussian World Model for Robotic Manipulation",
     tag: "World Model",
-    desc: "把 3D 高斯世界模型接进机器人操作：让策略在一个可渲染、可预测的三维表示上做决策，而不是只看二维画面。",
-    meta: "arXiv 2605.20752 · 代码待发布",
+    desc: "挂在 VLA 策略上的前馈式高斯世界模型插件：训练时把机器人视频解码成当前帧的 3D 高斯场景与短时程未来演化，推理时把全部辅助解码头丢掉，只留一段前缀参与动作生成，控制回路不变重。",
+    meta: "arXiv 2605.20752 · 代码已开源",
     href: "https://github.com/TuojingAI/GaussianDream",
     links: [
       { label: "arXiv", href: "https://arxiv.org/abs/2605.20752" },
@@ -104,7 +104,7 @@ export const feed: FeedEntry[] = [
     title: "ReconDrive：自动驾驶场景的前馈式 4D 高斯重建",
     titleEn: "Fast Feed-Forward 4D Gaussian Splatting",
     tag: "Reconstruction",
-    desc: "把 3D 基础模型扩展为快速、高保真的 4D 高斯泼溅生成框架，通过高效重建与新视角合成，为自动驾驶的真实闭环评测铺一条可规模化的路。",
+    desc: "把驾驶场景的 4D 高斯泼溅做成一次前向推理。在 nuScenes 上，一个约 20 秒的场景生成高斯需要 15 秒，per-scene 优化方法需要 23 到 46 分钟。",
     meta: "arXiv 2603.07552 · 代码与 checkpoint 已开源",
     href: "https://github.com/TuojingAI/ReconDrive",
     links: [
