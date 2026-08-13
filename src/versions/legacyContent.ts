@@ -27,7 +27,7 @@ export const hero = {
 
 export const mission = {
   lead: "拓境智能是一家面向 Physical World AI 的公司。我们围绕空间智能与物理智能构建基础设施：让机器先看懂真实世界的几何与场景，再理解接触、力与形变如何运转，最终能在真实世界中可靠地行动。",
-  body: "我们的四个开源项目连成一条完整的路线：从真实视频重建可交互的 4D 场景（ReconDrive），到在生成式世界模型里做反事实因果推理、造出安全攸关场景（CounterScene），到把 3D 高斯世界模型接进机器人操作策略（GaussianDream），再到用视触觉衡量可形变物体操作中的形变合规（SoftVTBench）。重建、生成、行动、评测——这是同一件事的四个面。",
+  body: "四个开源项目连成一条完整的路线：从真实视频重建可交互的 4D 场景（ReconDrive），到在世界模型里做反事实推理、造出安全攸关场景（CounterScene），到把 3D 高斯世界模型接进操作策略（GaussianDream），再到用视触觉判定操作中的形变是否越界（SoftVTBench）。Real2SimReady 是把这四件事接成一条数据管线的内部实践。",
   taglineZh: "拓展智能边界，连接数字世界与物理世界。",
   taglineEn: "Building intelligence for the physical world.",
 };

@@ -115,6 +115,33 @@ function Mesh({ flip = false }: { flip?: boolean }) {
   );
 }
 
+/* 内容比一屏高时用它包起来：页内先滚，滚到边界再把滚轮交还给翻页器。
+   翻页监听挂在 window 的冒泡阶段（usePager 里的 window.addEventListener("wheel", ...)），
+   所以在这一层 stopPropagation 就挡得住。
+   flex 容器一旦 overflow，justify-center 会把溢出的顶部推到滚不到的地方，
+   所以这里不用 justify-center，改成让子元素吃 my-auto。 */
+function ScrollPane({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  return (
+    <div
+      ref={ref}
+      className="flex h-full flex-col overflow-y-auto overscroll-contain pb-10 pt-24"
+      onWheel={(e) => {
+        const el = ref.current;
+        if (!el) return;
+        const room = el.scrollHeight - el.clientHeight;
+        if (room <= 1) return; // 没得滚，直接让翻页器接管
+        const down = e.deltaY > 0;
+        const atTop = el.scrollTop <= 0;
+        const atEnd = el.scrollTop >= room - 1;
+        if ((down && !atEnd) || (!down && !atTop)) e.stopPropagation();
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 /* 1200px 居中容器 —— Stripe 的 marketing 页宽度 */
 function Container({ children }: { children: React.ReactNode }) {
   return (
@@ -223,8 +250,8 @@ function HomePage() {
 
 function ResearchPage() {
   return (
-    <div className="relative isolate flex h-full flex-col justify-center pb-10 pt-24">
-      <Container><div className="relative w-full max-w-2xl">
+    <div className="relative isolate h-full">
+      <ScrollPane><Container><div className="relative my-auto w-full max-w-2xl">
         <PageLabel index={1} />
         <p className="lg-reveal lg-reveal-1 mt-4 font-mono text-sm text-foreground/85">
           {mission.body}
@@ -236,7 +263,7 @@ function ResearchPage() {
             ))}
           </div>
         </div>
-      </div></Container>
+      </div></Container></ScrollPane>
     </div>
   );
 }
