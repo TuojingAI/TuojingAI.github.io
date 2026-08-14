@@ -20,7 +20,8 @@ export type Figure = { src: string; caption: string };
 export type Video = {
   src: string;
   poster: string;
-  caption: string;
+  /* 视频不一定需要图注 —— 没有就不渲染 figcaption，避免留一段空白边距 */
+  caption?: string;
 };
 
 export type Block =
@@ -76,8 +77,6 @@ export const projects: Project[] = [
         video: {
           src: r2srFilm,
           poster: r2srPoster,
-          caption:
-            "80 秒，1920×1080，无音轨。七段：人类演示 · 场景理解 · 数字孪生 · 轨迹生成 · 仿真评估 · 选定策略 · 可形变物理。",
         },
       },
       { kind: "h", text: "管线的七段" },

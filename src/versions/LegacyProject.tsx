@@ -73,9 +73,11 @@ function Body({ blocks }: { blocks: Block[] }) {
                   className="block h-auto w-full"
                 />
               </div>
-              <figcaption className="mt-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
-                {b.video.caption}
-              </figcaption>
+              {b.video.caption && (
+                <figcaption className="mt-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
+                  {b.video.caption}
+                </figcaption>
+              )}
             </figure>
           );
 
