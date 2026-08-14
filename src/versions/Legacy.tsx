@@ -151,10 +151,10 @@ function Container({ children }: { children: React.ReactNode }) {
 
 const entryClasses: Record<FeedEntry["variant"], string> = {
   featured:
-    "feed-entry ml-6 flex cursor-pointer flex-col gap-2 rounded-2xl border border-card-border bg-white px-5 py-4 shadow-soft",
-  card: "feed-entry ml-6 flex cursor-pointer flex-col gap-2 rounded-2xl border border-card-border bg-white/70 px-5 py-4 hover:border-card-border-hover",
+    "feed-entry ml-6 flex cursor-pointer flex-col gap-2 rounded-[16px] border border-card-border bg-white px-5 py-4 shadow-soft",
+  card: "feed-entry ml-6 flex cursor-pointer flex-col gap-2 rounded-[16px] border border-card-border bg-white/70 px-5 py-4 hover:border-card-border-hover",
   plain:
-    "feed-entry ml-6 flex cursor-pointer flex-col gap-1.5 rounded-2xl px-5 py-4 hover:bg-white/50",
+    "feed-entry ml-6 flex cursor-pointer flex-col gap-1.5 rounded-[16px] px-5 py-4 hover:bg-white/50",
 };
 
 function Entry({ entry, index }: { entry: FeedEntry; index: number }) {

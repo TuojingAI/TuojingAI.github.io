@@ -7,13 +7,14 @@ import { careers, footer, site } from "./legacyContent";
 import type { Block, Figure, Project } from "./legacyProjects";
 import { projects } from "./legacyProjects";
 
+/* 图版规格量自两个参照站：worldlabs.ai 的媒体容器是 radius 8-16px + overflow hidden、
+   无标签栏无阴影；pi.website/blog/pi07 是 radius 12px + overflow hidden + bg-black，
+   连图注都不放。两家都没有"顶部等宽大写标签栏 + 直角边框盒"这种东西，所以去掉。
+   圆角一律加在外层容器上、媒体本身保持方角 —— 这是两家共同的做法。 */
 function Plate({ fig }: { fig: Figure }) {
   return (
     <figure className="my-8">
-      <div className="overflow-hidden border border-card-border bg-white">
-        <p className="border-b border-divider px-3 py-1.5 font-mono text-[10px] tracking-[0.14em] text-accent">
-          {fig.label}
-        </p>
+      <div className="overflow-hidden rounded-[12px] border border-card-border bg-white">
         <img
           src={fig.src}
           alt={fig.caption}
@@ -21,7 +22,7 @@ function Plate({ fig }: { fig: Figure }) {
           loading="lazy"
         />
       </div>
-      <figcaption className="mt-2 font-mono text-[11px] leading-relaxed text-muted-foreground">
+      <figcaption className="mt-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
         {fig.caption}
       </figcaption>
     </figure>
@@ -58,10 +59,8 @@ function Body({ blocks }: { blocks: Block[] }) {
         if (b.kind === "video")
           return (
             <figure key={i} className="my-8">
-              <div className="overflow-hidden border border-card-border bg-white">
-                <p className="border-b border-divider px-3 py-1.5 font-mono text-[10px] tracking-[0.14em] text-accent">
-                  {b.video.label}
-                </p>
+              {/* bg-black 跟 pi07 一样：片子是 16:9，容器不给底色的话首帧前会闪白 */}
+              <div className="overflow-hidden rounded-[12px] bg-black">
                 {/* preload="none"：15 MB 的片子不能在首屏就开始下，等用户按播放 */}
                 <video
                   src={b.video.src}
@@ -69,10 +68,10 @@ function Body({ blocks }: { blocks: Block[] }) {
                   controls
                   playsInline
                   preload="none"
-                  className="block h-auto w-full bg-black"
+                  className="block h-auto w-full"
                 />
               </div>
-              <figcaption className="mt-2 font-mono text-[11px] leading-relaxed text-muted-foreground">
+              <figcaption className="mt-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
                 {b.video.caption}
               </figcaption>
             </figure>
@@ -100,7 +99,7 @@ function Body({ blocks }: { blocks: Block[] }) {
 
         return (
           <div key={i} className="mt-6">
-            <div className="overflow-x-auto border border-card-border bg-white">
+            <div className="overflow-x-auto rounded-[12px] border border-card-border bg-white">
               <table className="w-full border-collapse font-mono text-[12px]">
                 <thead>
                   <tr className="border-b border-divider bg-background-deep/60">

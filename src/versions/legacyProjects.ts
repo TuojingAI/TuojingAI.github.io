@@ -16,11 +16,10 @@ import svTeaser from "../assets/projects/softvtbench-teaser.webp";
 import r2srPoster from "../assets/media/real2simready-poster.webp";
 import r2srFilm from "../assets/media/real2simready.mp4";
 
-export type Figure = { src: string; label: string; caption: string };
+export type Figure = { src: string; caption: string };
 export type Video = {
   src: string;
   poster: string;
-  label: string;
   caption: string;
 };
 
@@ -61,12 +60,6 @@ export const projects: Project[] = [
     tag: "Pipeline",
     date: "2026 年 8 月",
     lede: "操作者手持夹爪，自然地把任务做一遍。管线把这一次演示还原成与真实环境对齐的数字孪生，在里面生成多条候选动作序列并行推演，最后交付一个可执行的机器人技能。",
-    hero: {
-      src: r2srPoster,
-      label: "SIMULATION & EVALUATION",
-      caption:
-        "同一次演示派生出的三条候选执行方式，在仿真中并行展开后再做比较。",
-    },
     status: "内部管线，持续建设中",
     body: [
       {
@@ -83,7 +76,6 @@ export const projects: Project[] = [
         video: {
           src: r2srFilm,
           poster: r2srPoster,
-          label: "REAL2SIMREADY · 80s",
           caption:
             "1920×1080，无音轨。七段：人类演示 · 场景理解 · 数字孪生 · 轨迹生成 · 仿真评估 · 选定策略 · 可形变物理。",
         },
@@ -238,7 +230,6 @@ export const projects: Project[] = [
     ],
     hero: {
       src: svTeaser,
-      label: "OVERVIEW",
       caption:
         "4,000 条专家演示，四个诊断性套件，50 个以上资产，包括体积式可形变物体与外观匹配的刚体孪生。下方分别是受控的视觉与物理分布偏移、从易滑脱的松抓到过度压缩的物理交互区间，以及同步的视觉、触觉、本体、语言与动作流。",
     },
@@ -332,7 +323,6 @@ export const projects: Project[] = [
         kind: "fig",
         fig: {
           src: svTactile,
-          label: "TACTILE OBSERVATION",
           caption:
             "十个可形变资产上的触觉观测。底图是 GelSight Mini 的触觉 RGB，箭头是 marker 相对未接触基准的位移场 —— 接触斑块的位置、面积与剪切方向都写在这张图里，而第三人称与腕部相机在夹爪闭合的那一刻恰好看不到这里。",
         },
@@ -380,7 +370,6 @@ export const projects: Project[] = [
         kind: "fig",
         fig: {
           src: svMethod,
-          label: "PIPELINE",
           caption:
             "阶段一构建匹配的刚体-可形变物体并标定逐物体交互约束；阶段二生成受控任务，并把策略可见观测与仅评测可见的物理状态分开记录；阶段三做自动质检与人工核验，产出训练、ID 与 OOD 划分。任务成功与形变合规分别标注，DSR 在评测时把两者合并。",
         },
@@ -418,7 +407,6 @@ export const projects: Project[] = [
         kind: "fig",
         fig: {
           src: svGoalSafety,
-          label: "BEYOND TASK SUCCESS",
           caption:
             "三个可形变物体、跨 Object-Soft 与 Spatial-Soft 的示例 rollout，各行独立采样，不是同初始状态的配对比较。全部达成任务成功；蓝色满足标定容差，橙色在抓取阶段越过 R_t=1 并在搬运中持续偏高，最后的放置动作本身执行正确。第三人称与腕部视图难以区分这两类，marker 场与形变曲线可以。",
         },
@@ -537,7 +525,6 @@ export const projects: Project[] = [
         kind: "fig",
         fig: {
           src: svOod,
-          label: "OOD TRENDS",
           caption:
             "三个策略族 × 三条偏移轴（光照、质量、杨氏模量）× 两个可形变套件的任务成功率。虚线为视觉-only（VO-C），实线为视触觉（VT-C），竖线标出 in-distribution 参照点。",
         },
@@ -579,7 +566,6 @@ export const projects: Project[] = [
     ],
     hero: {
       src: gdFramework,
-      label: "FRAMEWORK",
       caption:
         "训练时时序视觉特征与可学习 queries 生成紧凑前缀，前缀被解码为当前与未来 3D 高斯状态，接受 RGB、深度与伪 3D 场景流监督；推理时全部辅助高斯解码头被丢弃，只有前缀参与动作生成。",
     },
@@ -723,7 +709,6 @@ export const projects: Project[] = [
     ],
     hero: {
       src: csIntro,
-      label: "OVERVIEW",
       caption:
         "观测场景里关键智能体等待，自车安全通过。反事实问题是：如果关键智能体没有等待呢。对该智能体的轨迹施加干预，构造出一个诱发安全攸关交互、同时保留真实交通动力学的反事实世界。",
     },
@@ -760,7 +745,6 @@ export const projects: Project[] = [
         kind: "fig",
         fig: {
           src: csMethod,
-          label: "FRAMEWORK",
           caption:
             "四个模块：因果对抗智能体选择、CIG 冲突感知交互编码、带 SceneTransformer 去噪器的扩散式交互 BEV 世界模型、在去噪过程中作用于对抗智能体的反事实引导。",
         },
@@ -939,7 +923,6 @@ export const projects: Project[] = [
     ],
     hero: {
       src: rdFramework,
-      label: "FRAMEWORK",
       caption:
         "从城市场景的每个段落中选两帧上下文输入，用静态-动态组合表示 4D 高斯。高斯预测头分为 Gaussian Parameter Prediction Head（GPPH）与 Gaussian Center Prediction Head（GCPH）两条路径。",
     },
