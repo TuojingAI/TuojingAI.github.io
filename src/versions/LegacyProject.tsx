@@ -59,8 +59,10 @@ function Body({ blocks }: { blocks: Block[] }) {
         if (b.kind === "video")
           return (
             <figure key={i} className="my-8">
-              {/* bg-black 跟 pi07 一样：片子是 16:9，容器不给底色的话首帧前会闪白 */}
-              <div className="overflow-hidden rounded-[12px] bg-black">
+              {/* 封面用片尾卡（#EAF5FB），与 --c-canvas-sunken 几乎同色，
+                  所以容器底色取 background-deep 而不是 pi07 那样的黑 ——
+                  黑底会让淡蓝封面在解码前先闪一下。 */}
+              <div className="overflow-hidden rounded-[12px] bg-background-deep">
                 {/* preload="none"：15 MB 的片子不能在首屏就开始下，等用户按播放 */}
                 <video
                   src={b.video.src}
