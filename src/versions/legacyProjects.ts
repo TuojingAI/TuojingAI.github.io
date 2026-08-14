@@ -1,5 +1,7 @@
 /* 项目详情页内容。全部改写自各项目对应的论文本身，不再取自 GitHub README。
-   - SoftVTBench 取自 arXiv 版 LaTeX 源码（main.tex 与 sec/*.tex）
+   - SoftVTBench 只取自本地 LaTeX 源码（main.tex 与 sec/*.tex），正文、数字与全部
+     配图都来自这一份；arXiv 2607.04234 是更早的 Workshop 版，标题与统计口径都不同，
+     只作为链接出现且已标注版本，不参与正文
    - GaussianDream / CounterScene / ReconDrive 取自各自的 arXiv 全文
    每一个数字、每一张表都逐位回溯到原文的表或章节，未做四舍五入、单位换算或补全。
    论文自陈的 caveat 与 limitation 一并保留 —— 页面宁可短，不要有一个推测出来的数。
@@ -8,7 +10,7 @@ import csIntro from "../assets/projects/counterscene-intro.webp";
 import csMethod from "../assets/projects/counterscene-method.webp";
 import gdFramework from "../assets/projects/gaussiandream.webp";
 import rdFramework from "../assets/projects/recondrive.webp";
-import svGoalSafety from "../assets/projects/softvtbench-goal_vs_safety.webp";
+import svRollouts from "../assets/projects/softvtbench-rollouts.webp";
 import svMethod from "../assets/projects/softvtbench-method.webp";
 import svOod from "../assets/projects/softvtbench-ood.webp";
 import svTactile from "../assets/projects/softvtbench-tactile.webp";
@@ -217,14 +219,17 @@ export const projects: Project[] = [
     tag: "Benchmark",
     date: "2026 年 7 月",
     venue: "ECCVW 2026 Oral",
-    venueNote: "早期版本",
+    venueNote: "Workshop 版",
     authors:
       "Bowen Jing*, Mingxin Wang*, Ruiyang Hao, Chenchen Ge, Hanwen Shen, Junjie He, Yang Cui, Yiming Hou, Weitao Zhou‡, Jiawei Wang, Minglei Li, Dandan Zhang, Ding Zhao, Houde Liu, Xiaofan Li, Si Liu, Ping Luo, Haibao Yu‡（* equal contribution　‡ corresponding author）",
     affiliations:
       "Tuojing Intelligence · Tsinghua University · King's College London · Southeast University · Stevens Institute of Technology · The Hong Kong University of Science and Technology (Guangzhou) · University of Manchester · Simple AI · Imperial College London · Carnegie Mellon University · Zhejiang University · Beihang University · The University of Hong Kong",
     lede: "把策略可见的接触观测与仅评测方可见的有限元物理状态分开记录，用逐物体标定的形变容差定义 Deformation-aware Success Rate（DSR）：一条 rollout 只有既完成任务、又全程未超出形变容差，才算成功。",
     links: [
-      { label: "arXiv 2607.04234", href: "https://arxiv.org/abs/2607.04234" },
+      {
+        label: "arXiv 2607.04234（Workshop 版）",
+        href: "https://arxiv.org/abs/2607.04234",
+      },
       { label: "代码", href: "https://github.com/TuojingAI/SoftVTBench" },
       {
         label: "数据集",
@@ -410,7 +415,7 @@ export const projects: Project[] = [
       {
         kind: "fig",
         fig: {
-          src: svGoalSafety,
+          src: svRollouts,
           caption:
             "三个可形变物体、跨 Object-Soft 与 Spatial-Soft 的示例 rollout，各行独立采样，不是同初始状态的配对比较。全部达成任务成功；蓝色满足标定容差，橙色在抓取阶段越过 R_t=1 并在搬运中持续偏高，最后的放置动作本身执行正确。第三人称与腕部视图难以区分这两类，marker 场与形变曲线可以。",
         },

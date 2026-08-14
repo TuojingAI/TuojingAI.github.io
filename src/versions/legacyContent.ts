@@ -74,7 +74,7 @@ export const feed: FeedEntry[] = [
     tag: "Benchmark",
     desc: "把「完成任务」和「没有把东西弄坏」合成一个指标来衡量：一条轨迹只有既达成目标、又全程未超出该物体标定的形变容差，才算成功。4,000 条专家演示、40 个任务、四个成对套件、50 个以上资产，每个可形变物体都配一个外观一致的刚体孪生。",
     award: "ECCVW 2026 Oral",
-    meta: "arXiv 2607.04234 · 代码与数据集已开源",
+    meta: "arXiv 2607.04234（Workshop 版）· 代码与数据集已开源",
     href: "https://github.com/TuojingAI/SoftVTBench",
     links: [
       { label: "arXiv", href: "https://arxiv.org/abs/2607.04234" },
