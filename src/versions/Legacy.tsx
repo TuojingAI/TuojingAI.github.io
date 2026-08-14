@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import logoBlue from "../assets/tuojing-logo-blue.png";
 import mesh from "../assets/media/mesh.webp";
 import MorphText, { PHYSICAL } from "../components/MorphText";
+import Shine from "../components/Shine";
 import LegacyProject from "./LegacyProject";
 import { findProject } from "./legacyProjects";
 import type { FeedEntry } from "./legacyContent";
@@ -190,6 +191,11 @@ function Entry({ entry, index }: { entry: FeedEntry; index: number }) {
       <p className="text-xs leading-relaxed text-muted-foreground">{entry.desc}</p>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-0.5">
         <span className="font-mono text-[10px] text-accent">阅读项目介绍 →</span>
+        {entry.award && (
+          <span className="font-mono text-[10px] text-foreground">
+            <Shine text={entry.award} />
+          </span>
+        )}
         <span className="font-mono text-[10px] text-muted-foreground/70">
           {entry.meta}
         </span>

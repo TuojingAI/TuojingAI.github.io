@@ -42,6 +42,9 @@ export type Project = {
   authors?: string;
   /* 机构按论文的编号顺序排列，去重后用 · 分隔 */
   affiliations?: string;
+  /* 外部收录。venue 是会扫光的那段，venueNote 是跟在后面的限定，不扫光 */
+  venue?: string;
+  venueNote?: string;
   lede: string;
   links?: { label: string; href: string }[];
   hero?: Figure;
@@ -213,6 +216,8 @@ export const projects: Project[] = [
       "A Deformation-Aware Visuo-Tactile Dataset and Benchmark for Deformable-Object Manipulation",
     tag: "Benchmark",
     date: "2026 年 7 月",
+    venue: "ECCVW 2026 Oral",
+    venueNote: "早期版本",
     authors:
       "Bowen Jing*, Mingxin Wang*, Ruiyang Hao, Chenchen Ge, Hanwen Shen, Junjie He, Yang Cui, Yiming Hou, Weitao Zhou‡, Jiawei Wang, Minglei Li, Dandan Zhang, Ding Zhao, Houde Liu, Xiaofan Li, Si Liu, Ping Luo, Haibao Yu‡（* equal contribution　‡ corresponding author）",
     affiliations:
@@ -697,6 +702,8 @@ export const projects: Project[] = [
       "Counterfactual Causal Reasoning in Generative World Models for Safety-Critical Closed-Loop Evaluation",
     tag: "Safety",
     date: "2026 年 3 月",
+    venue: "ECCVW 2026 Oral",
+    venueNote: "早期版本",
     authors:
       "Bowen Jing*, Ruiyang Hao*, Weitao Zhou‡, Haibao Yu‡（* equal contribution　‡ corresponding author）",
     affiliations:

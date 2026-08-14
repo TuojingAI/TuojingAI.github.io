@@ -2,6 +2,7 @@
    从 PI 学来的：大号衬线标题 + 标题下的 label/value 元信息表（发表 / 联系）+ 完整作者名单 +
    虚线框硬投影的资源按钮 + 带 mono 全大写角标的图版 + 无粗体的层级（层级只靠字号与字族）。
    换成原版皮肤的：淡蓝底、宋体标题、等宽正文、accent 蓝、原版的硬阴影规格。 */
+import Shine from "../components/Shine";
 import logoBlue from "../assets/tuojing-logo-blue.png";
 import { careers, footer, site } from "./legacyContent";
 import type { Block, Figure, Project } from "./legacyProjects";
@@ -189,6 +190,17 @@ export default function LegacyProject({ project }: { project: Project }) {
         <dl className="mt-8 grid grid-cols-[auto_1fr] gap-x-6 gap-y-1.5 font-mono text-xs">
           <dt className="text-muted-foreground">发表</dt>
           <dd className="text-foreground">{project.date}</dd>
+          {project.venue && (
+            <>
+              <dt className="text-muted-foreground">收录</dt>
+              <dd className="text-foreground">
+                <Shine text={project.venue} />
+                {project.venueNote && (
+                  <span className="text-muted-foreground"> · {project.venueNote}</span>
+                )}
+              </dd>
+            </>
+          )}
           <dt className="text-muted-foreground">状态</dt>
           <dd className="text-foreground">{project.status}</dd>
           <dt className="text-muted-foreground">联系</dt>

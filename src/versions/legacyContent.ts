@@ -45,6 +45,8 @@ export type FeedEntry = {
   titleEn: string;
   tag: string;
   desc: string;
+  /* 外部收录，单独一个字段是因为它要单独扫光，不能混在 meta 串里 */
+  award?: string;
   meta: string;
   href: string;
   links: { label: string; href: string }[];
@@ -71,6 +73,7 @@ export const feed: FeedEntry[] = [
     titleEn: "A Deformation-Aware Visuo-Tactile Dataset and Benchmark",
     tag: "Benchmark",
     desc: "把「完成任务」和「没有把东西弄坏」合成一个指标来衡量：一条轨迹只有既达成目标、又全程未超出该物体标定的形变容差，才算成功。4,000 条专家演示、40 个任务、四个成对套件、50 个以上资产，每个可形变物体都配一个外观一致的刚体孪生。",
+    award: "ECCVW 2026 Oral",
     meta: "arXiv 2607.04234 · 代码与数据集已开源",
     href: "https://github.com/TuojingAI/SoftVTBench",
     links: [
@@ -103,6 +106,7 @@ export const feed: FeedEntry[] = [
     titleEn: "Counterfactual Causal Reasoning in Generative World Models",
     tag: "Safety",
     desc: "不做随机扰动，而是先找出那个「正在维持安全」的关键交通参与者，再对它施加最小干预——把一个安全场景变成真实可信的安全攸关交互，同时保持周围多智能体动态的一致性。",
+    award: "ECCVW 2026 Oral",
     meta: "arXiv 2603.21104 · 代码待发布",
     href: "https://github.com/TuojingAI/CounterScene",
     links: [
