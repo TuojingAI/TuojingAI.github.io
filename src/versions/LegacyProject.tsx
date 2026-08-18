@@ -201,6 +201,12 @@ export default function LegacyProject({ project }: { project: Project }) {
               </dd>
             </>
           )}
+          {project.collab && (
+            <>
+              <dt className="text-muted-foreground">合作</dt>
+              <dd className="text-foreground">{project.collab}</dd>
+            </>
+          )}
           <dt className="text-muted-foreground">状态</dt>
           <dd className="text-foreground">{project.status}</dd>
           <dt className="text-muted-foreground">联系</dt>
