@@ -652,20 +652,6 @@ export const projects: Project[] = [
       { kind: "h", text: "推理开销与执行平滑度" },
       { kind: "p", text: "部署配置下辅助高斯解码器与预测头被移除，每个动作块 531 ms；保留解码器和头的诊断配置是 569 ms。两者都快于 WAM / World Action Model 基线的 700 ms 以上。同一组真机分析里，GaussianDream 相比 π0.5 基线减少了轨迹的突变。" },
       { kind: "fig", fig: { src: gdLatency, caption: "每个动作块的推理延迟对比，涵盖 GaussianDream 的两种配置与 WAM / World Action Model 基线。" } },
-      { kind: "h", text: "边界" },
-      { kind: "p", text: "以下为依据论文的方法与结果整理，论文本身没有单独的局限性章节。" },
-      {
-        kind: "list",
-        items: [
-          { term: "未来只动中心", desc: "未来状态只更新高斯中心，尺度、不透明度、外观、旋转都从当前模板复制，因此建模的是短时程的几何位移，不是外观或拓扑变化。" },
-          { term: "时间窗口很窄", desc: "上下文只有三帧 {t−10, t−5, t}，监督 horizon 只到 t+5，且 horizon 在训练中是逐步放长的。" },
-          { term: "几何监督是伪标签", desc: "深度来自 Depth Anything V2 的单目估计或仿真器深度；3D 场景流是由 RAFT 二维光流加深度反投影拼出来的，靠有效性掩码剔除无效对应，无效向量直接置零不进损失。这不是测量得到的真值几何。" },
-          { term: "前缀的视觉来源单一", desc: "前缀只从 agent-view 时序观测序列构造，伪深度也只从 agent-view RGB 生成。真机设置里腕部相机是策略的观测输入之一；论文未描述它是否参与高斯重建与预测。" },
-          { term: "仿真上不是全面领先", desc: "LIBERO 平均分低于 LingBot-VA 的 98.5，Long 一项也不是最高；RoboCasa 的 Doors/Drawers 和 Others 落后 GeoPredict。" },
-          { term: "真机仍有一半失败", desc: "真机平均成功率 50.0%，最难的两个场景是 35.0 和 40.0。" },
-          { term: "报告口径", desc: "仿真按标准协议每任务 50 次连续试验取平均成功率，论文只给单一数字，没有报告重复实验的方差；真机表也未给出每个场景的试验次数。" },
-        ],
-      },
     ],
   },
 
