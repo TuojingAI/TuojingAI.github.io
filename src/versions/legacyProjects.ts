@@ -8,7 +8,10 @@
    作者一律用论文的英文原名与署名顺序，共同一作标 *，通讯标 ‡。 */
 import csIntro from "../assets/projects/counterscene-intro.webp";
 import csMethod from "../assets/projects/counterscene-method.webp";
+import gdCompare from "../assets/projects/gaussiandream-compare.webp";
 import gdFramework from "../assets/projects/gaussiandream.webp";
+import gdLatency from "../assets/projects/gaussiandream-latency.webp";
+import gdReal from "../assets/projects/gaussiandream-real.webp";
 import rdFramework from "../assets/projects/recondrive.webp";
 import svRollouts from "../assets/projects/softvtbench-rollouts.webp";
 import svMethod from "../assets/projects/softvtbench-method.webp";
@@ -566,72 +569,30 @@ export const projects: Project[] = [
       "Zijian Zhang*, Yuqing Jiang*, Qian Cheng, Xiaofan Li, Si Liu, Ding Zhao, Ping Luo, Weitao Zhou, Haibao Yu‡（* equal contribution　‡ corresponding author）",
     affiliations:
       "Tuojing Intelligence · University of Chinese Academy of Sciences · Institute of Automation, Chinese Academy of Sciences · Tsinghua University · Zhejiang University · Beihang University · Carnegie Mellon University · The University of Hong Kong",
-    lede: "一个挂在 VLA 策略上的前馈式 3D 高斯世界模型插件：训练时把机器人视频解码成当前帧高斯场景和短时程未来高斯演化，用 RGB、深度和伪 3D 场景流做稠密监督；推理时丢掉全部辅助头，只留一段前缀 token 参与动作生成。",
+    lede: "一个挂在 VLA 策略上的前馈式 3D 高斯世界模型插件：训练时把机器人视频解码成当前帧高斯场景和短时程未来高斯演化，当前帧用 RGB 渲染和深度监督，未来帧再加伪 3D 场景流；推理时丢掉全部辅助头，只留一段前缀 token 参与动作生成。基座是 π0.5，动作接口不变。",
     links: [
       { label: "arXiv 2605.20752", href: "https://arxiv.org/abs/2605.20752" },
       { label: "代码", href: "https://github.com/TuojingAI/GaussianDream" },
     ],
     hero: {
-      src: gdFramework,
+      src: gdCompare,
       caption:
-        "训练时时序视觉特征与可学习 queries 生成紧凑前缀，前缀被解码为当前与未来 3D 高斯状态，接受 RGB、深度与伪 3D 场景流监督；推理时全部辅助高斯解码头被丢弃，只有前缀参与动作生成。",
+        "四类做法的对照：2D VLA 只有二维语义；3D 增强的 VLA 提供当前帧的三维落地但不预测未来；视频与隐空间世界模型在二维或隐空间里预测未来；GaussianDream 在当前三维上下文之上预测未来的结构化三维几何。",
     },
     status: "论文已上 arXiv，代码已发布",
     body: [
-      {
-        kind: "p",
-        text: "视觉-语言-动作策略把预训练视觉语言模型的语义先验搬进了机器人控制，但监督信号仍以动作模仿为主。论文指出三处缺口：3D 空间结构和接触约束只隐式编码在视觉隐变量和动作标签里，抓取点偏移这类几何误差难以纠正；机器人轨迹里的物体布局、外观、深度这些稠密像素证据被浪费，因为动作损失只监督每一步的控制指令；环境在交互之后如何演化，标准 VLA 没有显式机制去预判。",
-      },
-      {
-        kind: "p",
-        text: "已有的两条补救路线各有代价。3D 增强策略用点云或深度图把当前场景静态锚住，对交互后的状态演化仍然沉默；世界模型在像素、隐空间或动作空间里预测未来，但迭代体素优化和自回归视频 rollout 会把推理开销推高，难以放进高频控制回路。GaussianDream 的做法是把两者都放在训练侧，推理侧只保留代价最小的那部分。",
-      },
+      { kind: "p", text: "标准 VLA 的训练以行为克隆为主，3D 结构和接触约束只隐式地编码在视觉隐变量和动作标签里，图像里很多稠密的像素级几何信号没有被充分利用，环境在交互之后怎么变也没有显式监督。GaussianDream 的做法是在编码器里放一组可学习的 GaussianDream Query，让模型把当前帧的 3D 结构和短时程演化压进一段前缀 token，训练时用两个辅助高斯头把这段前缀解码回可渲染的 3D 高斯状态来接受监督，推理时把这两个头全部丢掉。" },
       { kind: "h", text: "非对称的插件设计" },
-      {
-        kind: "p",
-        text: "基座策略是 π0.5。编码器里加入可学习的 GaussianDream queries，与来自 agent-view 那一路的短时观测序列一起经时序编码器产生一段前缀 token；这段前缀与图像、语言 token 共享 2048 维的 PaliGemma/Gemma-2B 前缀空间，动作专家用 1024 维隐空间。训练时这段前缀被两个辅助头解码：静态重建头产出当前 3D 高斯场景状态，未来预测头产出 horizon 条件下的高斯演化状态。推理时所有辅助解码头被丢弃，策略只在原有的多模态上下文里追加这段前缀，动作接口不变，不做测试时高斯重建、渲染、视频 rollout，也不加规划器。",
-      },
-      { kind: "h", text: "当前帧重建" },
-      {
-        kind: "p",
-        text: "1024 个 GaussianDream token 被 reshape 成 32×32 的隐格点，经解码骨干上采样成 256×256×128 的稠密特征图。几何头预测深度、旋转、尺度、不透明度，外观头结合当前 RGB 观测预测一阶球谐系数。深度反投影得到高斯中心，场景共 256×256 个高斯，随后渲染出 RGB 和深度接受监督。这一支的作用是逼迫前缀承载可渲染的显式几何。",
-      },
-      { kind: "h", text: "未来高斯预测" },
-      {
-        kind: "p",
-        text: "时序特征由 VGGT 提取多尺度 3D-aware patch 特征，按 32×32 自适应池化后投影成时间 token。Temporal Gaussian Evolution 模块含 12 个注意力块、8 个注意力头，交替做帧内空间交互和跨帧的时间槽注意力。动态头预测 horizon 条件下的高斯中心位移，尺度、不透明度、外观、旋转直接沿用当前高斯模板，把预测集中在交互引起的几何变化上。上下文取三帧 {t−10, t−5, t}，未来监督覆盖 t+1 到 t+5。",
-      },
-      { kind: "h", text: "两阶段训练与伪监督" },
-      {
-        kind: "list",
-        items: [
-          {
-            term: "Stage I",
-            desc: "只训重建与预测头，不做动作学习。当前分支用深度和渲染损失，未来分支加上伪 3D 场景流损失，预测 horizon 在训练中逐步放大以稳定优化。",
-          },
-          {
-            term: "Stage II",
-            desc: "与策略联合训练，动作损失是 π0.5 的 flow matching 目标，总目标为动作损失加上带权的 GaussianDream 辅助损失。",
-          },
-          {
-            term: "伪深度",
-            desc: "由 Depth Anything V2 从 agent-view RGB 生成，缩放回原分辨率后随 episode 数据存储，仅训练时使用。",
-          },
-          {
-            term: "伪 3D 场景流",
-            desc: "默认用 RAFT 估计相邻帧 2D 光流，Farneback 作为轻量回退；warp 后采样未来深度、用相机内参反投影两帧作差得到 3D 位移，并计算有效性掩码剔除越界和无效深度的像素。",
-          },
-          {
-            term: "训练配置",
-            desc: "60K 步，global batch size 24，AdamW，峰值学习率 5×10⁻⁵，cosine 调度，10K 步 warmup，梯度裁剪 1.0，EMA 衰减 0.999，A100 上混合精度。",
-          },
-        ],
-      },
+      { kind: "p", text: "前缀由一个时序 3D 感知编码器从 agent-view 观测序列生成，不改动基座策略的动作接口。上下文取三帧 {t−10, t−5, t}，提供稀疏运动线索。图像 token、语言 token 和 GaussianDream token 共享 2048 维的 PaliGemma/Gemma-2B 前缀空间，动作专家用 1024 维隐空间。Query 网格是 32×32，即 1024 个可学习 query，先投影到 512 通道，经 Temporal Gaussian Evolution 模块处理，再投回 VLM 宽度接到多模态前缀上。TGE 有 12 个注意力块、8 个头、4 倍扩张的 MLP，每个块先在单帧内对 query 与 patch token 做自注意力，再对跨帧的同一 token 槽做时间注意力，取最新一帧的输出作为前缀。时序视觉 token 来自 VGGT 特征抽头，经 32×32 自适应平均池化和线性投影到 512 通道。" },
+      { kind: "fig", fig: { src: gdFramework, caption: "GaussianDream 总览。训练时时序视觉特征与可学习 GaussianDream Query 生成一段紧凑前缀，前缀被解码成当前与未来 3D 高斯状态，接受 RGB、深度和伪 3D 场景流监督；推理时全部辅助高斯解码头被丢弃，只有前缀参与动作生成。" } },
+      { kind: "p", text: "当前帧重建把前缀重排成 32×32 的 token 网格，由共享的 token-to-feature 主干上采样成 256×256×128 的稠密特征图。主干是三个转置卷积块，核 4、步长 2、padding 1，通道从 VLM 宽度降到 512、256、128，每块含 GroupNorm、GELU、3×3 卷积和一条双线性残差短路，随后由 DPT 式融合块细化。几何分支用一个 3×3 卷积输出 8 个通道：四元数旋转 4、尺度 3、不透明度 1；深度分支单独走两层 3×3 卷积加 GroupNorm/GELU，最后一个 3×3 卷积出一个深度通道；外观分支可选地用 7×7 卷积融合 RGB 图像，输出 9 个球谐外观通道。深度按相机内参反投影成高斯中心，场景一共 256×256 个高斯。" },
+      { kind: "p", text: "未来预测复用同一张 256×256 特征图。horizon embedding 在 3×3 投影到 128 通道后加入，接一个含两层 3×3 卷积和 GroupNorm 的残差块，速度头用 3×3 卷积、GroupNorm、GELU 和一个 1×1 卷积输出 3 通道的中心速度图。速度过 tanh 后缩放，再乘上 horizon 时间因子，只更新高斯中心；尺度、不透明度、外观、旋转都从当前高斯模板复制。监督的 horizon 是 t+1 到 t+5。" },
+      { kind: "h", text: "伪监督与两阶段训练" },
+      { kind: "p", text: "深度目标由 Depth Anything V2 从单张 agent-view RGB 生成稠密伪深度，缩放回原分辨率后与 episode 数据一起存盘；在损失里深度目标是伪深度或仿真器提供的深度。场景流目标由相邻两帧构造：默认用 RAFT 估计 2D 光流，轻量回退是 Farneback，把 t 帧像素 warp 到 t+1，双线性采样未来深度，两帧各自按内参反投影，取三维点之差作为伪 3D 流。有效性掩码剔除 warp 出画面的对应、深度无效的像素以及超出设定深度范围的像素，无效流向量置零并排除在未来预测损失之外。每个 sidecar 存 2D 流、伪 3D 流、有效性掩码、相机内参、相机名以及 episode 与 task 索引等元数据。" },
+      { kind: "p", text: "训练分两阶段。Stage I 只训重建头和预测头，不学动作，目标是当前深度与渲染损失加上按 horizon 加权的未来深度、渲染和流损失，流损失是掩码归一化的 L1；预测 horizon 在训练中逐步放长以稳定优化。Stage II 与策略联合训练，动作损失是基座 π0.5 的 flow matching 目标，总目标为动作损失加上带权重的 GaussianDream 目标，辅助高斯损失的作用是保住前缀的时空结构。训练配置（源码未区分阶段）：60K 步，global batch 24，AdamW，峰值学习率 5e-5，cosine 调度，10K warmup，梯度裁剪 1.0，EMA 衰减 0.999，混合精度，NVIDIA A100。" },
       { kind: "h", text: "评测设置" },
-      {
-        kind: "p",
-        text: "LIBERO 按 Spatial、Object、Goal、Long 四个协议评，50 条演示、50 次评测 trial。RoboCasa 用 Human-50 少样本设置，覆盖 24 个长时程厨房任务、五个场景，每任务 50 次 trial。真机平台是 leader-follower 双臂：leader 臂只在遥操作采数据时用，follower 臂是执行臂，评测时由策略直接控制；观测来自 agent-view 和腕部两路 RGB 相机。",
-      },
+      { kind: "p", text: "LIBERO 走 Spatial、Object、Goal、Long 四个协议，50 条演示、50 次评测试验。RoboCasa 用 Human-50 少样本设置，24 个长时程厨房任务，跨五个场景，每任务 50 次试验。仿真侧的成功率是所有评测试验的平均。真机对照对象是基座 π0.5，平台是 leader-follower 双臂：leader 臂只在遥操作采数时由人操作，follower 臂在采数时跟随 leader、在自主评测时由策略控制，follower 臂装在移动底盘上。策略输入是语言指令、机器人状态和两路 RGB —— agent-view 相机看整体工作空间与空间关系，腕部相机提供夹爪附近的近距离观测。任务覆盖属性 grounding、空间关系、堆叠与拆叠、长时程执行。" },
+      { kind: "fig", fig: { src: gdReal, caption: "真机任务，覆盖属性 grounding、空间关系、堆叠与拆叠、长时程执行。" } },
       {
         kind: "table",
         head: ["方法", "Spatial", "Object", "Goal", "Long", "Average"],
@@ -647,8 +608,9 @@ export const projects: Project[] = [
           ["Spatial Forcing (PyTorch)", "98.6", "98.4", "98.2", "95.4", "97.6"],
           ["GaussianDream", "99.0", "99.6", "99.0", "96.0", "98.4"],
         ],
-        note: "LIBERO 成功率（%）。GaussianDream 在 Spatial 与 Goal 上最高，平均 98.4。LingBot-VA 平均 98.5 更高，但控制时用的是更大的自回归视频-动作管线。Spatial Forcing 取其 PyTorch 实现以保持实现口径一致。",
+        note: "LIBERO 成功率（%）。Spatial Forcing 一栏用的是其 PyTorch 实现，以保持实现口径一致。",
       },
+      { kind: "p", text: "GaussianDream 在 LIBERO 上拿到 Spatial 99.0 和 Goal 99.0 两项最高，平均 98.4。平均分不是最高的：LingBot-VA 以 98.5 领先，Long 一项它是 98.5，GaussianDream 是 96.0。差别在于 LingBot-VA 在控制阶段跑的是更大的自回归视频-动作管线，而 GaussianDream 只把预测当作训练期监督，推理仍是前缀式的。" },
       {
         kind: "table",
         head: ["方法", "Pick&Place", "Doors/Drawers", "Others", "Average"],
@@ -661,8 +623,9 @@ export const projects: Project[] = [
           ["Being-H0.5", "36.0", "71.7", "57.6", "53.9"],
           ["GaussianDream", "43.8", "66.3", "54.4", "54.8"],
         ],
-        note: "RoboCasa Human-50 成功率（%）。GaussianDream 平均最高，Pick&Place 最高；GeoPredict 在 Doors/Drawers 与 Others 上更高。",
+        note: "RoboCasa Human-50 成功率（%）。",
       },
+      { kind: "p", text: "RoboCasa 上最清楚的优势在对定位精度敏感的 Pick&Place，43.8 是这一列最高，平均 54.8 也是最高。但 Doors/Drawers 和 Others 两列都落后 GeoPredict（75.1 与 62.4），平均分高于 Being-H0.5 的 53.9。" },
       {
         kind: "table",
         head: ["方法", "Scene-A", "Scene-B", "Scene-C", "Scene-D", "Average"],
@@ -670,30 +633,38 @@ export const projects: Project[] = [
           ["π0.5", "42.5", "50.0", "25.0", "20.0", "34.4"],
           ["GaussianDream", "55.0", "70.0", "35.0", "40.0", "50.0"],
         ],
-        note: "真机成功率（%）。相对基线 π0.5 从 34.4 提到 50.0，四个场景组均有提升，增益最大的是空间关系类和长时程场景。真机任务覆盖属性 grounding、空间关系、堆叠与拆叠、长时程执行。",
+        note: "真机成功率（%）。四个场景全部提升，平均从 34.4 提到 50.0。论文另称最大增益出现在空间关系与长时程任务，但未给出场景编号与任务类别的对应。",
       },
       { kind: "h", text: "消融" },
       {
         kind: "table",
-        head: ["当前重建", "未来预测", "渲染分支", "深度分支", "LIBERO 平均"],
+        head: ["当前帧重建", "未来预测", "渲染分支", "深度分支", "LIBERO 平均"],
         rows: [
-          ["✓", "✗", "✗", "✗", "97.0"],
-          ["✓", "✗", "✓", "✓", "97.3"],
-          ["✓", "✓", "✗", "✓", "97.5"],
-          ["✓", "✓", "✓", "✗", "97.2"],
-          ["✓", "✓", "✓", "✓", "98.4"],
+          ["有", "无", "无", "无", "97.0"],
+          ["有", "无", "有", "有", "97.3"],
+          ["有", "有", "无", "有", "97.5"],
+          ["有", "有", "有", "无", "97.2"],
+          ["有", "有", "有", "有", "98.4"],
         ],
-        note: "只做当前重建已有 97.0，说明把观测重建成高斯状态本身就是有效的空间先验；加入未来预测到 97.5；保留未来预测和渲染但去掉深度降到 97.2，说明只靠 RGB 一致性约束不住度量几何；全量 98.4。",
+        note: "LIBERO 上的组件消融（%）。",
       },
-      { kind: "h", text: "推理开销" },
-      {
-        kind: "p",
-        text: "部署配置去掉辅助高斯解码器与预测头后，每个 action chunk 的推理耗时为 531 ms；保留解码器和预测头的诊断配置为 569 ms。两者都快于 WAM / World Action Model 基线的 700 ms 以上。附录同时给出与 π0.5 的执行平滑度对比，GaussianDream 的轨迹突变更少。",
-      },
+      { kind: "p", text: "只做当前帧重建就有 97.0，说明把观测解码成高斯状态本身提供了较强的空间先验。加上未来预测到 97.5。保留未来预测和渲染但去掉深度掉到 97.2，说明只有 RGB 一致性不足以完全约束度量几何。四项齐全是 98.4。需要注意的是消融表里 97.3 那一列同时开了渲染和深度两项，论文正文把 97.0→97.3 的差归给渲染分支。" },
+      { kind: "h", text: "推理开销与执行平滑度" },
+      { kind: "p", text: "部署配置下辅助高斯解码器与预测头被移除，每个动作块 531 ms；保留解码器和头的诊断配置是 569 ms。两者都快于 WAM / World Action Model 基线的 700 ms 以上。同一组真机分析里，GaussianDream 相比 π0.5 基线减少了轨迹的突变。" },
+      { kind: "fig", fig: { src: gdLatency, caption: "每个动作块的推理延迟对比，涵盖 GaussianDream 的两种配置与 WAM / World Action Model 基线。" } },
       { kind: "h", text: "边界" },
+      { kind: "p", text: "以下为依据论文的方法与结果整理，论文本身没有单独的局限性章节。" },
       {
-        kind: "p",
-        text: "未来预测只更新高斯中心，尺度、不透明度、外观、旋转都从当前模板复制，因此建模的是短时程的几何位移，不是外观或拓扑变化；监督 horizon 也只到 t+5。深度和 3D 场景流都是伪标签，来自 Depth Anything V2 与 RAFT，而非真值传感。LIBERO 上平均分仍低于走视频-动作自回归路线的 LingBot-VA，Long 一项也不是最好；RoboCasa 上 Doors/Drawers 与 Others 两类落后于 GeoPredict。真机结果只与 π0.5 基线对比，没有与其他 3D 增强或世界模型方法的物理对照。",
+        kind: "list",
+        items: [
+          { term: "未来只动中心", desc: "未来状态只更新高斯中心，尺度、不透明度、外观、旋转都从当前模板复制，因此建模的是短时程的几何位移，不是外观或拓扑变化。" },
+          { term: "时间窗口很窄", desc: "上下文只有三帧 {t−10, t−5, t}，监督 horizon 只到 t+5，且 horizon 在训练中是逐步放长的。" },
+          { term: "几何监督是伪标签", desc: "深度来自 Depth Anything V2 的单目估计或仿真器深度；3D 场景流是由 RAFT 二维光流加深度反投影拼出来的，靠有效性掩码剔除无效对应，无效向量直接置零不进损失。这不是测量得到的真值几何。" },
+          { term: "前缀的视觉来源单一", desc: "前缀只从 agent-view 时序观测序列构造，伪深度也只从 agent-view RGB 生成。真机设置里腕部相机是策略的观测输入之一；论文未描述它是否参与高斯重建与预测。" },
+          { term: "仿真上不是全面领先", desc: "LIBERO 平均分低于 LingBot-VA 的 98.5，Long 一项也不是最高；RoboCasa 的 Doors/Drawers 和 Others 落后 GeoPredict。" },
+          { term: "真机仍有一半失败", desc: "真机平均成功率 50.0%，最难的两个场景是 35.0 和 40.0。" },
+          { term: "报告口径", desc: "仿真按标准协议每任务 50 次连续试验取平均成功率，论文只给单一数字，没有报告重复实验的方差；真机表也未给出每个场景的试验次数。" },
+        ],
       },
     ],
   },
