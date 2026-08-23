@@ -15,7 +15,6 @@ import gdReal from "../assets/projects/gaussiandream-real.webp";
 import rdFramework from "../assets/projects/recondrive.webp";
 import svRollouts from "../assets/projects/softvtbench-rollouts.webp";
 import svMethod from "../assets/projects/softvtbench-method.webp";
-import svOod from "../assets/projects/softvtbench-ood.webp";
 import svTactile from "../assets/projects/softvtbench-tactile.webp";
 import svTeaser from "../assets/projects/softvtbench-teaser.webp";
 import r2srPoster from "../assets/media/real2simready-poster.webp";
@@ -35,7 +34,9 @@ export type Block =
   | { kind: "list"; items: { term: string; desc: string }[] }
   | { kind: "table"; head: string[]; rows: string[][]; note?: string }
   | { kind: "fig"; fig: Figure }
-  | { kind: "video"; video: Video };
+  | { kind: "video"; video: Video }
+  /* 内联 SVG 数据图，chart 是 components/charts 里的注册键 */
+  | { kind: "chart"; chart: string };
 
 export type Project = {
   slug: string;
@@ -372,6 +373,7 @@ export const projects: Project[] = [
         ],
         note: "十个可形变资产的交互安全区。g 值越大表示抓得越紧；跨度按采集卡记录的松/紧实测开口直接相减，不是由统一线性换算推出的。",
       },
+      { kind: "chart", chart: "sv-tau" },
       { kind: "h", text: "评测协议" },
       {
         kind: "p",
@@ -418,6 +420,7 @@ export const projects: Project[] = [
         kind: "p",
         text: "十二个 in-distribution 配置全部存在完成任务却超出标定容差的 rollout，占各自成功 rollout 的 0.7% 到 24%。Diffusion Policy VT-C 的缺口最大：Object-Soft 上 9.6 个百分点、Spatial-Soft 上 8.0 个百分点，各相当于该配置成功 rollout 的 24%，由于 TSR 与 DSR 在同一批 rollout 上计算，这是 48 条与 40 条 episode 的精确计数，不是两个含噪估计之差。缺口的大小与策略族有关：Diffusion Policy 为 10%–24%，π0.5 为 8%–20%，FastWAM 只有 0.7%–6.5%。FastWAM 在两个 Spatial 配置上把 TSR 与 DSR 控制在 0.4 个百分点以内（500 条里的两条），同时拿到表中最强的 Spatial 结果。这说明两条评测轴对齐是可达的，而不是这个领域固有的代价。DSR 也确实会改结论：Object-Soft 上 TSR 把 Diffusion Policy 的 VT-C 排在 VO-C 之前（40.0% 对 37.4%），DSR 则把顺序反了过来（30.4% 对 33.6%）。判据本身是可达的 —— 2,000 条可形变物体演示的 R_max 中位数为 0.433、第 95 百分位为 0.713，没有一条演示超出其容差，所以学习策略里出现的越界不是从监督数据继承来的。",
       },
+      { kind: "chart", chart: "sv-tsr-dsr" },
       {
         kind: "fig",
         fig: {
@@ -537,17 +540,10 @@ export const projects: Project[] = [
         note: "九个留出条件池化后的 out-of-distribution 结果（%）。Δ 为相对同一模型、同一输入、同一套件的 in-distribution 条目的变化。",
       },
       {
-        kind: "fig",
-        fig: {
-          src: svOod,
-          caption:
-            "三个策略族 × 三条偏移轴（光照、质量、杨氏模量）× 两个可形变套件的任务成功率。虚线为视觉-only（VO-C），实线为视触觉（VT-C），竖线标出 in-distribution 参照点。",
-        },
-      },
-      {
         kind: "p",
         text: "分布偏移下，视触觉变体的优势是最一致的：VT-C 在全部六组策略-套件对比中 TSR 都高于 VO-C，DSR 在其中五组更高，唯一例外是 Object-Soft 上的 Diffusion Policy。单个 margin 有的很小，但方向的一致性本身就是结果 —— 按描述性单侧符号检验，六比零给出 p=0.016，五比一给出 p=0.11。而在 in-distribution，同样的比较是分裂的：VT-C 的 TSR 在六组里赢四组、输两组，没有统一方向。所以支持视触觉输入的最强对比证据是偏移下的任务成功提升，而不是 ID 性能或形变合规上的普遍收益；论文同时限定，这是对已发布变体的相关性描述，不是隔离出的触觉因果效应。",
       },
+      { kind: "chart", chart: "sv-ood" },
       {
         kind: "p",
         text: "按因子拆开看，这个模式更多由套件而非因子组织：Spatial-Soft 上视触觉曲线在三个因子、三个策略上都不低于视觉-only；Object-Soft 上两条曲线基本重合，可见的分离只出现在 π0.5 与 FastWAM 的质量偏移上，与触觉只能观测到接触建立之后才发生的变化相符。光照作用在接触之前，削弱的是两种模态共同依赖的视觉通路 —— Diffusion Policy 在 Object-Soft 的两个光照极端（×0.5 与 ×2.0）上，VO-C 与 VT-C 的 TSR 与 DSR 全部为 0，而在 ×1.33 上分别是 37/33 与 36/30。视觉整个失效时，触觉没有可修正的东西。",
@@ -610,6 +606,7 @@ export const projects: Project[] = [
         ],
         note: "LIBERO 成功率（%）。Spatial Forcing 一栏用的是其 PyTorch 实现，以保持实现口径一致。",
       },
+      { kind: "chart", chart: "gd-libero" },
       { kind: "p", text: "GaussianDream 在 LIBERO 上拿到 Spatial 99.0 和 Goal 99.0 两项最高，平均 98.4。平均分不是最高的：LingBot-VA 以 98.5 领先，Long 一项它是 98.5，GaussianDream 是 96.0。差别在于 LingBot-VA 在控制阶段跑的是更大的自回归视频-动作管线，而 GaussianDream 只把预测当作训练期监督，推理仍是前缀式的。" },
       {
         kind: "table",
@@ -648,6 +645,7 @@ export const projects: Project[] = [
         ],
         note: "LIBERO 上的组件消融（%）。",
       },
+      { kind: "chart", chart: "gd-ablation" },
       { kind: "p", text: "只做当前帧重建就有 97.0，说明把观测解码成高斯状态本身提供了较强的空间先验。加上未来预测到 97.5。保留未来预测和渲染但去掉深度掉到 97.2，说明只有 RGB 一致性不足以完全约束度量几何。四项齐全是 98.4。需要注意的是消融表里 97.3 那一列同时开了渲染和深度两项，论文正文把 97.0→97.3 的差归给渲染分支。" },
       { kind: "h", text: "推理开销与执行平滑度" },
       { kind: "p", text: "部署配置下辅助高斯解码器与预测头被移除，每个动作块 531 ms；保留解码器和头的诊断配置是 569 ms。两者都快于 WAM / World Action Model 基线的 700 ms 以上。同一组真机分析里，GaussianDream 相比 π0.5 基线减少了轨迹的突变。" },
@@ -771,6 +769,7 @@ export const projects: Project[] = [
         ],
         note: "论文 Table 2 的 8–10 s 长时程段（1–4 s 与 5–7 s 段见原文）。同一张表在 1–4 s 段上 CounterScene 的 ADE 是 0.288、CR 是 3.3%，CCDiff 对应 0.380 与 1.3%。",
       },
+      { kind: "chart", chart: "cs-tradeoff" },
       {
         kind: "p",
         text: "基线分成两种失败模式。CTG 和 CTG++ 保住了低越界率，但几乎不产生碰撞，CTG 在 8–10 s 也只有 2.0% CR。STRIVE 和 VAE 拿到了中等的长时程 CR（15.3%、13.3%），代价是真实性退化，8–10 s 的 ADE 超过 2.7。CounterScene 在 8–10 s 同时给出最低 ADE（1.877）和最高 CR（22.7%），且优势随时程拉长而扩大，论文把这解释为构造出的交互是随时间自然演化成危险，而不是靠激进扰动立刻撞上去。越界率上 CounterScene 不是最好的：8–10 s 的 ORR 是 1.9%，高于 CTG 与 CTG++ 的 0.2%。",
@@ -805,6 +804,7 @@ export const projects: Project[] = [
         ],
         note: "论文 Table 4，3 s 与 7 s 平均。Full 与这五个消融变体在 3 s / 7 s / 10 s 上的逐时程数值见附录 Table 9，趋势一致：10 s 上 Full 的 CR 是 32.0%，No Adaptive 是 24.0%，Minimal 是 20.0%。",
       },
+      { kind: "chart", chart: "cs-ablation" },
       {
         kind: "p",
         text: "去掉自适应到达时间压缩（No Adaptive）造成最大的 CR 下降，11.0% 掉到 7.5%，而真实性几乎不动（ADE 0.753 对 0.747）。去掉冲突感知加权或渐进调度各把 CR 压到 9.0%。去掉 jerk 正则或渐进调度会让 ADE 涨约 0.03、越界率从 0.9% 涨到 1.0%。只保留基础空间与时间目标的 Minimal 变体所有指标都变差，CR 6.5%、ADE 0.798。功能划分是清楚的：时间压缩负责对抗效果，调度与正则负责真实性。",
@@ -829,40 +829,6 @@ export const projects: Project[] = [
           ["CounterScene", "0.535", "5.4%", "1.111", "22.8%", "2.021", "40.2%"],
         ],
         note: "论文 Table 5。所有模型只在 nuScenes 上训练，直接用于 nuPlan，不做任何微调或超参调整。评测集是 100 个场景，Boston、Pittsburgh、Las Vegas、Singapore 各 25 个，过滤掉排队和长时间等待这类低风险样本，统一 10 Hz 推演。这张表里没有 VAE。FDE、ORR、HBR 三列见原文，CounterScene 的 HBR 在三个时程上分别是 17.6%、16.4%、15.5%。",
-      },
-      { kind: "h", text: "边界" },
-      {
-        kind: "list",
-        items: [
-          {
-            term: "短时程 CR 落后",
-            desc: "nuPlan 上 3 s 时 CounterScene 的 CR 是 5.4%，CCDiff 是 14.1%。论文的解释是此时生成的是自车真实感到威胁并开始急刹的近距冲突（HBR 17.6%，全表最高），3 秒不足以让这些交互演化成实际碰撞；到 7 s 时 CR 升到 40.2%，与 CCDiff 持平而 ADE 更低（2.021 对 2.534）。",
-          },
-          {
-            term: "越界率不是最优",
-            desc: "nuScenes 上 CounterScene 的 ORR 在 1–4 s 是 0.5%、8–10 s 是 1.9%，两个时程都高于 CTG 与 CTG++ 的 0.2%。nuPlan 上 7 s 的 ORR 是 1.5%，与 CCDiff 相同。",
-          },
-          {
-            term: "只干预单个智能体",
-            desc: "当前框架把反事实实例化成对单个因果关键智能体的最小干预，其余智能体和场景按学习到的动力学演化。论文在 Future Work 里把场景级约束保持与智能体级因果交互控制的联合形式化列为待做方向。",
-          },
-          {
-            term: "闭环里的自车规划器未指明",
-            desc: "论文反复用「自车感到真实威胁」来解释 HBR，但全篇没有说明闭环推演中自车用的是哪一个规划器。CR 与 HBR 都是对自车行为的度量，这个空缺影响两个对抗性指标的解释。",
-          },
-          {
-            term: "评测分辨率",
-            desc: "主结果在 100 个 nuScenes 验证场景上得到，每场景生成 16 条候选 rollout 并取对抗性最强的一条。附录 Table 8 的 CR 全部是 1.0% 的整数倍 —— 与 100 场景的规模一致，也就是说 CR 的分辨率就是每场景一个百分点，论文未给误差棒，也未做多种子重复。",
-          },
-          {
-            term: "筛选会过滤场景池",
-            desc: "离线冲突挖掘要求自车与候选至少共享五个有效未来时间步，并要通过 Tier 判据。没有候选存活的场景被标为无效，不生成冲突引导配置。",
-          },
-          {
-            term: "HBR 是近似量",
-            desc: "HBR 由预测质心的有限差分得到速度与加速度，纵向制动信号近似为加速度模长乘以航向角余弦，阈值取 −3.0 m/s²。这是一个几何近似而不是纵向加速度的严格投影。",
-          },
-        ],
       },
     ],
   },
@@ -1013,6 +979,7 @@ export const projects: Project[] = [
         ],
         note: "把渲染结果按 2 Hz 送进在 nuScenes 原图上预训练的 UniAD，横向偏移 0m、±1m、±2m、±3m 共七档一起统计，只算车辆类别。",
       },
+      { kind: "chart", chart: "rd-perception" },
       {
         kind: "p",
         text: "第三项协议把重建结果喂给下游感知：横向平移自车轨迹来模拟侧向偏移，渲染出的环视图像送进 UniAD。ReconDrive 检测 26.7% mAP、跟踪 18.9% AMOTA。这张表里有一个值得单独看的现象：四个 per-scene 优化方法的检测 mAP 全部低于前馈的 DrivingForward（14.6 到 18.5 对 23.4），但跟踪上并非如此，PVG 的 14.4% AMOTA 高于 DrivingForward 的 13.3%。论文的表述也是「前馈方法通常在检测上更强，在跟踪一致性上往往不及」。重建阶段的光度指标高，不等于渲染结果对下游感知可用。",
@@ -1029,32 +996,6 @@ export const projects: Project[] = [
       {
         kind: "p",
         text: "双帧输入在三项新视角指标上都好于单帧，论文的解释是多帧融合扩大了重建覆盖的视野范围，并提供了互补的视点信息。",
-      },
-      { kind: "h", text: "论文自述的局限" },
-      {
-        kind: "list",
-        items: [
-          {
-            term: "非刚性运动",
-            desc: "段落内的时序表示基于线性运动估计，难以准确表达复杂的非刚性形变和强非线性的物体轨迹。",
-          },
-          {
-            term: "时序聚合的冗余",
-            desc: "多帧聚合走的是逐像素输出的后处理，会带来高斯冗余，被遮挡区域的处理也不理想。",
-          },
-          {
-            term: "动态物体提取精度",
-            desc: "依赖 SAM2 做分割，偶尔出现边界不准或漏检；直接位移动态物体还会在背景上留下补不回来的空洞。",
-          },
-          {
-            term: "吞吐",
-            desc: "比优化类方法快几个数量级，但离边缘端实时仍有距离，需要更轻量的骨干和更高效的高斯采样策略。",
-          },
-          {
-            term: "泛化",
-            desc: "目前只在 nuScenes 上训练与评测，更广的地域范围和极端天气条件下的表现尚未验证。",
-          },
-        ],
       },
     ],
   },

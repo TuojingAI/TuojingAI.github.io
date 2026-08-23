@@ -2,6 +2,7 @@
    从 PI 学来的：大号衬线标题 + 标题下的 label/value 元信息表（发表 / 联系）+ 完整作者名单 +
    虚线框硬投影的资源按钮 + 带 mono 全大写角标的图版 + 无粗体的层级（层级只靠字号与字族）。
    换成原版皮肤的：淡蓝底、宋体标题、等宽正文、accent 蓝、原版的硬阴影规格。 */
+import { CHARTS, type ChartKey } from "../components/charts";
 import Shine from "../components/Shine";
 import logoBlue from "../assets/tuojing-logo-blue.png";
 import { careers, footer, site } from "./legacyContent";
@@ -56,6 +57,11 @@ function Body({ blocks }: { blocks: Block[] }) {
           );
 
         if (b.kind === "fig") return <Plate key={i} fig={b.fig} />;
+
+        if (b.kind === "chart") {
+          const Chart = CHARTS[b.chart as ChartKey];
+          return Chart ? <Chart key={i} /> : null;
+        }
 
         if (b.kind === "video")
           return (
