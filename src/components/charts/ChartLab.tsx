@@ -10,6 +10,11 @@ const TITLE: Record<string, string> = {
   "cs-tradeoff": "CounterScene · F8 Plumb Scatter · 真实性 × 对抗性",
   "cs-ablation": "CounterScene · F12 Dumbbell · 关掉哪个部件最伤对抗性",
   "rd-perception": "ReconDrive · F5 Tick Rows · 下游检测 mAP + 生成耗时",
+  "sv-cross": "SoftVTBench · F1 Rung Bars · 感知 × 控制粒度的交叉",
+  "gd-real": "GaussianDream · F6 Paired Rungs · 真机四个场景",
+  "gd-robocasa": "GaussianDream · F10 Dot Heat · RoboCasa 三类任务",
+  "cs-selection": "CounterScene · F5 Tick Rows · 只换选择策略",
+  "rd-quality": "ReconDrive · F8 Plumb Scatter · 重建质量 × 新视角质量",
 };
 
 export default function ChartLab() {
