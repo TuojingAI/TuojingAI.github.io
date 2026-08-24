@@ -15,7 +15,7 @@ import { projects } from "./legacyProjects";
    圆角一律加在外层容器上、媒体本身保持方角 —— 这是两家共同的做法。 */
 function Plate({ fig }: { fig: Figure }) {
   return (
-    <figure className="my-8">
+    <figure className="my-14">
       <div className="overflow-hidden rounded-[12px] border border-card-border bg-white">
         <img
           src={fig.src}
@@ -40,7 +40,7 @@ function Body({ blocks }: { blocks: Block[] }) {
           return (
             <h2
               key={i}
-              className="mt-10 font-serif text-xl font-normal text-foreground"
+              className="mt-20 font-sans text-[26px] font-light tracking-[-0.02em] text-foreground"
             >
               {b.text}
             </h2>
@@ -50,7 +50,7 @@ function Body({ blocks }: { blocks: Block[] }) {
           return (
             <p
               key={i}
-              className="mt-4 font-mono text-[13px] leading-[2] text-foreground/85"
+              className="mt-7 font-mono text-[15px] leading-[1.95] text-foreground/85"
             >
               {b.text}
             </p>
@@ -90,16 +90,16 @@ function Body({ blocks }: { blocks: Block[] }) {
 
         if (b.kind === "list")
           return (
-            <dl key={i} className="mt-5 flex flex-col">
+            <dl key={i} className="mt-10 flex flex-col">
               {b.items.map((it) => (
                 <div
                   key={it.term}
-                  className="flex flex-col gap-1 border-t border-divider py-3 sm:flex-row sm:gap-6"
+                  className="flex flex-col gap-2 border-t border-divider py-5 sm:flex-row sm:gap-8"
                 >
-                  <dt className="shrink-0 font-mono text-[13px] text-foreground sm:w-44">
+                  <dt className="shrink-0 font-mono text-[14px] text-foreground sm:w-48">
                     {it.term}
                   </dt>
-                  <dd className="font-mono text-[13px] leading-[1.9] text-muted-foreground">
+                  <dd className="font-mono text-[14px] leading-[1.95] text-muted-foreground">
                     {it.desc}
                   </dd>
                 </div>
@@ -109,7 +109,7 @@ function Body({ blocks }: { blocks: Block[] }) {
           );
 
         return (
-          <div key={i} className="mt-6">
+          <div key={i} className="mt-12">
             <div className="overflow-x-auto rounded-[12px] border border-card-border bg-white">
               <table className="w-full border-collapse font-mono text-[12px]">
                 <thead>
@@ -179,13 +179,13 @@ export default function LegacyProject({ project }: { project: Project }) {
         </div>
       </nav>
 
-      <article className="mx-auto max-w-3xl px-6 pb-24 pt-12">
+      <article className="mx-auto max-w-[760px] px-6 pb-40 pt-24">
         <p className="font-mono text-xs tracking-widest text-accent">
           {project.tag}
         </p>
 
         {/* 大号宋体标题，不用首页那条渐变——渐变留给首页一次就够 */}
-        <h1 className="mt-4 font-serif text-3xl font-bold leading-[1.3] text-foreground md:text-[40px]">
+        <h1 className="mt-5 font-serif text-3xl font-bold leading-[1.28] text-foreground md:text-[42px]">
           {project.title}
         </h1>
         <p className="mt-3 font-mono text-xs leading-relaxed text-muted-foreground">
@@ -193,7 +193,7 @@ export default function LegacyProject({ project }: { project: Project }) {
         </p>
 
         {/* PI 的 label/value 元信息表 */}
-        <dl className="mt-8 grid grid-cols-[auto_1fr] gap-x-6 gap-y-1.5 font-mono text-xs">
+        <dl className="mt-10 grid grid-cols-[auto_1fr] gap-x-8 gap-y-2.5 font-mono text-xs">
           <dt className="text-muted-foreground">发表</dt>
           <dd className="text-foreground">{project.date}</dd>
           {project.venue && (
@@ -239,7 +239,7 @@ export default function LegacyProject({ project }: { project: Project }) {
         )}
 
         {/* 资源按钮：虚线框 + 硬位移投影，PI 只把硬阴影用在这一个器件上 */}
-        <div className="mt-7 flex flex-wrap gap-3">
+        <div className="mt-10 flex flex-wrap gap-3">
           {(project.links ?? []).map((l) => (
             <a
               key={l.href}
@@ -253,7 +253,7 @@ export default function LegacyProject({ project }: { project: Project }) {
           ))}
         </div>
 
-        <p className="mt-9 border-l-2 border-accent pl-4 font-mono text-[13px] leading-[2] text-foreground">
+        <p className="mt-14 border-l-2 border-accent pl-6 font-mono text-[15px] leading-[2] text-foreground">
           {project.lede}
         </p>
 
@@ -261,7 +261,7 @@ export default function LegacyProject({ project }: { project: Project }) {
 
         <Body blocks={project.body} />
 
-        <nav className="mt-16 border-t border-divider pt-6">
+        <nav className="mt-32 border-t border-divider pt-10">
           <p className="font-mono text-xs text-muted-foreground">其他项目</p>
           <ul className="mt-3 flex flex-col">
             {others.map((p) => (
