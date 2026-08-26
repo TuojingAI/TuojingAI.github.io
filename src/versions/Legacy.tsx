@@ -274,7 +274,7 @@ function ResearchPage() {
   );
 }
 
-function JoinPage() {
+export function JoinPage() {
   return (
     <div className="relative isolate flex h-full flex-col justify-center pb-10 pt-24">
       <Mesh flip />
@@ -397,7 +397,8 @@ function Dots({
   );
 }
 
-const pageNodes = [HomePage, ResearchPage, JoinPage];
+/* JoinPage 暂时不挂上去，函数保留以便恢复 */
+const pageNodes = [HomePage, ResearchPage];
 
 // Apple-keynote style depth transition: passed pages fly toward the viewer,
 // upcoming pages surface from deeper in the scene.

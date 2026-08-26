@@ -60,7 +60,7 @@ export type Project = {
   status: string;
 };
 
-export const projects: Project[] = [
+const ALL_PROJECTS: Project[] = [
   {
     /* 内部管线，不是论文。页面内容全部是这条 80 秒演示片里可以看到的东西；
        片中烧录的读数（局部压缩率、质量回复率）不在正文复述 —— 它们的口径
@@ -895,6 +895,12 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+/* 暂时下线的项目。条目本身整块保留在上面，恢复时把 slug 从这个集合里去掉即可。
+   findProject 也走过滤后的列表，所以 ?p=<slug> 直接访问同样进不去。 */
+const HIDDEN = new Set(["gaussiandream", "recondrive"]);
+
+export const projects = ALL_PROJECTS.filter((p) => !HIDDEN.has(p.slug));
 
 export function findProject(slug: string) {
   return projects.find((p) => p.slug === slug) ?? null;

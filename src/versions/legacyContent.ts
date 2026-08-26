@@ -10,9 +10,8 @@ export const site = {
 export const pages = [
   { id: "home", label: "首页", labelEn: "Home" },
   { id: "research", label: "项目", labelEn: "Projects" },
-  /* 成员页按老板要求先下线。team 数据整块保留在下方，恢复时把这一条与
-     Legacy.tsx 里的 TeamPage / pageNodes 一起加回来即可。 */
-  { id: "join", label: "加入我们", labelEn: "Join Us" },
+  /* 成员页与加入我们页都先下线。team / careers / footer 数据整块保留在下方，
+     恢复时把对应条目与 Legacy.tsx 里的 TeamPage / JoinPage / pageNodes 一起加回来。 */
 ];
 
 export const hero = {
@@ -27,7 +26,9 @@ export const hero = {
 
 export const mission = {
   lead: "拓境智能是一家面向 Physical World AI 的公司。我们围绕空间智能与物理智能构建基础设施：让机器先看懂真实世界的几何与场景，再理解接触、力与形变如何运转，最终能在真实世界中可靠地行动。",
-  body: "四个开源项目连成一条完整的路线：从真实视频重建可交互的 4D 场景（ReconDrive），到在世界模型里做反事实推理、造出安全攸关场景（CounterScene），到把 3D 高斯世界模型接进操作策略（GaussianDream），再到用视触觉判定操作中的形变是否越界（SoftVTBench）。Real2SimReady 是把这四件事接成一条数据管线的内部实践。",
+  /* 只点名当前展示中的项目。GaussianDream 与 ReconDrive 暂时下线，
+     恢复展示时这句话要一并改回四个。 */
+  body: "两个开源项目分别守在这条路线的两端：CounterScene 在生成式世界模型里做反事实推理，把观测到的安全场景改成安全攸关的交互；SoftVTBench 用视触觉判定操作过程中的形变有没有越界。Real2SimReady 把一次真实采集接成从重建、推演到评测的完整管线，是这两端之间的内部实践。",
   taglineZh: "拓展智能边界，连接数字世界与物理世界。",
   taglineEn: "Building intelligence for the physical world.",
 };
@@ -55,7 +56,7 @@ export type FeedEntry = {
 
 /* 按公开时间倒序。desc 全部改写自各仓库 README 的 Introduction / Highlights，
    数字（1,628 demonstrations / 33 assets / 四个任务套件）取自 SoftVTBench README 自述。 */
-export const feed: FeedEntry[] = [
+const ALL_FEED: FeedEntry[] = [
   {
     slug: "real2simready",
     title: "Real2SimReady：从一次人类演示到可执行的仿真世界",
@@ -134,6 +135,11 @@ export const feed: FeedEntry[] = [
     variant: "card",
   },
 ];
+
+/* 与 legacyProjects 的 HIDDEN 保持一致 —— 两处都要改，否则首页会出现点不进去的卡片 */
+export const feed = ALL_FEED.filter(
+  (e) => !["gaussiandream", "recondrive"].includes(e.slug),
+);
 
 export type TeamMember = {
   initial: string;
