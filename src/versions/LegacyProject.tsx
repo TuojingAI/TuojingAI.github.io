@@ -4,6 +4,7 @@
    换成原版皮肤的：淡蓝底、宋体标题、等宽正文、accent 蓝、原版的硬阴影规格。 */
 import { CHARTS, type ChartKey } from "../components/charts";
 import Shine from "../components/Shine";
+import ThemeToggle from "../components/ThemeToggle";
 import logoBlue from "../assets/tuojing-logo-blue.png";
 import { careers, footer, site } from "./legacyContent";
 import type { Block, Figure, Project } from "./legacyProjects";
@@ -16,7 +17,7 @@ import { projects } from "./legacyProjects";
 function Plate({ fig }: { fig: Figure }) {
   return (
     <figure className="my-14">
-      <div className="overflow-hidden rounded-[12px] border border-card-border bg-white">
+      <div className="overflow-hidden rounded-[12px] border border-card-border bg-canvas-raised">
         <img
           src={fig.src}
           alt={fig.caption}
@@ -110,7 +111,7 @@ function Body({ blocks }: { blocks: Block[] }) {
 
         return (
           <div key={i} className="mt-12">
-            <div className="overflow-x-auto rounded-[12px] border border-card-border bg-white">
+            <div className="overflow-x-auto rounded-[12px] border border-card-border bg-canvas-raised">
               <table className="w-full border-collapse font-mono text-[12px]">
                 <thead>
                   <tr className="border-b border-divider bg-background-deep/60">
@@ -161,7 +162,7 @@ export default function LegacyProject({ project }: { project: Project }) {
   const others = projects.filter((p) => p.slug !== project.slug);
 
   return (
-    <div className="min-h-svh bg-background font-mono text-sm text-foreground antialiased">
+    <div className="theme-fade min-h-svh bg-background font-mono text-sm text-foreground antialiased">
       <nav className="sticky top-0 z-50 border-b border-divider/80">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-6 px-6 py-4">
           <a href="./" className="flex items-center gap-2.5">
@@ -170,12 +171,15 @@ export default function LegacyProject({ project }: { project: Project }) {
               {site.nameZh}
             </span>
           </a>
-          <a
-            href="./#research"
-            className="text-xs text-foreground/70 underline-offset-8 hover:text-foreground hover:underline"
-          >
-            ← 返回项目
-          </a>
+          <div className="flex items-center gap-5">
+            <a
+              href="./#research"
+              className="text-xs text-foreground/70 underline-offset-8 hover:text-foreground hover:underline"
+            >
+              ← 返回项目
+            </a>
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
 
@@ -246,7 +250,7 @@ export default function LegacyProject({ project }: { project: Project }) {
               href={l.href}
               target="_blank"
               rel="noreferrer"
-              className="border border-dashed border-foreground/55 bg-white px-4 py-2 font-mono text-xs text-foreground shadow-hard-sm transition-transform duration-150 hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-none"
+              className="border border-dashed border-foreground/55 bg-canvas-raised px-4 py-2 font-mono text-xs text-foreground shadow-hard-sm transition-transform duration-150 hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-none"
             >
               {l.label} ↗
             </a>

@@ -1,7 +1,7 @@
 /* 八张项目数据图。图型骨架取自 lieflat-charts 的 Lupi Basics gallery，
    每页之内模板不重复（F12 / F6 / F5 / F1 / F8）。
    数值逐格取自各项目论文的正式表格，与项目页正文里的表同源。 */
-import { C, ChartFrame, label, num, rnd, useReveal } from "./base";
+import { ChartFrame, label, num, rnd, usePalette, useReveal } from "./base";
 
 /* ── 共用：滚入后逐个淡入的属性 ── */
 const fade = (on: boolean, delay: number, o = 1) => ({
@@ -23,6 +23,7 @@ const Svg = ({ h, children, r }: { h: number; children: React.ReactNode; r: Reac
 
 /* ════ F12 Dumbbell ════ SoftVTBench：TSR → DSR，缺口本身是结论 */
 export function SvTsrDsr() {
+  const C = usePalette();
   const { ref, on } = useReveal<SVGSVGElement>();
   const D: [string, string, number, number][] = [
     ["Object-Soft", "DP · VO-C", 37.4, 33.6], ["Object-Soft", "DP · VT-C", 40.0, 30.4],
@@ -78,6 +79,7 @@ export function SvTsrDsr() {
 
 /* ════ F1 Rung Bars ════ GaussianDream：四个开关的消融 */
 export function GdAblation() {
+  const C = usePalette();
   const { ref, on } = useReveal<SVGSVGElement>();
   const D: [string[], number][] = [
     [["当前帧重建"], 97.0],
@@ -119,6 +121,7 @@ export function GdAblation() {
 
 /* ════ F8 Plumb Scatter ════ CounterScene：真实性 × 对抗性 */
 export function CsTradeoff() {
+  const C = usePalette();
   const { ref, on } = useReveal<SVGSVGElement>();
   const P: [string, number, number][] = [
     ["CTG", 2.480, 2.0], ["VAE", 3.086, 13.3], ["STRIVE", 2.722, 15.3],
@@ -163,6 +166,7 @@ export function CsTradeoff() {
 
 /* ════ F12 Dumbbell ════ CounterScene：关掉哪个部件最伤对抗性 */
 export function CsAblation() {
+  const C = usePalette();
   const { ref, on } = useReveal<SVGSVGElement>();
   const FULL = 11.0;
   const D: [string, number, number][] = [
@@ -212,6 +216,7 @@ export function CsAblation() {
 
 /* ════ F5 Tick Rows ════ ReconDrive：下游检测 mAP + 生成耗时 */
 export function RdPerception() {
+  const C = usePalette();
   const { ref, on } = useReveal<SVGSVGElement>();
   const D: [string, number, number, string, boolean][] = [
     ["ReconDrive", 26.7, 18.9, "15s", true], ["DrivingForward", 23.4, 13.3, "5s", true],
@@ -257,6 +262,7 @@ export function RdPerception() {
 
 /* ════ F6 Paired Rungs ════ GaussianDream：真机四个场景 */
 export function GdReal() {
+  const C = usePalette();
   const { ref, on } = useReveal<SVGSVGElement>();
   const D: [string, number, number][] = [
     ["Scene-A", 42.5, 55.0], ["Scene-B", 50.0, 70.0],
@@ -298,6 +304,7 @@ export function GdReal() {
 
 /* ════ F10 Dot Heat ════ GaussianDream：RoboCasa 三类任务 */
 export function GdRoboCasa() {
+  const C = usePalette();
   const { ref, on } = useReveal<SVGSVGElement>();
   const COL = ["Pick&Place", "Doors/Drawers", "Others", "Average"];
   const D: [string, number[]][] = [
@@ -346,6 +353,7 @@ export function GdRoboCasa() {
 
 /* ════ F5 Tick Rows ════ CounterScene：只换选择策略，骨干与引导不变 */
 export function CsSelection() {
+  const C = usePalette();
   const { ref, on } = useReveal<SVGSVGElement>();
   const D: [string, number, number][] = [
     ["Ours 因果选择", 11.0, 0.721], ["Random 随机采样", 10.0, 1.024],

@@ -33,18 +33,43 @@ export function useReveal<T extends Element>() {
 
 /* 站点色板。灰阶承载数据，品牌蓝只标每张图的一个主角 ——
    蓝与灰在任何合理明度下都到不了 3:1 的相邻对比，所以颜色不能是唯一线索，
-   类目差异一律另由明度、形状或位置承担。 */
-export const C = {
-  ink: "#0B2B49",
-  mut: "#5A6E86",
-  faint: "#8CA0B4",
-  grid: "#E2EAF2",
-  data: "#6E8299",
-  dataLo: "#B6C4D2",
-  hero: "#0877FE",
-  heroTxt: "#0A6BE0",
+   类目差异一律另由明度、形状或位置承担。
+
+   暗色不是把浅色反相：深底上 #0877FE 只有 2.3:1，必须提亮到 #4D9BFF；
+   数据灰也要整体上移，否则发丝笔画在深底上直接消失。 */
+type Palette = {
+  ink: string; mut: string; faint: string; grid: string;
+  data: string; dataLo: string; hero: string; heroTxt: string; card: string;
+};
+const LIGHT: Palette = {
+  ink: "#0B2B49", mut: "#5A6E86", faint: "#8CA0B4", grid: "#E2EAF2",
+  data: "#6E8299", dataLo: "#B6C4D2", hero: "#0877FE", heroTxt: "#0A6BE0",
   card: "#FFFFFF",
 };
+const DARK: Palette = {
+  ink: "#E6EDF5", mut: "#94A9BD", faint: "#7C8FA3", grid: "#2C4152",
+  data: "#9DB2C6", dataLo: "#4A6076", hero: "#4D9BFF", heroTxt: "#7BB4FF",
+  card: "#132330",
+};
+
+/* 订阅 <html> 上的 data-theme，切换时让图表重渲染。
+   走 MutationObserver 而不是 context，是为了不给整棵树加 provider ——
+   图表是叶子节点，谁用谁订阅。 */
+export function usePalette() {
+  const read = () =>
+    document.documentElement.getAttribute("data-theme") === "dark" ? DARK : LIGHT;
+  const [pal, setPal] = useState<Palette>(read);
+  useEffect(() => {
+    const mo = new MutationObserver(() => setPal(read()));
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    setPal(read());
+    return () => mo.disconnect();
+  }, []);
+  return pal;
+}
+
+/* 保留具名导出，供不需要跟随主题的场合使用 */
+export const C = LIGHT;
 
 /* 卡片外壳：跟 Plate / 视频块同规格 —— 12px 圆角、发丝边、图注在下 */
 export function ChartFrame({
@@ -56,7 +81,7 @@ export function ChartFrame({
 }) {
   return (
     <figure className="my-8">
-      <div className="overflow-hidden rounded-[12px] border border-card-border bg-white px-5 py-6 sm:px-7">
+      <div className="overflow-hidden rounded-[12px] border border-card-border bg-canvas-raised px-5 py-6 sm:px-7">
         {children}
       </div>
       {caption && (

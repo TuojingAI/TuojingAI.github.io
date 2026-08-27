@@ -762,3 +762,66 @@ button:disabled,
     background-position: 20% 50%;
   }
 }
+
+/* ── 暗色（仅 blog / 项目详情页启用） ───────────────────────────────
+   站点全部 token 都从 .v-legacy 那 15 个变量派生，所以暗色就是重定义这 15 个。
+   底色不用纯黑，取跟品牌 ink (#0B2B49) 同族的深 navy，卡片比画布亮一档。
+   对比度实测（vs 画布 / vs 卡片）：
+     正文 #E6EDF5  15.22 / 13.58   次级 #94A9BD  7.41 / 6.61
+     链接蓝 #4D9BFF 6.37 / 5.68    —— #0877FE 在深底上只有 2.3:1，必须提亮
+   发丝线按"在卡片上仍看得见"取值，#22323F 只有 1.22:1 不够，用 #2C4152。 */
+.v-legacy[data-theme="dark"] {
+  --c-canvas: 12 24 34;           /* #0C1822 */
+  --c-canvas-raised: 19 35 48;    /* #132330 卡片 */
+  --c-canvas-sunken: 9 18 26;     /* #09121A 色带比画布更沉 */
+  --c-ink: 230 237 245;           /* #E6EDF5 */
+  --c-ink-muted: 148 169 189;     /* #94A9BD */
+  --c-ink-faint: 148 169 189;
+  --c-ink-inverse: 12 24 34;
+  --c-rule: 44 65 82;             /* #2C4152 */
+  --c-rule-strong: 60 84 104;     /* #3C5468 */
+  --c-instrument: 77 155 255;     /* #4D9BFF 提亮后的品牌蓝 */
+  --c-instrument-wash: 20 40 62;
+  --c-instrument-ink: 12 24 34;
+  --c-legacy-deep: 99 168 255;    /* #63A8FF */
+  --c-unsafe: 232 118 96;
+  --c-figure-bg: 19 35 48;
+}
+
+/* 论文配图是白底的，整块白贴在深底上会炫目。压一点亮度、微升对比，
+   悬停时还原到原始亮度，方便看细节。 */
+.v-legacy[data-theme="dark"] figure img {
+  filter: brightness(0.86) contrast(1.04);
+  transition: filter 260ms ease;
+}
+.v-legacy[data-theme="dark"] figure:hover img {
+  filter: none;
+}
+
+/* 首页的渐变网格与硬阴影是给浅底设计的，暗色下压掉 */
+.v-legacy[data-theme="dark"] .shadow-hard-sm {
+  box-shadow: 2px 2px 0 rgb(var(--c-rule-strong));
+}
+
+/* 主题切换时让底色与文字平滑过渡，但不给会拖慢滚动的属性上 transition */
+.v-legacy[data-theme] body,
+.v-legacy[data-theme] .theme-fade {
+  transition: background-color 320ms cubic-bezier(.22,1,.36,1),
+              color 320ms cubic-bezier(.22,1,.36,1),
+              border-color 320ms cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .v-legacy[data-theme] body,
+  .v-legacy[data-theme] .theme-fade,
+  .v-legacy[data-theme="dark"] figure img { transition: none; }
+}
+
+/* View Transitions：关掉默认的交叉淡入，只留 ThemeToggle 里那道圆形擦除。
+   不这么做的话新旧两层会同时淡入淡出，圆形边界糊成一团。 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
