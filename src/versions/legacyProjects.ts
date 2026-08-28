@@ -66,9 +66,9 @@ export type Project = {
 
 const ALL_PROJECTS: Project[] = [
   {
-    /* 底本只有本地 LaTeX 源码。论文已投 arXiv 但编号尚未公开，
-       所以没有 links、没有编号、没有发表状态 —— 缺的东西一律留空，不补。
-       正文一律照论文陈述，凡属论文自陈的限定都保留原样。 */
+    /* 正文底本是本地 LaTeX 源码，一律照论文陈述，论文自陈的限定保留原样。
+       arXiv 2608.27365 与代码仓库均已核实存在：abs 页标题为 KnockGS、
+       九位作者与 main.tex 逐位一致（2026-08-27 提交）。 */
     slug: "knockgs",
     title: "KnockGS：用一次已知的交互标定物理高斯表示",
     titleEn: "Interaction-Grounded Calibration of Physical Gaussian Representations",
@@ -79,7 +79,11 @@ const ALL_PROJECTS: Project[] = [
     affiliations:
       "Tuojing Intelligence · Southeast University · Stevens Institute of Technology · Tsinghua University · Simple AI · Imperial College London · Shanghai Jiao Tong University · GigaAI · Sun Yat-sen University · The University of Hong Kong",
     lede: "物理集成的三维高斯资产可以被仿真也可以被渲染，但现有管线假定材料参数已知或由人手指定。KnockGS 用一次已知的、主动施加的交互和它的响应，标定两个 MPM 材料尺度，冻结后用于预测另一次不相交的交互。",
-    status: "论文已投 arXiv，编号待公开",
+    links: [
+      { label: "arXiv 2608.27365", href: "https://arxiv.org/abs/2608.27365" },
+      { label: "代码", href: "https://github.com/TuojingAI/KnockGS" },
+    ],
+    status: "论文已上 arXiv，代码已开源",
     body: [
       { kind: "h", text: "被动观测下的不可辨识性" },
       { kind: "p", text: "三维重建能高保真地恢复真实物体的几何与外观，但视觉重建本身不决定弹性、密度、阻尼、摩擦或内部结构。PhysGaussian 这类物理集成的扩展把高斯基元关联到物质点法（MPM）的物质点上，让重建出来的资产既可仿真又可渲染，外观与力学状态留在同一个表示里。这类管线是前向的：材料模型与参数必须先给定，仿真才能预测运动。" },

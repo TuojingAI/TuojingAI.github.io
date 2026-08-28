@@ -63,9 +63,12 @@ const ALL_FEED: FeedEntry[] = [
     titleEn: "Interaction-Grounded Calibration of Physical Gaussian Representations",
     tag: "Physical Asset",
     desc: "物理集成的三维高斯资产可以被仿真也可以被渲染，但现有管线假定材料参数已知或由人手指定。KnockGS 用一次已知的、主动施加的交互和它的响应，标定两个 MPM 材料尺度，冻结后用于预测另一次不相交的交互。",
-    meta: "论文已投 arXiv，编号待公开",
+    meta: "arXiv 2608.27365 · 代码已开源",
     href: "?p=knockgs",
-    links: [],
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2608.27365" },
+      { label: "代码", href: "https://github.com/TuojingAI/KnockGS" },
+    ],
     variant: "featured",
   },
   {
