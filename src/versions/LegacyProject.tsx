@@ -8,7 +8,7 @@ import ThemeToggle from "../components/ThemeToggle";
 import logoBlue from "../assets/tuojing-logo-blue.png";
 import { careers, footer, site } from "./legacyContent";
 import type { Block, Figure, Project } from "./legacyProjects";
-import { projects } from "./legacyProjects";
+import { listedProjects } from "./legacyProjects";
 
 /* 图版规格量自两个参照站：worldlabs.ai 的媒体容器是 radius 8-16px + overflow hidden、
    无标签栏无阴影；pi.website/blog/pi07 是 radius 12px + overflow hidden + bg-black，
@@ -159,7 +159,8 @@ function Body({ blocks }: { blocks: Block[] }) {
 }
 
 export default function LegacyProject({ project }: { project: Project }) {
-  const others = projects.filter((p) => p.slug !== project.slug);
+  /* 未列出的项目不在站内互相导流，只保留直达链接 */
+  const others = listedProjects.filter((p) => p.slug !== project.slug);
 
   return (
     <div className="theme-fade min-h-svh bg-background font-mono text-sm text-foreground antialiased">

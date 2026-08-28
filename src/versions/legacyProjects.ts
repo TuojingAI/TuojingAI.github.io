@@ -992,11 +992,22 @@ const ALL_PROJECTS: Project[] = [
   },
 ];
 
-/* 暂时下线的项目。条目本身整块保留在上面，恢复时把 slug 从这个集合里去掉即可。
-   findProject 也走过滤后的列表，所以 ?p=<slug> 直接访问同样进不去。 */
-const HIDDEN = new Set(["gaussiandream"]);
+/* 两种不同的"不展示"，别混：
 
-export const projects = ALL_PROJECTS.filter((p) => !HIDDEN.has(p.slug));
+   OFFLINE  —— 完全不上线。列表里没有，直接敲 ?p=<slug> 也进不去
+                （findProject 走过滤后的列表，返回 null 即回落首页）。
+   UNLISTED —— 不进首页项目列表，但保留直达链接。页面照常渲染、可分享，
+                只是站内没有入口。
+
+   两个集合互斥：OFFLINE 里的东西不需要也不应该再写进 UNLISTED。 */
+const OFFLINE = new Set(["gaussiandream"]);
+const UNLISTED = new Set(["knockgs", "softvtbench", "counterscene", "recondrive"]);
+
+/* 可访问的全集 —— findProject 与详情页渲染用这个 */
+export const projects = ALL_PROJECTS.filter((p) => !OFFLINE.has(p.slug));
+
+/* 会出现在首页项目列表与详情页底部「其他项目」里的 —— 用这个 */
+export const listedProjects = projects.filter((p) => !UNLISTED.has(p.slug));
 
 export function findProject(slug: string) {
   return projects.find((p) => p.slug === slug) ?? null;

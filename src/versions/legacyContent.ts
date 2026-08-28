@@ -28,7 +28,7 @@ export const mission = {
   lead: "拓境智能是一家面向 Physical World AI 的公司。我们围绕空间智能与物理智能构建基础设施：让机器先看懂真实世界的几何与场景，再理解接触、力与形变如何运转，最终能在真实世界中可靠地行动。",
   /* 只点名当前展示中的项目。GaussianDream 与 ReconDrive 暂时下线，
      恢复展示时这句话要一并改回四个。 */
-  body: "三个开源项目连成一条路线：ReconDrive 把真实视频重建成可交互的 4D 场景，CounterScene 在生成式世界模型里做反事实推理、把安全场景改成安全攸关的交互，SoftVTBench 用视触觉判定操作过程中的形变有没有越界。Real2SimReady 把一次真实采集接成从重建、推演到评测的完整管线。",
+  body: "Real2SimReady 把一次真实采集接成从重建、推演到评测的完整管线：操作者手持夹爪把任务做一遍，管线还原出与真实环境几何对齐的可交互仿真世界，再从中派生多条候选轨迹、多套背景与光照，交付可直接用于训练与评测的仿真资产。",
   taglineZh: "拓展智能边界，连接数字世界与物理世界。",
   taglineEn: "Building intelligence for the physical world.",
 };
@@ -147,10 +147,10 @@ const ALL_FEED: FeedEntry[] = [
   },
 ];
 
-/* 与 legacyProjects 的 HIDDEN 保持一致 —— 两处都要改，否则首页会出现点不进去的卡片 */
-export const feed = ALL_FEED.filter(
-  (e) => !["gaussiandream"].includes(e.slug),
-);
+/* 首页项目列表只展示 Real2SimReady。其余项目页仍可通过 ?p=<slug> 直达，
+   但站内不给入口 —— 与 legacyProjects 的 UNLISTED 保持一致。
+   GaussianDream 在 legacyProjects 的 OFFLINE 里，直达也进不去。 */
+export const feed = ALL_FEED.filter((e) => e.slug === "real2simready");
 
 export type TeamMember = {
   initial: string;
