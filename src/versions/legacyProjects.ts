@@ -1004,8 +1004,9 @@ const ALL_PROJECTS: Project[] = [
                 只是站内没有入口。
 
    两个集合互斥：OFFLINE 里的东西不需要也不应该再写进 UNLISTED。 */
-const OFFLINE = new Set(["gaussiandream"]);
-const UNLISTED = new Set(["knockgs", "softvtbench", "counterscene", "recondrive"]);
+/* 目前全部上线、全部列出。要藏哪个，把 slug 填进对应集合即可 */
+const OFFLINE = new Set<string>([]);
+const UNLISTED = new Set<string>([]);
 
 /* 可访问的全集 —— findProject 与详情页渲染用这个 */
 export const projects = ALL_PROJECTS.filter((p) => !OFFLINE.has(p.slug));
