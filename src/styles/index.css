@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Lab uses the existing brand palette; the 3D app loads only after entry. */
+.lab-link { align-items: center; gap: 1rem; color: #316cde; font-size: 13px; text-decoration: underline; text-underline-offset: 6px; }
+.lab-link:hover { color: #17489f; }
+.lab-showcase { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); align-items: center; gap: clamp(28px, 4vw, 64px); padding: 24px 0; }
+.lab-features { display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 28px 0; padding: 18px 0; border-top: 1px solid rgb(var(--c-rule)); border-bottom: 1px solid rgb(var(--c-rule)); font-size: 11px; color: rgb(var(--c-ink-muted)); }
+.lab-enter { display: inline-flex; align-items: center; justify-content: space-between; gap: 32px; min-height: 48px; padding: 13px 21px; border-radius: 10px; background: #316cde; color: white; font-size: 13px; transition: background .2s, transform .2s; }
+.lab-enter:hover { background: #2354b3; transform: translateY(-2px); }
+.lab-preview { margin: 0; min-width: 0; }
+.lab-preview > a { display: block; overflow: hidden; border: 1px solid #dbe3ed; border-radius: 16px; background: #fff; box-shadow: 0 20px 65px -32px #24466b55; transition: transform .25s; }
+.lab-preview > a:hover { transform: translateY(-4px); }
+.lab-preview img { display: block; width: 100%; height: auto; }
+.lab-preview-caption { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; padding: 18px 20px; border-top: 1px solid #e7ecf2; font-size: 11px; color: #316cde; }
+.lab-preview figcaption { margin-top: 14px; font-size: 11px; line-height: 1.8; color: rgb(var(--c-ink-muted)); }
+.lab-link:focus-visible, .lab-enter:focus-visible, .lab-preview > a:focus-visible { outline: 3px solid #316cde; outline-offset: 5px; }
+@media (max-width: 900px) { .lab-showcase { grid-template-columns: 1fr; gap: 32px; } .lab-copy { max-width: 580px; } .lab-preview { max-width: 720px; } }
+@media (prefers-reduced-motion: reduce) { .lab-enter, .lab-preview > a { transition: none; } .lab-enter:hover, .lab-preview > a:hover { transform: none; } }
+
 /* ============================================================
    四套皮共用一组变量名。切 <html> 上的 class 即换版本。
    通道写成空格分隔 RGB，才能保留 Tailwind 的 <alpha-value>。

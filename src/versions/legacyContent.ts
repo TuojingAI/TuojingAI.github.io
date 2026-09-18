@@ -9,6 +9,7 @@ export const site = {
 
 export const pages = [
   { id: "home", label: "首页", labelEn: "Home" },
+  { id: "lab", label: "实验室", labelEn: "Lab" },
   { id: "research", label: "项目", labelEn: "Projects" },
   /* 成员页与加入我们页都先下线。team / careers / footer 数据整块保留在下方，
      恢复时把对应条目与 Legacy.tsx 里的 TeamPage / JoinPage / pageNodes 一起加回来。 */
@@ -37,6 +38,15 @@ export const loop = [
   { zh: "行动", en: "Act" },
   { zh: "评测", en: "Evaluate" },
 ];
+
+export const lab = {
+  title: "走进拓境实验室",
+  titleEn: "A real space. Ready to explore.",
+  description:
+    "从真实空间的三维扫描，到可以亲手探索的交互场景。旋转视角，查看机器人配置，探索我们的实验环境。",
+  features: ["R5 单臂 / 双臂", "空间与组件交互", "原始扫描对照"],
+  href: "/lab/",
+};
 
 export type FeedEntry = {
   slug: string;

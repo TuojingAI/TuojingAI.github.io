@@ -14,6 +14,7 @@ import {
   feed,
   footer,
   hero,
+  lab,
   loop,
   mission,
   pages,
@@ -235,6 +236,9 @@ function HomePage() {
         <p className="lg-reveal lg-reveal-3 mt-4 font-serif text-lg italic text-deep">
           {mission.taglineEn}
         </p>
+        <a href={lab.href} className="lab-link lg-reveal lg-reveal-4 mt-6 inline-flex">
+          探索我们的实验室 <span aria-hidden="true">→</span>
+        </a>
         <div className="lg-reveal lg-reveal-4 mt-12 flex max-w-3xl flex-wrap items-center gap-x-2 gap-y-1 border-y border-divider py-4 font-mono text-xs text-muted-foreground">
           {loop.map((step, i) => (
             <span key={step.en} className="flex items-center gap-x-2">
@@ -254,11 +258,44 @@ function HomePage() {
   );
 }
 
+function LabPage() {
+  return (
+    <div className="relative isolate h-full">
+      <ScrollPane><Container>
+        <div className="lab-showcase my-auto">
+          <div className="lab-copy">
+            <PageLabel index={1} />
+            <h2 className="tj-display lg-reveal lg-reveal-1 mt-6 text-[clamp(2rem,3.6vw,3.25rem)] leading-tight text-foreground">
+              {lab.title}
+            </h2>
+            <p className="lg-reveal lg-reveal-2 mt-4 font-serif text-lg italic text-deep">{lab.titleEn}</p>
+            <p className="lg-reveal lg-reveal-2 mt-6 text-sm leading-[1.9] text-muted-foreground">{lab.description}</p>
+            <ul className="lab-features lg-reveal lg-reveal-3" aria-label="实验室体验功能">
+              {lab.features.map((feature) => <li key={feature}>{feature}</li>)}
+            </ul>
+            <a className="lab-enter lg-reveal lg-reveal-4" href={lab.href}>
+              进入交互实验室 <span aria-hidden="true">→</span>
+            </a>
+            <p className="lg-reveal lg-reveal-4 mt-4 text-xs leading-relaxed text-muted-foreground">在浏览器中探索，无需安装。</p>
+          </div>
+          <figure className="lab-preview lg-reveal lg-reveal-2">
+            <a href={lab.href} aria-label="进入拓境交互实验室">
+              <img src="/images/lab-preview.png" alt="拓境实验室三维全景，展示窗边机械臂工作桌、收纳区和机器人" width="1280" height="720" loading="lazy" />
+              <span className="lab-preview-caption"><span>真实空间 · 交互重建</span><span>探索空间 <span aria-hidden="true">↗</span></span></span>
+            </a>
+            <figcaption>依据现场扫描还原的交互展示，机器人配置支持切换。</figcaption>
+          </figure>
+        </div>
+      </Container></ScrollPane>
+    </div>
+  );
+}
+
 function ResearchPage() {
   return (
     <div className="relative isolate h-full">
       <ScrollPane><Container><div className="relative my-auto w-full max-w-2xl">
-        <PageLabel index={1} />
+        <PageLabel index={2} />
         <p className="lg-reveal lg-reveal-1 mt-4 font-mono text-sm text-foreground/85">
           {mission.body}
         </p>
@@ -398,7 +435,7 @@ function Dots({
 }
 
 /* JoinPage 暂时不挂上去，函数保留以便恢复 */
-const pageNodes = [HomePage, ResearchPage];
+const pageNodes = [HomePage, LabPage, ResearchPage];
 
 // Apple-keynote style depth transition: passed pages fly toward the viewer,
 // upcoming pages surface from deeper in the scene.
@@ -504,6 +541,7 @@ export default function Legacy() {
               key={pages[i].id}
               id={pages[i].id}
               aria-hidden={page !== i}
+              ref={(element) => { if (element) element.inert = page !== i; }}
               style={proPageStyle(i - page, pageNodes.length)}
               className={`pro-page absolute inset-0 bg-background will-change-transform ${
                 booted && page === i ? "page-active" : ""

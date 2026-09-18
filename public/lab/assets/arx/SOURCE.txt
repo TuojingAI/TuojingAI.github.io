@@ -1,0 +1,10 @@
+ARX Robotics model geometry and kinematics
+Official source: https://github.com/ARXroboticsX/ARX_Model
+Upstream commit: 74386441845f12af4da203843b6400951d6c5530
+Prepared on 2026-09-17 from the supplied L20 collection.
+All model names, geometry and source kinematic definitions remain attributable to ARX Robotics.
+No repository-wide model license was present in the supplied ARX_Model collection. No license from an unrelated SDK has been applied to these meshes.
+Website derivatives: STL to indexed binary, gzip, quadric-error decimation up to 14,000 triangles per mesh. SI scales, visual origins, colors, joint axes and limits preserved.
+Web motion is kinematic presentation only; it is not Isaac Sim physics, collision checking or validated hardware control.
+Additional web encoding: 16-bit positions within each mesh bounding box, 8-bit normalized normals, adaptive 16/32-bit indices.
+Meshoptimizer 1.2.0 (MIT) encoding and 45-degree normal smoothing on webpage copies; vertex positions and triangles retained by this final compression step.

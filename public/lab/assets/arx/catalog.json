@@ -1,0 +1,52 @@
+[
+  {
+    "id": "a5",
+    "title": "A5",
+    "placement": "desk"
+  },
+  {
+    "id": "r5a",
+    "title": "R5 / R5a",
+    "placement": "desk"
+  },
+  {
+    "id": "x5a",
+    "title": "X5 / X5A",
+    "placement": "desk"
+  },
+  {
+    "id": "x5_2025",
+    "title": "X5 2025",
+    "placement": "desk"
+  },
+  {
+    "id": "ac_one",
+    "title": "AC one",
+    "placement": "desk"
+  },
+  {
+    "id": "ac_one_without_handle",
+    "title": "AC one 无手柄版",
+    "placement": "desk"
+  },
+  {
+    "id": "x7",
+    "title": "X7",
+    "placement": "floor"
+  },
+  {
+    "id": "x7s",
+    "title": "X7s",
+    "placement": "floor"
+  },
+  {
+    "id": "lift",
+    "title": "LIFT",
+    "placement": "floor"
+  },
+  {
+    "id": "lift_mini",
+    "title": "LIFT-mini",
+    "placement": "floor"
+  }
+]
