@@ -540,6 +540,7 @@ h3 { font-size: var(--fs-h3); line-height: 1.35; }
 .dp-steps li p, .dp-out li p { font-size: var(--fs-small); color: var(--ink-2); line-height: 1.5; }
 .dp-steps li:not(:last-child)::after { content: '→'; position: absolute; right: -17px; top: 50%; transform: translateY(-50%); color: var(--ink-3); font-size: 14px; }
 .dp-wide { grid-column: span 2; }
+.dp-full { grid-column: 1 / -1; }
 .dp-key { background: var(--surface-2) !important; box-shadow: none !important; }
 .dp-join { position: relative; }
 .dp-join::before { content: ''; position: absolute; left: 6px; top: 25%; bottom: 25%; width: 10px; border: 1.5px solid var(--ink-3); border-left: 0; border-radius: 0 10px 10px 0; }
@@ -962,10 +963,9 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
       <div class="cover-text">
         <p class="eyebrow reveal">合作提案</p>
         <h1 class="display reveal">Real2Sim2Real 灵巧手 Benchmark <span class="x">×</span> Sharpa 合作提案</h1>
-        <p class="lead reveal"><span class="draft">用仿真评测预测真机表现，系统量化触觉的价值。</span></p>
+        <p class="lead reveal">打通 Real2Sim2Real 的流程，在探索过程中逐步了解触觉对于灵巧手探索物理世界的价值和意义。</p>
         <p class="names reveal">目标 CVPR 2027</p>
         <p class="cover-meta reveal">拓境智能触觉生态团队</p>
-        <p class="cover-meta print-only">在线版（含视频）：<mark class="tbc">【待确认：预读链接】</mark></p>
       </div>
       <figure class="media hero-media reveal" id="heroMedia">
         <div class="ph"><span>【待补】首屏大图：sim / real 同步对比（静态帧）</span><span class="spec">assets/hero/hero-poster.webp · 1920×1200 WebP</span></div>
@@ -983,23 +983,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   <div class="slide-inner">
     <p class="eyebrow">一页摘要</p>
     <h2 >一句话提议</h2>
-    <p class="proposal">以 SharpaWave 为主力本体，共建一个<em>能用仿真评测预测真机表现</em>、并<em>系统量化触觉价值</em>的灵巧手 benchmark，目标 CVPR 2027。</p>
-    <div class="grid g3">
-      <div class="card stat">
-        <div class="stat-num">4</div>
-        <div class="stat-label">个 real2sim 真实家庭场景</div>
-        <div class="foot"><span class="badge ok"><svg><use href="#i-ok"/></svg>已完成</span><span class="names">厨房 · 卧室 · 客厅 · 卫生间</span></div>
-      </div>
-      <div class="card stat">
-        <div class="stat-num pending"><mark class="tbc">【待确认：首批任务数】</mark></div>
-        <div class="stat-label">个代表任务</div>
-        <div class="foot"><span class="names">家庭场景桌面级任务</span></div>
-      </div>
-      <div class="card stat">
-        <div class="stat-num pending"><mark class="tbc">【待确认：第三个数字，如已采集轨迹数或并行评测吞吐】</mark></div>
-        <div class="stat-label"><mark class="tbc">【待确认：指标名】</mark></div>
-      </div>
-    </div>
+    <p class="proposal">以 Real2Sim2Real 为核心，共建一个<em>能用仿真评测预测真机表现</em>、并<em>系统量化触觉价值</em>的灵巧手 benchmark，在实践中不断深化 Real2Sim2Real 的意义，目标 CVPR 2027。</p>
   </div>
 </section>
 
@@ -1009,7 +993,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
     <div class="head">
       <p class="eyebrow">团队</p>
       <h2 >团队背景</h2>
-      <p class="lead">拓境智能触觉生态团队，<mark class="tbc">【待确认：一句话介绍】</mark></p>
+      <p class="lead">拓境智能触觉生态团队</p>
     </div>
     <div class="grid team-grid">
       <article class="card person">
@@ -1062,41 +1046,17 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
 </section>
 
 <!-- ======================= 02 愿景：问题 ======================= -->
-<section class="slide" id="problem" data-chapter="02" data-label="愿景与定位 · 问题" data-first>
+<section class="slide" id="problem" data-chapter="02" data-label="愿景与定位" data-first>
   <div class="slide-inner">
     <div class="head">
       <p class="eyebrow">愿景与定位</p>
-      <h2>让灵巧手 + 触觉策略的仿真评测，能预测真机排名</h2>
+      <h2>让灵巧手 + 触觉策略的仿真评测，具备真机预测力</h2>
     </div>
-    <div class="grid g3 problem-list">
-      <div><h3>缺少能预测真机排名的评测</h3><p>灵巧手操作缺少一个"仿真分数能预测真机排名"的评测。</p></div>
-      <div><h3>多只报仿真成功率</h3><p>现有 benchmark 多只报仿真成功率，仿真结论能否迁移到真机缺少检验。</p></div>
-      <div><h3>触觉作用缺少系统量化</h3><p>触觉在哪些任务、哪些条件下真正起作用，缺少系统量化。</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="slide" id="evidence" data-chapter="02" data-label="问题证据">
-  <div class="slide-inner">
-    <div class="head">
-      <h2>仿真成功率与真机成功率会脱节</h2>
-      <p class="lead">同一批策略，在仿真里的高低次序，搬到真机上可能改变。已有工作（如 SIMPLER）在机械臂上观察到这一现象，灵巧手 + 触觉的数据来自我们的首轮结果。</p>
-    </div>
-    <div class="ev">
-      <svg class="ev-plot" viewBox="0 0 560 420" role="img" aria-label="仿真成功率与真机成功率散点图（数据待补）">
-        <line class="ev-axis" x1="70" y1="360" x2="530" y2="360"/><line class="ev-axis" x1="70" y1="360" x2="70" y2="30"/>
-        <line class="ev-diag" x1="70" y1="360" x2="530" y2="30"/>
-        <text class="ev-t" x="300" y="402" text-anchor="middle">仿真成功率</text>
-        <text class="ev-t" x="24" y="195" text-anchor="middle" transform="rotate(-90 24 195)">真机成功率</text>
-        <text class="ev-s" x="70" y="380" text-anchor="middle">0</text><text class="ev-s" x="530" y="380" text-anchor="middle">100%</text><text class="ev-s" x="56" y="364" text-anchor="end">0</text><text class="ev-s" x="56" y="36" text-anchor="end">100%</text>
-        <text class="ev-s" x="470" y="62" text-anchor="end">完全一致</text>
-        <g id="evPoints"></g>
-        <text class="ev-ph" x="300" y="210" text-anchor="middle">【待补】≥3 个策略的仿真与真机成功率，匿名为 Policy A / B / C</text>
-      </svg>
-      <ul class="ev-notes">
-        <li><b>只看现象</b><p>每个点是一个策略，横轴为仿真成功率，纵轴为真机成功率；越偏离对角线，脱节越明显。</p></li>
-        <li><b>为什么重要</b><p>如果只报仿真成功率，排在前面的策略未必在真机上更好；这正是我们用排名一致性做主指标的原因。</p></li>
-      </ul>
+    <div class="grid g2 problem-list">
+      <div><h3>① 缺少能预测真机表现的仿真评测</h3><p>现有评测通常分别报告仿真或真机性能，缺少系统验证：仿真中的性能差异与策略排名，能否预测真机表现。</p></div>
+      <div><h3>② 缺少 Real–Sim Physical Correspondence</h3><p>不仅比较 task success，还量化真实与仿真在接触、力、运动轨迹、物体动力学与任务结果上的一致性。</p></div>
+      <div><h3>③ 触觉作用缺少系统量化</h3><p>回答的不只是"触觉有没有用"，而是：在哪些任务、接触条件和 Physical OOD 下有用，以及提升多少。</p></div>
+      <div><h3>④ 缺少可控的 Physical OOD 评测</h3><p>系统改变质量、摩擦、刚度、内容物 / 填充量、重心等物理属性，测试仿真结论在真实物理变化下是否仍然成立。</p></div>
     </div>
   </div>
 </section>
@@ -1109,30 +1069,23 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
       <h2 >Real2Sim2Real 闭环</h2>
     </div>
     <div class="flow-wrap reveal">
-      <svg class="flow" viewBox="0 0 1200 350" role="img" aria-labelledby="flowT flowD">
+      <svg class="flow" viewBox="0 0 1400 350" role="img" aria-labelledby="flowT flowD">
         <title id="flowT">Real2Sim2Real 总览流程</title>
-        <desc id="flowD">真实场景，经 real2sim 重建进入仿真；在仿真中大规模采集、训练与评测；再到真机部署验证；最后回到指标：比较仿真与真机的 policy 排名。</desc>
+        <desc id="flowD">真实场景经 real2sim 重建进入仿真；在仿真场景中设置任务、采集数据；在仿真中大规模训练与评测；再到真机部署验证；最后回到指标：比较仿真与真机的 policy 排名。</desc>
         <defs>
           <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L9 5L0 9" fill="none" stroke="var(--ink-3)" stroke-width="1.6"/></marker>
           <marker id="ahA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L9 5L0 9" fill="none" stroke="var(--accent)" stroke-width="1.6"/></marker>
         </defs>
-        <path class="arrow soft" d="M600 106 C 600 52, 1102 52, 1102 104" marker-end="url(#ah)"/>
-        <text class="lbl" x="851" y="44" text-anchor="middle">仿真中的 policy 排名</text>
-        <g><rect class="n-box" x="10" y="110" width="176" height="140" rx="12"/><text class="n-t" x="30" y="158">真实场景</text><text class="n-s" x="30" y="188">家庭环境</text><text class="n-s" x="30" y="210">4 个场景</text></g>
-        <g><rect class="n-box" x="261" y="110" width="176" height="140" rx="12"/><text class="n-t" x="281" y="158">real2sim 重建</text><text class="n-s" x="281" y="188">SAM 3</text><text class="n-s" x="281" y="210">Depth Anything 3</text><text class="n-s" x="281" y="232">Blender</text></g>
-        <g><rect class="n-box" x="512" y="110" width="176" height="140" rx="12"/><text class="n-t" x="532" y="158">仿真大规模</text><text class="n-s" x="532" y="188">采集 · 训练 · 评测</text><text class="n-s" x="532" y="210">Isaac Sim + Newton</text></g>
-        <g><rect class="n-box" x="763" y="110" width="176" height="140" rx="12"/><text class="n-t" x="783" y="158">真机部署验证</text><text class="n-s" x="783" y="188">SharpaWave</text></g>
-        <g class="n-key"><rect class="n-box key" x="1014" y="110" width="176" height="140" rx="12"/><text class="n-t" x="1034" y="158">回到指标</text><text class="n-s" x="1034" y="188">Sim–Real policy-</text><text class="n-s" x="1034" y="210">ranking</text><text class="n-s" x="1034" y="232">correlation</text></g>
-        <path class="arrow" d="M192 180H255" marker-end="url(#ah)"/>
-        <path class="arrow" d="M443 180H506" marker-end="url(#ah)"/>
-        <path class="arrow" d="M694 180H757" marker-end="url(#ah)"/>
-        <path class="arrow acc" d="M945 180H1008" marker-end="url(#ahA)"/>
-        <text class="lbl acc" x="976" y="100" text-anchor="middle">真机排名</text>
-        <path class="arrow soft" d="M1102 254 C 1102 312, 98 312, 98 256" marker-end="url(#ah)"/>
-        <text class="lbl" x="600" y="340" text-anchor="middle">Real2Sim2Real 闭环</text>
+        <path class="arrow soft" d="M904 106 C 904 52, 1312 52, 1312 104" marker-end="url(#ah)"/>
+        <text class="lbl" x="1108" y="44" text-anchor="middle">仿真中的 policy 排名</text>
+        <g><rect class="n-box" x="4" y="110" width="168" height="140" rx="12"/><text class="n-t" x="22" y="158">真实场景</text><text class="n-s" x="22" y="186">家庭环境</text><text class="n-s" x="22" y="208">4 个场景</text></g><g><rect class="n-box" x="208" y="110" width="168" height="140" rx="12"/><text class="n-t" x="226" y="158">real2sim 重建</text><text class="n-s" x="226" y="186">SAM 3</text><text class="n-s" x="226" y="208">Depth Anything 3</text><text class="n-s" x="226" y="230">Blender</text></g><g><rect class="n-box" x="412" y="110" width="168" height="140" rx="12"/><text class="n-t" x="430" y="158">任务设置</text><text class="n-s" x="430" y="186">定义任务</text><text class="n-s" x="430" y="208">成功判据</text></g><g><rect class="n-box" x="616" y="110" width="168" height="140" rx="12"/><text class="n-t" x="634" y="158">数据采集</text><text class="n-s" x="634" y="186">人类演示</text><text class="n-s" x="634" y="208">遥操作</text><text class="n-s" x="634" y="230">仿真生成</text></g><g><rect class="n-box" x="820" y="110" width="168" height="140" rx="12"/><text class="n-t" x="838" y="158">仿真训练与评测</text><text class="n-s" x="838" y="186">Isaac Sim + Newton</text><text class="n-s" x="838" y="208">大规模并行</text></g><g><rect class="n-box" x="1024" y="110" width="168" height="140" rx="12"/><text class="n-t" x="1042" y="158">真机部署验证</text><text class="n-s" x="1042" y="186">SharpaWave</text></g><g class="n-key"><rect class="n-box key" x="1228" y="110" width="168" height="140" rx="12"/><text class="n-t" x="1246" y="158">回到指标</text><text class="n-s" x="1246" y="186">Sim–Real policy-</text><text class="n-s" x="1246" y="208">ranking</text><text class="n-s" x="1246" y="230">correlation</text></g>
+        <path class="arrow" d="M177 180H203" marker-end="url(#ah)"/><path class="arrow" d="M381 180H407" marker-end="url(#ah)"/><path class="arrow" d="M585 180H611" marker-end="url(#ah)"/><path class="arrow" d="M789 180H815" marker-end="url(#ah)"/><path class="arrow" d="M993 180H1019" marker-end="url(#ah)"/><path class="arrow acc" d="M1197 180H1223" marker-end="url(#ahA)"/>
+        <text class="lbl acc" x="1210" y="100" text-anchor="middle">真机排名</text>
+        <path class="arrow soft" d="M1312 254 C 1312 312, 88 312, 88 256" marker-end="url(#ah)"/>
+        <text class="lbl" x="700" y="340" text-anchor="middle">Real2Sim2Real 闭环</text>
       </svg>
     </div>
-    <ol class="sr-only flow-steps"><li>真实场景</li><li>real2sim 重建（SAM 3、Depth Anything 3、Blender）</li><li>仿真大规模采集 / 训练 / 评测（Isaac Sim + Newton）</li><li>真机部署验证（SharpaWave）</li><li>回到指标：Sim–Real policy-ranking correlation</li></ol>
+    <ol class="sr-only flow-steps"><li>真实场景</li><li>real2sim 重建（SAM 3、Depth Anything 3、Blender）</li><li>任务设置</li><li>数据采集（人类演示、遥操作、仿真生成）</li><li>仿真训练与评测（Isaac Sim + Newton）</li><li>真机部署验证（SharpaWave）</li><li>回到指标：Sim–Real policy-ranking correlation</li></ol>
     <div class="flow-legend"><span class="note">主指标：仿真与真机的 policy 排名是否一致</span><span class="note">下一屏展开：real2sim 管线</span></div>
   </div>
 </section>
@@ -1194,30 +1147,36 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   <div class="slide-inner">
     <div class="head">
       <h2>数据管线</h2>
-      <p class="lead">人类演示与真机遥操作两条来源，在仿真里补上力与物理可行性，汇成统一格式的训练与评测数据。</p>
+      <p class="lead">人类演示、遥操作与仿真直接生成三条来源，在仿真里补上力与物理可行性，汇成统一格式的训练与评测数据。</p>
     </div>
     <div class="dp">
       <div class="dp-lanes">
         <div class="dp-lane">
           <div class="dp-lh"><b>人类演示</b><span class="badge ok"><svg><use href="#i-ok"/></svg>已跑通（NVIDIA CHORD）</span></div>
           <ol class="dp-steps dp3">
-            <li><b>人类演示采集</b></li>
+            <li><b>采集</b></li>
             <li><b>重定向到灵巧手</b></li>
             <li class="dp-key"><b>仿真物理修正</b></li>
           </ol>
         </div>
         <div class="dp-lane">
-          <div class="dp-lh"><b>真机遥操作</b><span class="badge wip"><svg><use href="#i-wip"/></svg>采集进行中</span></div>
+          <div class="dp-lh"><b>遥操作</b><span class="badge wip"><svg><use href="#i-wip"/></svg>进行中</span></div>
           <ol class="dp-steps dp3">
-            <li><b>真机遥操作采集</b></li>
-            <li><b>数字孪生回放</b></li>
-            <li class="dp-key"><b>仿真扩增</b></li>
+            <li><b>采集</b></li>
+            <li><b>重定向 / 数字孪生回放</b></li>
+            <li class="dp-key"><b>RL 修正与数据扩充</b></li>
+          </ol>
+        </div>
+        <div class="dp-lane">
+          <div class="dp-lh"><b>仿真直接生成</b><span class="badge ok"><svg><use href="#i-ok"/></svg>已并行化</span></div>
+          <ol class="dp-steps dp3">
+            <li class="dp-full dp-key"><b>并行采集 / RL 策略生成</b></li>
           </ol>
         </div>
       </div>
       <div class="dp-join" aria-hidden="true"></div>
       <ol class="dp-out">
-        <li><b>统一数据格式</b><p>LeRobot v3.0</p><span class="badge ok"><svg><use href="#i-ok"/></svg>采集与 RL 已并行化</span></li>
+        <li><b>统一数据格式</b><p>LeRobot v3.0</p></li>
         <li><b>训练与评测</b><p>仿真与真机两端</p></li>
       </ol>
     </div>
@@ -1313,7 +1272,6 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
     <div class="head">
       <p class="eyebrow">当前进展</p>
       <h2 >当前进展</h2>
-      <p class="note">截至 <mark class="tbc">【待确认：更新日期】</mark></p>
     </div>
     <div class="grid board">
       <div >
@@ -1359,59 +1317,6 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
       <p class="lead">10 个 policy 已接入 SharpaWave，支持触觉与非触觉两种输入配置。</p>
     </div>
     <div class="pgroups"><div class="pgroup"><p class="kicker">模仿学习</p><ul><li><b>ACT</b><span>Action Chunking with Transformers</span></li><li><b>Diffusion Policy</b><span>DP</span></li></ul></div><div class="pgroup"><p class="kicker">视触觉 / 力感知</p><ul><li><b>ViTacFormer</b><span>视触觉策略，原论文使用 SharpaWave（开发版）</span></li><li><b>ForceVLA</b><span>力感知 VLA</span></li></ul></div><div class="pgroup"><p class="kicker">VLA</p><ul><li><b>OpenVLA</b></li><li><b>π0</b></li><li><b>π0.5</b></li><li><b>GR00T N1.7</b></li></ul></div><div class="pgroup"><p class="kicker">世界-动作模型</p><ul><li><b>LingBot-VA</b></li><li><b>Fast-WAM</b></li></ul></div></div>
-  </div>
-</section>
-
-<!-- ======================= 03 Demo 视频 ======================= -->
-<section class="slide wide" id="demos" data-chapter="03" data-label="能力展示">
-  <div class="slide-inner">
-    <div class="head">
-      <h2>能力展示</h2>
-    </div>
-    <div class="carousel" data-no-swipe>
-      <div class="car-track" tabindex="0" aria-label="能力展示视频，可横向滑动">
-        <figure class="car-card">
-          <div class="media"><div class="ph"><span>【待补】real2sim 场景 sim / real 并排视频</span><span class="spec">assets/demo/sim-real-side.mp4 + .webp poster · ≤20 s · ≤10 MB</span></div>
-            <img class="print-poster" src="assets/demo/sim-real-side.webp" alt="" onerror="this.remove()">
-            <video class="demo-video" src="assets/demo/sim-real-side.mp4" poster="assets/demo/sim-real-side.webp" muted playsinline loop preload="none"></video>
-            <span class="badge vid-tag"><svg><use href="#i-play"/></svg>视频</span></div>
-          <figcaption><h3>real2sim：真实与仿真并排</h3><p>同一场景的真实画面与仿真画面并排播放。</p></figcaption>
-        </figure>
-        <figure class="car-card">
-          <div class="media"><div class="ph"><span>【待补】CHORD 人手演示 → 灵巧手视频</span><span class="spec">assets/demo/chord-human2hand.mp4 + .webp poster · ≤20 s · ≤10 MB</span></div>
-            <img class="print-poster" src="assets/demo/chord-human2hand.webp" alt="" onerror="this.remove()">
-            <video class="demo-video" src="assets/demo/chord-human2hand.mp4" poster="assets/demo/chord-human2hand.webp" muted playsinline loop preload="none"></video>
-            <span class="badge vid-tag"><svg><use href="#i-play"/></svg>视频</span></div>
-          <figcaption><h3>人手演示 → 灵巧手</h3><p>CHORD 管线：人手演示生成灵巧手动作。</p></figcaption>
-        </figure>
-        <figure class="car-card">
-          <div class="media"><div class="ph"><span>【待补】EgoVideo 重定向 demo 视频</span><span class="spec">assets/demo/egovideo-retarget.mp4 + .webp poster · ≤20 s · ≤10 MB</span></div>
-            <img class="print-poster" src="assets/demo/egovideo-retarget.webp" alt="" onerror="this.remove()">
-            <video class="demo-video" src="assets/demo/egovideo-retarget.mp4" poster="assets/demo/egovideo-retarget.webp" muted playsinline loop preload="none"></video>
-            <span class="badge vid-tag"><svg><use href="#i-play"/></svg>视频</span></div>
-          <figcaption><h3>EgoVideo 重定向</h3><p class="draft">人手视频到灵巧手动作的重定向示例。</p></figcaption>
-        </figure>
-        <figure class="car-card">
-          <div class="media"><div class="ph"><span>【待补】仿真并行采集 demo 视频</span><span class="spec">assets/demo/sim-parallel.mp4 + .webp poster · ≤20 s · ≤10 MB</span></div>
-            <img class="print-poster" src="assets/demo/sim-parallel.webp" alt="" onerror="this.remove()">
-            <video class="demo-video" src="assets/demo/sim-parallel.mp4" poster="assets/demo/sim-parallel.webp" muted playsinline loop preload="none"></video>
-            <span class="badge vid-tag"><svg><use href="#i-play"/></svg>视频</span></div>
-          <figcaption><h3>仿真并行采集</h3><p class="draft">Isaac Sim 中多环境并行采集。</p></figcaption>
-        </figure>
-        <figure class="car-card">
-          <div class="media"><div class="ph"><span>【待补】真机部署 demo 视频</span><span class="spec">assets/demo/real-deploy.mp4 + .webp poster · ≤20 s · ≤10 MB</span></div>
-            <img class="print-poster" src="assets/demo/real-deploy.webp" alt="" onerror="this.remove()">
-            <video class="demo-video" src="assets/demo/real-deploy.mp4" poster="assets/demo/real-deploy.webp" muted playsinline loop preload="none"></video>
-            <span class="badge vid-tag"><svg><use href="#i-play"/></svg>视频</span></div>
-          <figcaption><h3>真机部署</h3><p>本体：<mark class="tbc">【待确认：所用灵巧手型号】</mark></p></figcaption>
-        </figure>
-      </div>
-      <div class="car-ctrl no-print">
-        <button class="btn icon" type="button" data-dir="-1" aria-label="上一个">‹</button>
-        <button class="btn icon" type="button" data-dir="1" aria-label="下一个">›</button>
-      </div>
-    </div>
-    <p class="note print-only" style="margin-top:10px">视频见在线版：<mark class="tbc">【待确认：预读链接】</mark></p>
   </div>
 </section>
 
@@ -1611,44 +1516,6 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   </div>
 </section>
 
-<!-- ======================= 05 时间线 ======================= -->
-<section class="slide wide" id="timeline" data-chapter="06" data-label="时间线">
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">时间线</p>
-      <h2 >时间线：硬件到位是关键依赖</h2>
-    </div>
-    <!-- 横轴按日比例：9/28 = 0%，11/26 = 86%（每天 ≈ 1.458%），之后断轴接"投稿后" -->
-    <div class="tl reveal" data-no-swipe>
-      <div class="tl-axis"></div><div class="tl-break" aria-hidden="true">//</div>
-      <div class="tl-item tl-pt" style="--x:2.9%"><span class="tl-date">9/30</span><p>benchmark v0.1 完成</p></div>
-      <div class="tl-item tl-band hw" style="--x:4.4%; --w:27.7%; --lane:0"><div class="bar"></div><p>真机到位窗口 <mark class="tbc">【待确认：10 月中上旬】</mark></p></div>
-      <div class="tl-item tl-key" style="--x:19%"><span class="badge key">关键依赖</span><div class="callout"><b>SharpaWave 真机到位</b><br>论文中包含 SharpaWave 真机 + 触觉结果的前提</div><span class="diamond"></span></div>
-      <div class="tl-item tl-band" style="--x:4.4%; --w:43.7%; --lane:1"><div class="bar"></div><p><span class="tl-date">10 月</span> 扩充任务、基线比较与真机实验</p></div>
-      <div class="tl-item tl-band freeze" style="--x:49.6%; --w:11.7%; --lane:1"><div class="bar"></div><p><span class="tl-date">11/1–11/9</span> 冻结实验版本</p></div>
-      <div class="tl-item tl-pt flag" style="--x:71.4%"><span class="tl-date">11/16</span><p>CVPR 2027 正文提交</p></div>
-      <div class="tl-item tl-pt below" style="--x:81.6%"><span class="tl-date">11/23</span><p>补充材料</p></div>
-      <div class="tl-item tl-pt soft" style="--x:92%"><span class="badge tbc">【待确认】</span><p>投稿后：benchmark 公开发布</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= 05 末页 ======================= -->
-<section class="slide" id="asks" data-chapter="06" data-label="需要确认的问题">
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">待讨论</p>
-      <h2 >会上希望确认的 3 个问题</h2>
-    </div>
-    <div class="grid g3 asks">
-      <div class="card ask"><span class="ask-no">1</span><div><h3>硬件数量与到位时间</h3><p>SharpaWave 真机的数量、借用或采购方式、到位时间。</p></div></div>
-      <div class="card ask"><span class="ask-no">2</span><div><h3>仿真资产与触觉参数的提供范围</h3><p>USD / URDF、关节与驱动参数、触觉传感器规格与建模参数。</p></div></div>
-      <div class="card ask"><span class="ask-no">3</span><div><h3>署名与发布方式</h3><p>论文署名或致谢方式，benchmark 与排行榜的发布方式。</p></div></div>
-    </div>
-    <div class="contact"><b>联系方式</b><mark class="tbc">【待确认：联系人 · 邮箱 · 电话 / 微信】</mark></div>
-  </div>
-</section>
-
 </main>
 
 <!-- 演示模式 HUD -->
@@ -1659,7 +1526,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   <div class="hud-right">
     <span class="hud-dots" id="hudDots" aria-hidden="true"></span>
     <button class="hud-nav" id="prevBtn" type="button" aria-label="上一步">‹</button>
-    <span class="hud-count" id="hudCount">01 / 24</span>
+    <span class="hud-count" id="hudCount">01 / 20</span>
     <button class="hud-nav" id="nextBtn" type="button" aria-label="下一步">›</button>
   </div>
   <div class="hud-hint" id="hudHint">← → 或空格翻页 · F 全屏 · T 深浅色 · B 黑屏 · Esc 退出</div>
