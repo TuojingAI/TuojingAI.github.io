@@ -262,6 +262,7 @@ h3 { font-size: var(--fs-h3); line-height: 1.35; }
 .cover .lead { margin-bottom: 26px; }
 .cover-meta { margin-top: 26px; font-size: var(--fs-small); color: var(--ink-3); }
 .hero-media { --ar: 16 / 10; }
+.hero-cap { position: absolute; left: 12px; bottom: 12px; z-index: 2; font-size: 13px; color: #fff; background: rgb(0 0 0 / .45); border-radius: 999px; padding: 4px 11px; }
 .print-only { display: none; }
 @media screen and (max-width: 900px) { .cover-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; } }
 
@@ -968,7 +969,8 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
       </div>
       <figure class="media hero-media reveal" id="heroMedia">
         <div class="ph"><span>【待补】首屏大图：sim / real 同步对比（静态帧）</span><span class="spec">assets/hero/hero-poster.webp · 1920×1200 WebP</span></div>
-        <img src="assets/hero/hero-poster.webp" alt="" fetchpriority="high" decoding="async" onerror="this.remove()">
+        <img src="assets/hero/hero-poster.webp" alt="概念示意：仿真中的数字孪生手与真实机械手抓取同一物体" fetchpriority="high" decoding="async" onerror="this.remove()">
+        <span class="hero-cap">概念示意</span>
         <!-- 首屏 scrub：把 section 的 data-scrub 改为 on 并放入 hero-scrub.mp4 才启用 -->
         <video id="heroVideo" muted playsinline preload="none" disablepictureinpicture data-src="assets/hero/hero-scrub.mp4" hidden></video>
       </figure>
