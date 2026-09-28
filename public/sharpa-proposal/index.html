@@ -605,6 +605,26 @@ h3 { font-size: var(--fs-h3); line-height: 1.35; }
 
 .cmp .st { display: inline-block; font-size: 12.5px; font-weight: 500; color: var(--ink-3); background: var(--bg); border-radius: 999px; padding: 1px 8px; margin-right: 4px; }
 .corr-src { margin: -6px 0 14px; }
+/* 已有工作：SoftVTBench */
+.prior { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(24px, 3.5vw, 48px); align-items: center; }
+.prior-fig img { width: 100%; height: auto; border-radius: var(--r); background: #fff; }
+.prior-text { display: grid; gap: 14px; }
+.prior-facts li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: var(--fs-body-2); color: var(--ink-2); }
+.prior-facts li:first-child { border-top: 1px solid var(--line-strong); }
+.prior-facts b { color: var(--ink); font-size: 17px; }
+.prior-find { display: grid; gap: 12px; }
+.prior-find li { display: grid; gap: 4px; padding: 14px 16px; background: var(--surface); border-radius: var(--r); box-shadow: var(--card-shadow); }
+.prior-find b { font-size: 17px; }
+.prior-find p { color: var(--ink-2); font-size: var(--fs-body-2); }
+@media screen and (max-width: 900px) { .prior { grid-template-columns: minmax(0, 1fr); } }
+
+.ood-fig img { width: 100%; height: auto; border-radius: var(--r); background: #fff; padding: 10px; }
+.ood-notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); margin-top: var(--sp-2); }
+.ood-notes li { display: grid; gap: 4px; align-content: start; padding-top: 12px; border-top: 1px solid var(--line-strong); }
+.ood-notes b { font-size: 17px; }
+.ood-notes p { color: var(--ink-2); font-size: var(--fs-body-2); }
+@media screen and (max-width: 860px) { .ood-notes { grid-template-columns: minmax(0, 1fr); } }
+
 /* 分析 */
 .two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: clamp(28px, 4vw, 56px); }
 @media screen and (max-width: 800px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
@@ -813,7 +833,7 @@ h3 { font-size: var(--fs-h3); line-height: 1.35; }
   html.present .stat-num.pending { font-size: 22px; }
   html.present .proposal { font-size: 36px; max-width: 1200px; }
   html.present .statement { font-size: 32px; max-width: 1200px; }
-  html.present .ev-notes b { font-size: 22px; } html.present .ins b { font-size: 32px; } html.present .val h3 { font-size: 32px; }
+  html.present .ev-notes b { font-size: 22px; } html.present .ood-notes b { font-size: 21px; } html.present #priorood .head { margin-bottom: 20px; } html.present .ood-notes { margin-top: 22px; } html.present .prior-facts b, html.present .prior-find b { font-size: 21px; } html.present .prior-find li { padding: 12px 16px; } html.present .ins b { font-size: 32px; } html.present .val h3 { font-size: 32px; }
   html.present .car-track { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 18px; } html.present .car-card .media { --ar: 16 / 8; }
   html.present .dp { grid-template-columns: minmax(0, 1fr) 32px 300px; } html.present .dp-steps li b, html.present .dp-out li b { font-size: 20px; } html.present .dp-lh b { font-size: 22px; }
   html.present .pyr li { min-height: 150px; } html.present .pyr b, html.present .pyr-notes b { font-size: 22px; }
@@ -944,7 +964,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
       <a href="#problem" data-ch="02">愿景与定位</a>
       <a href="#progress" data-ch="03">进展</a>
       <a href="#landscape" data-ch="04">衔接</a>
-      <a href="#value" data-ch="05">价值</a>
+      <a href="#why" data-ch="05">为什么是 Sharpa</a>
       <a href="#exchange" data-ch="06">合作</a>
     </nav>
     <div class="nav-tools">
@@ -1042,6 +1062,50 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
         <div class="p-cred">南京大学硕士</div>
       </article>
     </div>
+  </div>
+</section>
+
+<section class="slide wide" id="prior" data-chapter="01" data-label="已有工作：SoftVTBench">
+  <div class="slide-inner">
+    <div class="head">
+      <h2>已有工作：SoftVTBench</h2>
+      <p class="note">ECCVW 2026 Oral · 代码与数据集已开源 ·
+        <a href="https://arxiv.org/abs/2607.04234" target="_blank" rel="noopener">arXiv 2607.04234（Workshop 版）</a> ·
+        <a href="https://github.com/TuojingAI/SoftVTBench" target="_blank" rel="noopener">代码</a> ·
+        <a href="https://huggingface.co/datasets/Arthur12137/SoftVTBench" target="_blank" rel="noopener">数据集</a> ·
+        <a href="https://softvtbench.github.io/" target="_blank" rel="noopener">项目站</a></p>
+    </div>
+    <div class="prior">
+      <figure class="prior-fig"><img src="assets/prior/softvtbench-teaser.webp" alt="SoftVTBench 概览：4 个任务套件、4,000 条演示、视觉 OOD 与物理 OOD 设置、从滑脱到过度挤压的安全交互区间" loading="lazy" decoding="async"></figure>
+      <div class="prior-text">
+        <ul class="prior-facts">
+          <li><b>首个系统评测物理 OOD 的视触觉 benchmark</b></li>
+          <li>4,000 条专家演示 · 40 个任务 · 9 个 OOD 条件（光照 · 质量 · 杨氏模量）</li>
+          <li>有限元物理真值 + 形变感知成功率（DSR）</li>
+        </ul>
+        <p class="kicker">对触觉的两条结论</p>
+        <ol class="prior-find">
+          <li><b>触觉不适合直接并入 System 1</b><p>直接把触觉加进策略输入，in-distribution 下 6 组对比 4 胜 2 负，没有统一收益，还可能增加过度挤压。</p></li>
+          <li><b>在视觉与物理 OOD 下，触觉带来一致的鲁棒性</b><p>分布偏移下，视触觉变体的任务成功率在全部 6 组对比中都更高（单侧符号检验 p = 0.016）。</p></li>
+        </ol>
+        <p class="note">这是本项目的出发点：把触觉放进 Real2Sim2Real，在真机上检验这些结论。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide wide" id="priorood" data-chapter="01" data-label="SoftVTBench：分布偏移下的触觉">
+  <div class="slide-inner">
+    <div class="head">
+      <h2>分布偏移下，触觉更鲁棒</h2>
+      <p class="note">SoftVTBench：三种策略在逐一改变光照、质量、杨氏模量时的任务成功率。虚线为仅视觉（VO-C），红线为视触觉（VT-C），竖线为训练分布。</p>
+    </div>
+    <figure class="ood-fig"><img src="assets/prior/softvtbench-ood.webp" alt="SoftVTBench 分布偏移结果：Diffusion Policy、π0.5、FastWAM 在 Object-Soft 与 Spatial-Soft 上，随光照、质量、杨氏模量变化的任务成功率，对比仅视觉与视触觉" loading="lazy" decoding="async"></figure>
+    <ul class="ood-notes">
+      <li><b>空间布局任务上一致占优</b><p>Spatial-Soft 上，三个因子、三种策略，视触觉曲线都不低于仅视觉。</p></li>
+      <li><b>物理变化主要体现在质量上</b><p>Object-Soft 上两条线基本重合，分离出现在 π0.5 与 FastWAM 的质量偏移上：触觉感知的是接触建立之后的变化。</p></li>
+      <li><b>视觉整个失效时，触觉也救不回来</b><p>光照作用在接触之前；Diffusion Policy 在光照 ×0.5 与 ×2.0 时，两种模态的成功率都降到 0。</p></li>
+    </ul>
   </div>
 </section>
 
@@ -1403,8 +1467,22 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   </div>
 </section>
 
+<section class="slide" id="why" data-chapter="05" data-label="为什么需要 SharpaWave" data-first>
+  <div class="slide-inner">
+    <div class="head">
+      <p class="eyebrow">为什么是 SharpaWave</p>
+      <h2>为什么需要 SharpaWave</h2>
+    </div>
+    <div class="grid g3 val">
+      <div class="card"><h3>它有触觉</h3><p>SharpaWave 带视触觉；我们目前没有带触觉的灵巧手。</p></div>
+      <div class="card"><h3>它的 Isaac Sim 模型很精准</h3><p>SharpaWave 的 Isaac Sim 模型做得好、精度高。仿真端能不能信，首先取决于本体模型，这让 Real2Sim2Real 里的 Sim 一环站得住。</p></div>
+      <div class="card"><h3>用它证明触觉在 Real2Sim2Real 中的作用</h3><p>要回答触觉在这条 pipeline 里到底起什么作用，需要一只带触觉的灵巧手贯穿始终：在仿真里采集和训练，在真机上验证。</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ======================= 05 分析 ======================= -->
-<section class="slide" id="value" data-chapter="05" data-label="对 SharpaWave 意味着什么" data-first>
+<section class="slide" id="value" data-chapter="05" data-label="对 SharpaWave 意味着什么">
   <div class="slide-inner">
     <div class="head">
       <p class="eyebrow">对 SharpaWave 的价值</p>
@@ -1526,7 +1604,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   <div class="hud-right">
     <span class="hud-dots" id="hudDots" aria-hidden="true"></span>
     <button class="hud-nav" id="prevBtn" type="button" aria-label="上一步">‹</button>
-    <span class="hud-count" id="hudCount">01 / 20</span>
+    <span class="hud-count" id="hudCount">01 / 23</span>
     <button class="hud-nav" id="nextBtn" type="button" aria-label="下一步">›</button>
   </div>
   <div class="hud-hint" id="hudHint">← → 或空格翻页 · F 全屏 · T 深浅色 · B 黑屏 · Esc 退出</div>
