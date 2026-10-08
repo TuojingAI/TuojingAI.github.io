@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="robots" content="noindex,nofollow">
-<title>Real2Sim2Real 灵巧手 Benchmark × Sharpa 合作提案</title>
+<title>真实物理交互 · 灵巧手 Benchmark × Sharpa 合作提案</title>
 <script>
   // 首帧前：标记 JS 可用、恢复主题、?review 显示草拟标记与素材规格
   (function () {
@@ -626,6 +626,16 @@ h3 { font-size: var(--fs-h3); line-height: 1.35; }
 .ood-notes p { color: var(--ink-2); font-size: var(--fs-body-2); }
 @media screen and (max-width: 860px) { .ood-notes { grid-template-columns: minmax(0, 1fr); } }
 
+/* 物理建模与交互 */
+.phys-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.2vw, 28px); }
+.phys-card { display: grid; gap: 10px; align-content: start; }
+.phys-media { --ar: 16 / 10; background: #0f1115; }
+.phys-media > video, .phys-media > .print-poster { object-fit: contain; }
+.phys-card h3 { font-size: 18px; }
+.phys-card p { font-size: var(--fs-body-2); color: var(--ink-2); }
+@media screen and (max-width: 760px) { .phys-grid { grid-template-columns: minmax(0, 1fr); } }
+@media print { .phys-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; } .phys-card p { font-size: 8pt; } }
+
 /* 分析 */
 .two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: clamp(28px, 4vw, 56px); }
 @media screen and (max-width: 800px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
@@ -834,7 +844,7 @@ h3 { font-size: var(--fs-h3); line-height: 1.35; }
   html.present .stat-num.pending { font-size: 22px; }
   html.present .proposal { font-size: 36px; max-width: 1200px; }
   html.present .statement { font-size: 32px; max-width: 1200px; }
-  html.present .ev-notes b { font-size: 22px; } html.present .ood-notes b { font-size: 21px; } html.present #priorood .head { margin-bottom: 20px; } html.present .ood-notes { margin-top: 22px; } html.present .prior-facts b, html.present .prior-find b { font-size: 21px; } html.present .prior-find li { padding: 12px 16px; } html.present .ins b { font-size: 32px; } html.present .val h3 { font-size: 32px; }
+  html.present .ev-notes b { font-size: 22px; } html.present .phys-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } html.present .phys-media { --ar: 4 / 3; } html.present .phys-card h3 { font-size: 21px; } html.present .phys-card p { font-size: 17px; } html.present .ood-notes b { font-size: 21px; } html.present #priorood .head { margin-bottom: 20px; } html.present .ood-notes { margin-top: 22px; } html.present .prior-facts b, html.present .prior-find b { font-size: 21px; } html.present .prior-find li { padding: 12px 16px; } html.present .ins b { font-size: 32px; } html.present .val h3 { font-size: 32px; }
   html.present .car-track { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 18px; } html.present .car-card .media { --ar: 16 / 8; }
   html.present .dp { grid-template-columns: minmax(0, 1fr) 32px 300px; } html.present .dp-steps li b, html.present .dp-out li b { font-size: 20px; } html.present .dp-lh b { font-size: 22px; }
   html.present .pyr li { min-height: 150px; } html.present .pyr b, html.present .pyr-notes b { font-size: 22px; }
@@ -943,6 +953,73 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   .t-leaf, .t-q { padding: 8px 12px; }
   a { color: inherit; text-decoration: none; }
 }
+
+/* Research proposal revision: single narrative. */
+.cover-grid { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
+.hero-media { --ar: 1200 / 990; background: #101419; }
+.hero-media > img, .hero-media > video { object-fit: contain; }
+.hero-evidence figcaption { margin-top: 12px; color: var(--ink-3); font-size: var(--fs-xs); line-height: 1.5; }
+.pitch-grid .card { padding: 26px; }
+.pitch-grid h3 { margin-bottom: 12px; }
+.pitch-grid p { color: var(--ink-2); }
+.evidence-note { margin-top: 24px; color: var(--ink-3); font-size: var(--fs-small); line-height: 1.65; }
+.research-callout { margin-top: 30px; padding: 20px 24px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 var(--r) var(--r) 0; font-size: var(--fs-lead); line-height: 1.6; }
+.case-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+.case-card { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.case-title { min-height: 104px; }
+.case-card h3 { font-size: 20px; margin-top: 6px; }
+.case-card p { font-size: var(--fs-body-2); color: var(--ink-2); }
+.case-card .case-label { font-size: var(--fs-xs); font-weight: 600; color: var(--ink-3); margin-top: 10px; }
+.case-card .target-label { color: var(--accent-ink); }
+.case-card .case-source { margin-top: auto; padding-top: 12px; font-size: var(--fs-xs); }
+.reference-video { width: 100%; aspect-ratio: 16/9; object-fit: contain; background: #15191e; border-radius: var(--r); }
+.pilot-table { width: 100%; border-collapse: collapse; }
+.pilot-table th, .pilot-table td { text-align: left; padding: 18px 20px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.pilot-table th { width: 24%; font-weight: 600; }
+.pilot-table td { color: var(--ink-2); }
+.corr-h .note { display: block; margin-top: 6px; font-weight: 400; }
+.prior-evidence { display: grid; gap: 12px; align-content: start; }
+.ood-stack { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 4px; }
+#metrics .research-callout { margin-top: 28px; }
+#metrics .corr-h, #value .corr-h, #exchange .corr-h { margin-top: 36px; }
+.deliv-compact .deliv li { padding: 9px 0; }
+.vision-grid { margin-top: 36px; }
+.vision-step { font-size: var(--fs-xs); font-weight: 600; color: var(--accent-ink); margin-bottom: 6px; }
+#vision .research-callout { margin-top: 32px; }
+#value .pitch-grid .card { padding: 22px 26px; }
+.tiers-compact .tier { padding: 18px 20px; gap: 8px; }
+@media screen and (max-width: 900px) { .cover-grid { grid-template-columns: minmax(0,1fr); } .case-grid { grid-template-columns: minmax(0,1fr); gap: 36px; } .case-title { min-height: 0; } }
+@media screen and (max-width: 640px) { .pitch-grid .card { padding: 20px; } .pilot-table th, .pilot-table td { padding: 12px 8px; font-size: 14px; } .pilot-table th { width: 29%; } }
+@media screen {
+ html.present .cover-grid { grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); }
+ html.present #cover .display { font-size: 54px; }
+ html.present #cover .lead { font-size: 25px; }
+ html.present .hero-evidence { align-self: center; }
+ html.present .hero-evidence figcaption { font-size: 16px; }
+ html.present .pitch-grid h3 { font-size: 28px; }
+ html.present .pitch-grid p { font-size: 22px; }
+ html.present .pitch-grid .card { padding: 30px; }
+ html.present .case-title { min-height: 86px; }
+ html.present .case-card h3 { font-size: 25px; }
+ html.present .case-card p { font-size: 19px; }
+ html.present .case-card .case-label, html.present .case-card .case-source { font-size: 16px; }
+ html.present #physical-gap .lead { font-size: 23px; }
+ html.present #physical-gap .head { margin-bottom: 20px; }
+ html.present #physical-gap .slide-inner { padding-top: 54px; padding-bottom: 82px; }
+ html.present #physical-gap .reference-video { aspect-ratio: 16 / 7; }
+ html.present #physical-gap .case-title { min-height: 74px; }
+ html.present #physical-gap .case-card h3 { font-size: 23px; }
+ html.present #physical-gap .case-card p { font-size: 18px; }
+ html.present #physical-gap .evidence-note { font-size: 15px; }
+ html.present #physical-gap .case-label, html.present #physical-gap .case-source { font-size: 15px; }
+ html.present .evidence-note { font-size: 17px; margin-top: 22px; }
+ html.present .research-callout { font-size: 26px; }
+ html.present .pilot-table th, html.present .pilot-table td { padding: 18px 20px; font-size: 23px; }
+ html.present.present-narrow .case-grid, html.present.present-narrow .pitch-grid { grid-template-columns: minmax(0,1fr); }
+ html.present.present-narrow .cover-grid { grid-template-columns: minmax(0,1fr); }
+}
+@media print { .hero-media > img { display: block !important; } .reference-video { display: none; } .case-title { min-height: 0; } .case-card h3 { font-size: 14pt; } .case-card p { font-size: 10pt; } .evidence-note { font-size: 9pt; } .appendix > summary { break-before: page; } }
+
 </style>
 </head>
 <body>
@@ -959,57 +1036,229 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
 
 <header class="site-nav" id="nav">
   <div class="nav-in">
-    <nav class="chapters" aria-label="章节">
-      <a href="#summary" data-ch="00">摘要</a>
-      <a href="#team" data-ch="01">团队</a>
-      <a href="#problem" data-ch="02">愿景与定位</a>
-      <a href="#progress" data-ch="03">进展</a>
-      <a href="#landscape" data-ch="04">衔接</a>
-      <a href="#why" data-ch="05">为什么是 Sharpa</a>
-      <a href="#exchange" data-ch="06">合作</a>
-    </nav>
-    <div class="nav-tools">
-      <button class="btn icon" id="themeBtn" type="button" aria-label="切换深浅色" hidden><svg><use href="#i-theme"/></svg></button>
+    <nav class="chapters" aria-label="章节"><a href="#summary" data-ch="00">提议</a><a href="#why" data-ch="01">为什么是 Sharpa</a><a href="#approach" data-ch="02">我们的方法</a><a href="#prior" data-ch="03">我们的基础</a><a href="#problem" data-ch="04">怎么验证</a><a href="#landscape" data-ch="05">与 Sharpa</a><a href="#pilot" data-ch="06">合作</a><a href="#vision" data-ch="07">愿景</a></nav>
+    <div class="nav-tools"><button class="btn icon" id="themeBtn" type="button" aria-label="切换深浅色" hidden><svg><use href="#i-theme"/></svg></button>
     </div>
   </div>
   <div class="nav-progress" aria-hidden="true"><i></i></div>
 </header>
 
 <main id="deck">
+<section class="slide cover" id="cover" data-chapter="00" data-label="真实物理交互 × Sharpa" data-scrub="off">
+<div class="hero-track"><div class="hero-sticky"><div class="slide-inner cover-grid">
+<div class="cover-text"><p class="eyebrow reveal">拓境智能 × Sharpa · 联合研究提案</p>
+<h1 class="display reveal">以真实物理交互为核心的<br>灵巧手 Benchmark</h1>
+<p class="lead reveal">拟以 <strong>SharpaWave 为首发本体</strong>，共同检验：仿真中的接触、触觉与策略结论，能否在真机上成立。</p>
+<p class="names reveal">Real2Sim2Real · 物理 OOD · 目标 CVPR 2027</p></div>
+<figure class="hero-evidence reveal"><div class="media hero-media" id="heroMedia">
+<img src="assets/physics/cap-half-turn.webp" alt="SharpaWave 仿真手旋拧瓶盖，右侧为接触力读数，下方为 TacMap 触觉图" fetchpriority="high" decoding="async">
+<video id="heroVideo" class="demo-video" src="assets/physics/cap-half-turn.mp4" poster="assets/physics/cap-half-turn.webp" aria-label="SharpaWave 螺纹接触与 TacMap 触觉仿真演示" muted playsinline loop autoplay controls preload="metadata"></video></div>
+<figcaption>SharpaWave 仿真演示 · 螺纹接触 / 各指法向力与摩擦力 / TacMap 触觉图</figcaption></figure>
+</div></div></div></section>
 
-<!-- ======================= 00 封面 ======================= -->
-<section class="slide cover" id="cover" data-chapter="00" data-label="封面" data-scrub="off">
-  <div class="hero-track"><div class="hero-sticky">
-    <div class="slide-inner cover-grid">
-      <div class="cover-text">
-        <p class="eyebrow reveal">合作提案</p>
-        <h1 class="display reveal">Real2Sim2Real 灵巧手 Benchmark <span class="x">×</span> Sharpa 合作提案</h1>
-        <p class="lead reveal">打通 Real2Sim2Real 的流程，在探索过程中逐步了解触觉对于灵巧手探索物理世界的价值和意义。</p>
-        <p class="names reveal">目标 CVPR 2027</p>
-        <p class="cover-meta reveal">拓境智能触觉生态团队</p>
+<section class="slide" id="summary" data-chapter="00" data-label="一个共同的研究问题"><div class="slide-inner"><div class="head"><h2>一个共同的研究问题</h2></div><p class="proposal">当摩擦、载荷与可见性发生变化时，<em>触觉何时改变策略的优劣</em>？我们能否用<em>经过真机校验的物理交互仿真</em>提前预测这种变化？</p>
+<div class="grid g3 pitch-grid"><article class="card"><h3>研究对象</h3><p>接触建立、滑移、旋拧、卡扣与形变：关注动作完成过程中的物理机制。</p></article><article class="card"><h3>验证目标</h3><p>同时比较物理响应、策略排序和失败模式，检验仿真结论的适用边界。</p></article><article class="card"><h3>合作起点</h3><p>先完成一个 SharpaWave 接触任务族的 sim–real 对照，再扩展任务与方法。</p></article></div></div></section>
+
+<section class="slide" id="why" data-chapter="01" data-label="为什么需要 SharpaWave" data-first><div class="slide-inner"><div class="head"><p class="eyebrow">为什么是 SharpaWave</p><h2>为什么需要 SharpaWave</h2><p class="lead">它有我们需要的触觉和精准的仿真模型，而且我们已经开始用它。</p></div><div class="grid g3 pitch-grid"><article class="card"><h3>它有触觉</h3><p>SharpaWave 带视触觉；我们目前没有带触觉的灵巧手。</p></article><article class="card"><h3>它的 Isaac Sim 模型很精准</h3><p>仿真端可不可信，首先取决于本体模型。我们已接入 SharpaWave 仿真资产，用于瓶盖旋拧与换握。</p></article><article class="card"><h3>用它证明触觉的作用</h3><p>要回答触觉在 Real2Sim2Real 中到底起什么作用，需要一只带触觉的手贯穿始终。现有演示已接入 <a href="https://github.com/sharpa-robotics/sharpa-tacmap" target="_blank" rel="noopener">TacMap</a> 触觉图。</p></article></div></div></section>
+
+<section class="slide wide" id="approach" data-chapter="02" data-label="我们的做法" data-first>
+  <div class="slide-inner">
+    <div class="head">
+      <p class="eyebrow">我们的做法</p>
+      <h2 >Real2Sim2Real 闭环</h2>
+    </div>
+    <div class="flow-wrap reveal">
+      <svg class="flow" viewBox="0 0 1400 350" role="img" aria-labelledby="flowT flowD">
+        <title id="flowT">Real2Sim2Real 总览流程</title>
+        <desc id="flowD">真实场景经 real2sim 重建进入仿真；在仿真场景中设置任务、采集数据；在仿真中大规模训练与评测；再到真机部署验证；最后回到指标：比较仿真与真机的 policy 排名。</desc>
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L9 5L0 9" fill="none" stroke="var(--ink-3)" stroke-width="1.6"/></marker>
+          <marker id="ahA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L9 5L0 9" fill="none" stroke="var(--accent)" stroke-width="1.6"/></marker>
+        </defs>
+        <path class="arrow soft" d="M904 106 C 904 52, 1312 52, 1312 104" marker-end="url(#ah)"/>
+        <text class="lbl" x="1108" y="44" text-anchor="middle">仿真中的 policy 排名</text>
+        <g><rect class="n-box" x="4" y="110" width="168" height="140" rx="12"/><text class="n-t" x="22" y="158">真实场景</text><text class="n-s" x="22" y="186">家庭环境</text><text class="n-s" x="22" y="208">4 个场景</text></g><g><rect class="n-box" x="208" y="110" width="168" height="140" rx="12"/><text class="n-t" x="226" y="158">real2sim 重建</text><text class="n-s" x="226" y="186">SAM 3</text><text class="n-s" x="226" y="208">Depth Anything 3</text><text class="n-s" x="226" y="230">Blender</text></g><g><rect class="n-box" x="412" y="110" width="168" height="140" rx="12"/><text class="n-t" x="430" y="158">任务设置</text><text class="n-s" x="430" y="186">定义任务</text><text class="n-s" x="430" y="208">成功判据</text></g><g><rect class="n-box" x="616" y="110" width="168" height="140" rx="12"/><text class="n-t" x="634" y="158">数据采集</text><text class="n-s" x="634" y="186">人类演示</text><text class="n-s" x="634" y="208">遥操作</text><text class="n-s" x="634" y="230">仿真生成</text></g><g><rect class="n-box" x="820" y="110" width="168" height="140" rx="12"/><text class="n-t" x="838" y="158">仿真训练与评测</text><text class="n-s" x="838" y="186">Isaac Sim + Newton</text><text class="n-s" x="838" y="208">大规模并行</text></g><g><rect class="n-box" x="1024" y="110" width="168" height="140" rx="12"/><text class="n-t" x="1042" y="158">真机部署验证</text><text class="n-s" x="1042" y="186">SharpaWave</text></g><g class="n-key"><rect class="n-box key" x="1228" y="110" width="168" height="140" rx="12"/><text class="n-t" x="1246" y="158">回到指标</text><text class="n-s" x="1246" y="186">Sim–Real policy-</text><text class="n-s" x="1246" y="208">ranking</text><text class="n-s" x="1246" y="230">correlation</text></g>
+        <path class="arrow" d="M177 180H203" marker-end="url(#ah)"/><path class="arrow" d="M381 180H407" marker-end="url(#ah)"/><path class="arrow" d="M585 180H611" marker-end="url(#ah)"/><path class="arrow" d="M789 180H815" marker-end="url(#ah)"/><path class="arrow" d="M993 180H1019" marker-end="url(#ah)"/><path class="arrow acc" d="M1197 180H1223" marker-end="url(#ahA)"/>
+        <text class="lbl acc" x="1210" y="100" text-anchor="middle">真机排名</text>
+        <path class="arrow soft" d="M1312 254 C 1312 312, 88 312, 88 256" marker-end="url(#ah)"/>
+        <text class="lbl" x="700" y="340" text-anchor="middle">Real2Sim2Real 闭环</text>
+      </svg>
+    </div>
+    <ol class="sr-only flow-steps"><li>真实场景</li><li>real2sim 重建（SAM 3、Depth Anything 3、Blender）</li><li>任务设置</li><li>数据采集（人类演示、遥操作、仿真生成）</li><li>仿真训练与评测（Isaac Sim + Newton）</li><li>真机部署验证（SharpaWave）</li><li>回到指标：Sim–Real policy-ranking correlation</li></ol>
+    <div class="flow-legend"><span class="note">主指标：仿真与真机的 policy 排名是否一致</span><span class="note">下一屏展开：real2sim 管线</span></div>
+  </div>
+</section>
+
+<section class="slide wide narr" id="pipeline" data-chapter="02" data-label="real2sim 管线" data-steps="5" data-stage="0">
+  <div class="narr-track"><div class="narr-sticky">
+    <div class="slide-inner">
+      <div class="narr-head">
+        <div>
+          <p class="eyebrow">real2sim 管线</p>
+          <h2><span class="draft">从一张真实照片到可评测的仿真场景</span></h2>
+        </div>
+        <p class="note">以厨房场景为例</p>
       </div>
-      <figure class="media hero-media reveal" id="heroMedia">
-        <div class="ph"><span>【待补】首屏大图：sim / real 同步对比（静态帧）</span><span class="spec">assets/hero/hero-poster.webp · 1920×1200 WebP</span></div>
-        <img src="assets/hero/hero-poster.webp" alt="概念示意：仿真中的数字孪生手与真实机械手抓取同一物体" fetchpriority="high" decoding="async" onerror="this.remove()">
-        <span class="hero-cap">概念示意</span>
-        <!-- 首屏 scrub：把 section 的 data-scrub 改为 on 并放入 hero-scrub.mp4 才启用 -->
-        <video id="heroVideo" muted playsinline preload="none" disablepictureinpicture data-src="assets/hero/hero-scrub.mp4" hidden></video>
-      </figure>
+      <div class="narr-body">
+        <div class="narr-frames">
+          <div class="m-row m-head" aria-hidden="true"><span></span>
+            <div class="m-cells">
+              <div><b>真实照片</b></div>
+              <div><b>SAM 3 分割</b></div>
+              <div><b>Depth Anything 3 深度</b></div>
+              <div><b>Blender 外观</b></div>
+              <div><b>最终仿真场景</b></div>
+            </div>
+          </div>
+          <!-- 素材命名：assets/pipeline/{scene}-{1-photo|2-sam3|3-depth|4-blender|5-isaac}.webp，同一场景 5 张需同机位对齐 -->
+          <div class="m-row is-active" data-scene="kitchen"><span class="scene-name">厨房</span>
+            <div class="m-cells">
+              <figure class="media frame"><div class="ph"><span>【待补】厨房 · 真实照片</span><span class="spec">kitchen-1-photo.webp</span></div><img src="assets/pipeline/kitchen-1-photo.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"></figure>
+              <figure class="media frame"><div class="ph"><span>【待补】厨房 · SAM 3 分割</span><span class="spec">kitchen-2-sam3.webp</span></div><img src="assets/pipeline/kitchen-2-sam3.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"></figure>
+              <figure class="media frame"><div class="ph"><span>【待补】厨房 · Depth Anything 3 深度</span><span class="spec">kitchen-3-depth.webp</span></div><img src="assets/pipeline/kitchen-3-depth.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"></figure>
+              <figure class="media frame"><div class="ph"><span>【待补】厨房 · Blender 外观</span><span class="spec">kitchen-4-blender.webp</span></div><img src="assets/pipeline/kitchen-4-blender.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"></figure>
+              <figure class="media frame live" data-live="https://shenpu-interactive-home.arthur12137.chatgpt.site/"><div class="ph"><span>【待补】厨房 · 最终仿真场景</span><span class="spec">kitchen-5-sim.webp</span></div><img src="assets/pipeline/kitchen-5-sim.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"><iframe title="可交互的三维仿真场景" referrerpolicy="no-referrer" allow="fullscreen"></iframe><button class="live-btn" type="button"><span>▶ 加载可交互场景（需联网）</span></button></figure>
+            </div>
+          </div>
+        </div>
+        <ol class="narr-caps" aria-live="polite">
+          <li class="is-current"><span class="cap-no">阶段 1 / 5 · 输入</span><span class="cap-t">真实照片</span><p class="draft">在真实家庭环境中拍摄场景照片，作为重建的起点，也是之后真机对照的基准。</p><p class="note cap-out">输出：RGB 图像</p></li>
+          <li class="is-future"><span class="cap-no">阶段 2 / 5 · SAM 3</span><span class="cap-t">SAM 3 分割</span><p class="draft">对照片做分割，得到逐物体掩码，区分需要单独建模的物体与背景。</p><p class="note cap-out">输出：逐物体掩码</p></li>
+          <li class="is-future"><span class="cap-no">阶段 3 / 5 · Depth Anything 3</span><span class="cap-t">Depth Anything 3 深度</span><p class="draft">估计深度，恢复场景几何与物体之间的空间关系。</p><p class="note cap-out">输出：深度图</p></li>
+          <li class="is-future"><span class="cap-no">阶段 4 / 5 · Blender</span><span class="cap-t">Blender 外观</span><p class="draft">在 Blender 中整理几何与材质，使渲染外观接近真实照片。</p><p class="note cap-out">输出：带材质的物体资产</p></li>
+          <li class="is-future"><span class="cap-no">阶段 5 / 5 · Isaac Sim + Newton</span><span class="cap-t">最终仿真场景</span><p class="draft">导入 Isaac Sim 并配置物理，得到可用于并行采集、训练与评测的仿真场景。画面可交互：拖动旋转视角，点击家具打开柜门。</p><div class="badges cap-out"><span class="badge ok"><svg><use href="#i-ok"/></svg>4 个场景已完成</span><a href="https://shenpu-interactive-home.arthur12137.chatgpt.site/" target="_blank" rel="noopener">在线交互版 ↗</a></div></li>
+        </ol>
+      </div>
+      <ol class="narr-ticks" aria-label="管线阶段">
+        <li><button class="tick is-current" type="button" data-k="0"><i></i>照片</button></li>
+        <li><button class="tick" type="button" data-k="1"><i></i>分割</button></li>
+        <li><button class="tick" type="button" data-k="2"><i></i>深度</button></li>
+        <li><button class="tick" type="button" data-k="3"><i></i>外观</button></li>
+        <li><button class="tick" type="button" data-k="4"><i></i>最终仿真</button></li>
+      </ol>
     </div>
   </div></div>
 </section>
 
-<!-- ======================= 00 摘要 ======================= -->
-<section class="slide" id="summary" data-chapter="00" data-label="一页摘要">
+<section class="slide wide" id="physics" data-chapter="02" data-label="物理建模与交互">
   <div class="slide-inner">
-    <p class="eyebrow">一页摘要</p>
-    <h2 >一句话提议</h2>
-    <p class="proposal">以 Real2Sim2Real 为核心，共建一个<em>能用仿真评测预测真机表现</em>、并<em>系统量化触觉价值</em>的灵巧手 benchmark，在实践中不断深化 Real2Sim2Real 的意义，目标 CVPR 2027。</p>
+    <div class="head">
+      <h2>我们已经能做到的：把交互机制放进仿真</h2>
+      <p class="lead">螺纹、卡扣 / 弹簧与可形变物体，这些细节决定了仿真结论能否迁移到真机。</p>
+    </div>
+    <div class="phys-grid">
+      <figure class="phys-card">
+        <div class="media phys-media">
+          <img class="print-poster" src="assets/physics/cap-half-turn.webp" alt="" onerror="this.remove()">
+          <video class="demo-video" src="assets/physics/cap-half-turn.mp4" poster="assets/physics/cap-half-turn.webp" muted playsinline loop autoplay preload="metadata"></video>
+        </div>
+        <figcaption><h3>瓶盖螺纹：半圈旋拧后提起</h3><p>螺纹接触参与求解：SharpaWave 半圈旋拧后把瓶盖提起，同步显示各指法向力 / 摩擦力、螺纹轴向载荷与 TacMap 指尖触觉图。</p></figcaption>
+      </figure>
+      <figure class="phys-card">
+        <div class="media phys-media">
+          <img class="print-poster" src="assets/physics/cap-open.webp" alt="" onerror="this.remove()">
+          <video class="demo-video" src="assets/physics/cap-open.mp4" poster="assets/physics/cap-open.webp" muted playsinline loop autoplay preload="metadata"></video>
+        </div>
+        <figcaption><h3>瓶盖螺纹：多次换握旋开</h3><p>旋拧、松开、换握循环，直到瓶盖旋开；全程记录腕部角度与累计旋转角。</p></figcaption>
+      </figure>
+      <figure class="phys-card">
+        <div class="media phys-media">
+          <img class="print-poster" src="assets/physics/microwave-latch.webp" alt="" onerror="this.remove()">
+          <video class="demo-video" src="assets/physics/microwave-latch.mp4" poster="assets/physics/microwave-latch.webp" muted playsinline loop autoplay preload="metadata"></video>
+        </div>
+        <figcaption><h3>微波炉卡扣与弹簧</h3><p>门框内部的卡扣与弹簧参与接触求解，外观与内部剖视同步回放，记录门角度、锁舌抬升与弹簧力。</p></figcaption>
+      </figure>
+      <figure class="phys-card">
+        <div class="media phys-media">
+          <img class="print-poster" src="assets/physics/plastic-bag.webp" alt="" onerror="this.remove()">
+          <video class="demo-video" src="assets/physics/plastic-bag.mp4" poster="assets/physics/plastic-bag.webp" muted playsinline loop autoplay preload="metadata"></video>
+        </div>
+        <figcaption><h3>塑料袋仿真</h3><p>在 Newton 中仿真可形变塑料袋，机器人从袋中分拣果蔬。</p></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
-<!-- ======================= 01 团队 ======================= -->
-<section class="slide" id="team" data-chapter="01" data-label="团队背景" data-first>
+<section class="slide" id="datapipe" data-chapter="02" data-label="数据管线">
+  <div class="slide-inner">
+    <div class="head">
+      <h2>数据管线</h2>
+      <p class="lead">人类演示、遥操作与仿真直接生成三条来源，在仿真里补上力与物理可行性，汇成统一格式的训练与评测数据。</p>
+    </div>
+    <div class="dp">
+      <div class="dp-lanes">
+        <div class="dp-lane">
+          <div class="dp-lh"><b>人类演示</b><span class="badge ok"><svg><use href="#i-ok"/></svg>已跑通（NVIDIA CHORD）</span></div>
+          <ol class="dp-steps dp3">
+            <li><b>采集</b></li>
+            <li><b>重定向到灵巧手</b></li>
+            <li class="dp-key"><b>仿真物理修正</b></li>
+          </ol>
+        </div>
+        <div class="dp-lane">
+          <div class="dp-lh"><b>遥操作</b><span class="badge wip"><svg><use href="#i-wip"/></svg>进行中</span></div>
+          <ol class="dp-steps dp3">
+            <li><b>采集</b></li>
+            <li><b>重定向 / 数字孪生回放</b></li>
+            <li class="dp-key"><b>RL 修正与数据扩充</b></li>
+          </ol>
+        </div>
+        <div class="dp-lane">
+          <div class="dp-lh"><b>仿真直接生成</b><span class="badge ok"><svg><use href="#i-ok"/></svg>已并行化</span></div>
+          <ol class="dp-steps dp3">
+            <li class="dp-full dp-key"><b>并行采集 / RL 策略生成</b></li>
+          </ol>
+        </div>
+      </div>
+      <div class="dp-join" aria-hidden="true"></div>
+      <ol class="dp-out">
+        <li><b>统一数据格式</b><p>LeRobot v3.0</p></li>
+        <li><b>训练与评测</b><p>仿真与真机两端</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="slide wide" id="prior" data-chapter="03" data-label="已有工作：SoftVTBench" data-first>
+  <div class="slide-inner">
+    <div class="head">
+      <h2>已有工作：SoftVTBench</h2>
+      <p class="note">ECCVW 2026 Oral · 代码与数据集已开源 ·
+        <a href="https://arxiv.org/abs/2607.04234" target="_blank" rel="noopener">arXiv 2607.04234（Workshop 版）</a> ·
+        <a href="https://github.com/TuojingAI/SoftVTBench" target="_blank" rel="noopener">代码</a> ·
+        <a href="https://huggingface.co/datasets/Arthur12137/SoftVTBench" target="_blank" rel="noopener">数据集</a> ·
+        <a href="https://softvtbench.github.io/" target="_blank" rel="noopener">项目站</a></p>
+    </div>
+    <div class="prior">
+      <div class="prior-text">
+        <ul class="prior-facts">
+          <li><b>物理 OOD 视触觉评测的已有基础</b></li>
+          <li>4,000 条专家演示 · 40 个任务 · 9 个 OOD 条件（光照 · 质量 · 杨氏模量）</li>
+          <li>有限元物理真值 + 形变感知成功率（DSR）</li>
+        </ul>
+        <p class="kicker">对触觉的两条结论</p>
+        <ol class="prior-find">
+          <li><b>直接融合触觉未带来稳定收益</b><p>直接把触觉加进策略输入，in-distribution 下 6 组对比 4 胜 2 负，没有统一收益，还可能增加过度挤压。</p></li>
+          <li><b>在视觉与物理 OOD 下，触觉带来一致的鲁棒性</b><p>分布偏移下，视触觉变体的任务成功率在全部 6 组对比中都更高（单侧符号检验 p = 0.016）。</p></li>
+        </ol>
+        <p class="note">这些结论来自平行夹爪 + GelSight；在灵巧手上是否成立，正是要在 SharpaWave 上检验的。</p>
+      </div>
+      <div class="prior-evidence">
+        <figure class="ood-fig"><img src="assets/prior/softvtbench-ood.webp" alt="SoftVTBench 分布偏移结果：Diffusion Policy、π0.5、FastWAM 在 Object-Soft 与 Spatial-Soft 上，随光照、质量、杨氏模量变化的任务成功率，对比仅视觉与视触觉" loading="lazy" decoding="async"></figure>
+        <p class="note">分布偏移下的任务成功率：逐一改变光照、质量、杨氏模量。虚线为仅视觉，红线为视触觉，竖线为训练分布。</p>
+        <ul class="ood-notes ood-stack">
+      <li><b>空间布局任务上一致占优</b><p>Spatial-Soft 上，三个因子、三种策略，视触觉曲线都不低于仅视觉。</p></li>
+      <li><b>物理变化主要体现在质量上</b><p>Object-Soft 上两条线基本重合，分离出现在 π0.5 与 FastWAM 的质量偏移上：触觉感知的是接触建立之后的变化。</p></li>
+      <li><b>视觉整个失效时，触觉也救不回来</b><p>光照作用在接触之前；Diffusion Policy 在光照 ×0.5 与 ×2.0 时，两种模态的成功率都降到 0。</p></li>
+    </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="progress" data-chapter="03" data-label="已经完成什么，合作补齐什么"><div class="slide-inner"><div class="head"><h2>已经完成什么，合作补齐什么</h2></div><div class="grid g3 pitch-grid"><article class="card"><h3>已有工程基础</h3><p>4 个 real2sim 场景；Isaac Sim + Newton 环境；SharpaWave 仿真资产；接触任务演示；数据采集与 RL 并行化。</p></article><article class="card"><h3>正在推进</h3><p>首批任务采集与训练、遥操作、评测并行化及数据格式适配。已接入 10 个 policy：ACT、Diffusion Policy、ViTacFormer、ForceVLA、OpenVLA、π0、π0.5、GR00T N1.7、LingBot-VA、Fast-WAM。</p></article><article class="card"><h3>首轮合作验证</h3><p>完成真机与传感器标定、训练代表性触觉基线，运行独立测试并交付物理差异与策略排序报告。</p></article></div><p class="evidence-note">说明：以上演示均在仿真中完成；目前还没有 SharpaWave 真机结果，真机验证正是首轮合作要做的事。</p></div></section>
+
+<section class="slide" id="team" data-chapter="03" data-label="团队背景">
   <div class="slide-inner">
     <div class="head">
       <p class="eyebrow">团队</p>
@@ -1072,204 +1321,13 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   </div>
 </section>
 
-<section class="slide wide" id="prior" data-chapter="01" data-label="已有工作：SoftVTBench">
+<section class="slide" id="problem" data-chapter="04" data-label="“物理真实”要经得起四项检查" data-first><div class="slide-inner"><div class="head"><h2>“物理真实”要经得起四项检查</h2><p class="lead">从接触过程到任务结论，用可测量、可复现的证据界定仿真的可信范围。</p></div><div class="grid g2 pitch-grid"><article class="card"><h3>01 · 接触与运动约束</h3><p>测量接触位置、滑移和运动轨迹；旋拧任务检查转角与轴向位移的关系，并报告异常穿透。</p></article><article class="card"><h3>02 · 力与机构响应</h3><p>对照法向力、摩擦力、扭矩及机构状态；用真机标定的参数检验插接阻力、螺纹、卡扣和弹簧响应。</p></article><article class="card"><h3>03 · 触觉观测</h3><p>对齐接触发生时刻、空间分布与变化趋势，记录标定误差、采样频率和延迟；不把深度图直接当作真实传感器输出。</p></article><article class="card"><h3>04 · 任务结论</h3><p>在未用于标定的测试条件下比较策略排名、触觉增益和失败类型，同时报告重复试验的不确定性。</p></article></div></div></section>
+
+<section class="slide" id="metrics" data-chapter="04" data-label="评测物理响应，也评测科研结论">
   <div class="slide-inner">
-    <div class="head">
-      <h2>已有工作：SoftVTBench</h2>
-      <p class="note">ECCVW 2026 Oral · 代码与数据集已开源 ·
-        <a href="https://arxiv.org/abs/2607.04234" target="_blank" rel="noopener">arXiv 2607.04234（Workshop 版）</a> ·
-        <a href="https://github.com/TuojingAI/SoftVTBench" target="_blank" rel="noopener">代码</a> ·
-        <a href="https://huggingface.co/datasets/Arthur12137/SoftVTBench" target="_blank" rel="noopener">数据集</a> ·
-        <a href="https://softvtbench.github.io/" target="_blank" rel="noopener">项目站</a></p>
-    </div>
-    <div class="prior">
-      <figure class="prior-fig"><img src="assets/prior/softvtbench-teaser.webp" alt="SoftVTBench 概览：4 个任务套件、4,000 条演示、视觉 OOD 与物理 OOD 设置、从滑脱到过度挤压的安全交互区间" loading="lazy" decoding="async"></figure>
-      <div class="prior-text">
-        <ul class="prior-facts">
-          <li><b>首个系统评测物理 OOD 的视触觉 benchmark</b></li>
-          <li>4,000 条专家演示 · 40 个任务 · 9 个 OOD 条件（光照 · 质量 · 杨氏模量）</li>
-          <li>有限元物理真值 + 形变感知成功率（DSR）</li>
-        </ul>
-        <p class="kicker">对触觉的两条结论</p>
-        <ol class="prior-find">
-          <li><b>触觉不适合直接并入 System 1</b><p>直接把触觉加进策略输入，in-distribution 下 6 组对比 4 胜 2 负，没有统一收益，还可能增加过度挤压。</p></li>
-          <li><b>在视觉与物理 OOD 下，触觉带来一致的鲁棒性</b><p>分布偏移下，视触觉变体的任务成功率在全部 6 组对比中都更高（单侧符号检验 p = 0.016）。</p></li>
-        </ol>
-        <p class="note">这是本项目的出发点：把触觉放进 Real2Sim2Real，在真机上检验这些结论。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="slide wide" id="priorood" data-chapter="01" data-label="SoftVTBench：分布偏移下的触觉">
-  <div class="slide-inner">
-    <div class="head">
-      <h2>分布偏移下，触觉更鲁棒</h2>
-      <p class="note">SoftVTBench：三种策略在逐一改变光照、质量、杨氏模量时的任务成功率。虚线为仅视觉（VO-C），红线为视触觉（VT-C），竖线为训练分布。</p>
-    </div>
-    <figure class="ood-fig"><img src="assets/prior/softvtbench-ood.webp" alt="SoftVTBench 分布偏移结果：Diffusion Policy、π0.5、FastWAM 在 Object-Soft 与 Spatial-Soft 上，随光照、质量、杨氏模量变化的任务成功率，对比仅视觉与视触觉" loading="lazy" decoding="async"></figure>
-    <ul class="ood-notes">
-      <li><b>空间布局任务上一致占优</b><p>Spatial-Soft 上，三个因子、三种策略，视触觉曲线都不低于仅视觉。</p></li>
-      <li><b>物理变化主要体现在质量上</b><p>Object-Soft 上两条线基本重合，分离出现在 π0.5 与 FastWAM 的质量偏移上：触觉感知的是接触建立之后的变化。</p></li>
-      <li><b>视觉整个失效时，触觉也救不回来</b><p>光照作用在接触之前；Diffusion Policy 在光照 ×0.5 与 ×2.0 时，两种模态的成功率都降到 0。</p></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ======================= 02 愿景：问题 ======================= -->
-<section class="slide" id="problem" data-chapter="02" data-label="愿景与定位" data-first>
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">愿景与定位</p>
-      <h2>让灵巧手 + 触觉策略的仿真评测，具备真机预测力</h2>
-    </div>
-    <div class="grid g2 problem-list">
-      <div><h3>① 缺少能预测真机表现的仿真评测</h3><p>现有评测通常分别报告仿真或真机性能，缺少系统验证：仿真中的性能差异与策略排名，能否预测真机表现。</p></div>
-      <div><h3>② 缺少 Real–Sim Physical Correspondence</h3><p>不仅比较 task success，还量化真实与仿真在接触、力、运动轨迹、物体动力学与任务结果上的一致性。</p></div>
-      <div><h3>③ 触觉作用缺少系统量化</h3><p>回答的不只是"触觉有没有用"，而是：在哪些任务、接触条件和 Physical OOD 下有用，以及提升多少。</p></div>
-      <div><h3>④ 缺少可控的 Physical OOD 评测</h3><p>系统改变质量、摩擦、刚度、内容物 / 填充量、重心等物理属性，测试仿真结论在真实物理变化下是否仍然成立。</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= 02 愿景：做法（总览流程图） ======================= -->
-<section class="slide wide" id="approach" data-chapter="02" data-label="我们的做法">
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">我们的做法</p>
-      <h2 >Real2Sim2Real 闭环</h2>
-    </div>
-    <div class="flow-wrap reveal">
-      <svg class="flow" viewBox="0 0 1400 350" role="img" aria-labelledby="flowT flowD">
-        <title id="flowT">Real2Sim2Real 总览流程</title>
-        <desc id="flowD">真实场景经 real2sim 重建进入仿真；在仿真场景中设置任务、采集数据；在仿真中大规模训练与评测；再到真机部署验证；最后回到指标：比较仿真与真机的 policy 排名。</desc>
-        <defs>
-          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L9 5L0 9" fill="none" stroke="var(--ink-3)" stroke-width="1.6"/></marker>
-          <marker id="ahA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L9 5L0 9" fill="none" stroke="var(--accent)" stroke-width="1.6"/></marker>
-        </defs>
-        <path class="arrow soft" d="M904 106 C 904 52, 1312 52, 1312 104" marker-end="url(#ah)"/>
-        <text class="lbl" x="1108" y="44" text-anchor="middle">仿真中的 policy 排名</text>
-        <g><rect class="n-box" x="4" y="110" width="168" height="140" rx="12"/><text class="n-t" x="22" y="158">真实场景</text><text class="n-s" x="22" y="186">家庭环境</text><text class="n-s" x="22" y="208">4 个场景</text></g><g><rect class="n-box" x="208" y="110" width="168" height="140" rx="12"/><text class="n-t" x="226" y="158">real2sim 重建</text><text class="n-s" x="226" y="186">SAM 3</text><text class="n-s" x="226" y="208">Depth Anything 3</text><text class="n-s" x="226" y="230">Blender</text></g><g><rect class="n-box" x="412" y="110" width="168" height="140" rx="12"/><text class="n-t" x="430" y="158">任务设置</text><text class="n-s" x="430" y="186">定义任务</text><text class="n-s" x="430" y="208">成功判据</text></g><g><rect class="n-box" x="616" y="110" width="168" height="140" rx="12"/><text class="n-t" x="634" y="158">数据采集</text><text class="n-s" x="634" y="186">人类演示</text><text class="n-s" x="634" y="208">遥操作</text><text class="n-s" x="634" y="230">仿真生成</text></g><g><rect class="n-box" x="820" y="110" width="168" height="140" rx="12"/><text class="n-t" x="838" y="158">仿真训练与评测</text><text class="n-s" x="838" y="186">Isaac Sim + Newton</text><text class="n-s" x="838" y="208">大规模并行</text></g><g><rect class="n-box" x="1024" y="110" width="168" height="140" rx="12"/><text class="n-t" x="1042" y="158">真机部署验证</text><text class="n-s" x="1042" y="186">SharpaWave</text></g><g class="n-key"><rect class="n-box key" x="1228" y="110" width="168" height="140" rx="12"/><text class="n-t" x="1246" y="158">回到指标</text><text class="n-s" x="1246" y="186">Sim–Real policy-</text><text class="n-s" x="1246" y="208">ranking</text><text class="n-s" x="1246" y="230">correlation</text></g>
-        <path class="arrow" d="M177 180H203" marker-end="url(#ah)"/><path class="arrow" d="M381 180H407" marker-end="url(#ah)"/><path class="arrow" d="M585 180H611" marker-end="url(#ah)"/><path class="arrow" d="M789 180H815" marker-end="url(#ah)"/><path class="arrow" d="M993 180H1019" marker-end="url(#ah)"/><path class="arrow acc" d="M1197 180H1223" marker-end="url(#ahA)"/>
-        <text class="lbl acc" x="1210" y="100" text-anchor="middle">真机排名</text>
-        <path class="arrow soft" d="M1312 254 C 1312 312, 88 312, 88 256" marker-end="url(#ah)"/>
-        <text class="lbl" x="700" y="340" text-anchor="middle">Real2Sim2Real 闭环</text>
-      </svg>
-    </div>
-    <ol class="sr-only flow-steps"><li>真实场景</li><li>real2sim 重建（SAM 3、Depth Anything 3、Blender）</li><li>任务设置</li><li>数据采集（人类演示、遥操作、仿真生成）</li><li>仿真训练与评测（Isaac Sim + Newton）</li><li>真机部署验证（SharpaWave）</li><li>回到指标：Sim–Real policy-ranking correlation</li></ol>
-    <div class="flow-legend"><span class="note">主指标：仿真与真机的 policy 排名是否一致</span><span class="note">下一屏展开：real2sim 管线</span></div>
-  </div>
-</section>
-
-<!-- ======================= 02 叙事 A：real2sim 管线 ======================= -->
-<section class="slide wide narr" id="pipeline" data-chapter="02" data-label="real2sim 管线" data-steps="5" data-stage="0">
-  <div class="narr-track"><div class="narr-sticky">
-    <div class="slide-inner">
-      <div class="narr-head">
-        <div>
-          <p class="eyebrow">real2sim 管线</p>
-          <h2><span class="draft">从一张真实照片到可评测的仿真场景</span></h2>
-        </div>
-        <p class="note">以厨房场景为例</p>
-      </div>
-      <div class="narr-body">
-        <div class="narr-frames">
-          <div class="m-row m-head" aria-hidden="true"><span></span>
-            <div class="m-cells">
-              <div><b>真实照片</b></div>
-              <div><b>SAM 3 分割</b></div>
-              <div><b>Depth Anything 3 深度</b></div>
-              <div><b>Blender 外观</b></div>
-              <div><b>最终仿真场景</b></div>
-            </div>
-          </div>
-          <!-- 素材命名：assets/pipeline/{scene}-{1-photo|2-sam3|3-depth|4-blender|5-isaac}.webp，同一场景 5 张需同机位对齐 -->
-          <div class="m-row is-active" data-scene="kitchen"><span class="scene-name">厨房</span>
-            <div class="m-cells">
-              <figure class="media frame"><div class="ph"><span>【待补】厨房 · 真实照片</span><span class="spec">kitchen-1-photo.webp</span></div><img src="assets/pipeline/kitchen-1-photo.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"></figure>
-              <figure class="media frame"><div class="ph"><span>【待补】厨房 · SAM 3 分割</span><span class="spec">kitchen-2-sam3.webp</span></div><img src="assets/pipeline/kitchen-2-sam3.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"></figure>
-              <figure class="media frame"><div class="ph"><span>【待补】厨房 · Depth Anything 3 深度</span><span class="spec">kitchen-3-depth.webp</span></div><img src="assets/pipeline/kitchen-3-depth.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"></figure>
-              <figure class="media frame"><div class="ph"><span>【待补】厨房 · Blender 外观</span><span class="spec">kitchen-4-blender.webp</span></div><img src="assets/pipeline/kitchen-4-blender.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"></figure>
-              <figure class="media frame live" data-live="https://shenpu-interactive-home.arthur12137.chatgpt.site/"><div class="ph"><span>【待补】厨房 · 最终仿真场景</span><span class="spec">kitchen-5-sim.webp</span></div><img src="assets/pipeline/kitchen-5-sim.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"><iframe title="可交互的三维仿真场景" referrerpolicy="no-referrer" allow="fullscreen"></iframe><button class="live-btn" type="button"><span>▶ 加载可交互场景（需联网）</span></button></figure>
-            </div>
-          </div>
-        </div>
-        <ol class="narr-caps" aria-live="polite">
-          <li class="is-current"><span class="cap-no">阶段 1 / 5 · 输入</span><span class="cap-t">真实照片</span><p class="draft">在真实家庭环境中拍摄场景照片，作为重建的起点，也是之后真机对照的基准。</p><p class="note cap-out">输出：RGB 图像</p></li>
-          <li class="is-future"><span class="cap-no">阶段 2 / 5 · SAM 3</span><span class="cap-t">SAM 3 分割</span><p class="draft">对照片做分割，得到逐物体掩码，区分需要单独建模的物体与背景。</p><p class="note cap-out">输出：逐物体掩码</p></li>
-          <li class="is-future"><span class="cap-no">阶段 3 / 5 · Depth Anything 3</span><span class="cap-t">Depth Anything 3 深度</span><p class="draft">估计深度，恢复场景几何与物体之间的空间关系。</p><p class="note cap-out">输出：深度图</p></li>
-          <li class="is-future"><span class="cap-no">阶段 4 / 5 · Blender</span><span class="cap-t">Blender 外观</span><p class="draft">在 Blender 中整理几何与材质，使渲染外观接近真实照片。</p><p class="note cap-out">输出：带材质的物体资产</p></li>
-          <li class="is-future"><span class="cap-no">阶段 5 / 5 · Isaac Sim + Newton</span><span class="cap-t">最终仿真场景</span><p class="draft">导入 Isaac Sim 并配置物理，得到可用于并行采集、训练与评测的仿真场景。画面可交互：拖动旋转视角，点击家具打开柜门。</p><div class="badges cap-out"><span class="badge ok"><svg><use href="#i-ok"/></svg>4 个场景已完成</span><a href="https://shenpu-interactive-home.arthur12137.chatgpt.site/" target="_blank" rel="noopener">在线交互版 ↗</a></div></li>
-        </ol>
-      </div>
-      <ol class="narr-ticks" aria-label="管线阶段">
-        <li><button class="tick is-current" type="button" data-k="0"><i></i>照片</button></li>
-        <li><button class="tick" type="button" data-k="1"><i></i>分割</button></li>
-        <li><button class="tick" type="button" data-k="2"><i></i>深度</button></li>
-        <li><button class="tick" type="button" data-k="3"><i></i>外观</button></li>
-        <li><button class="tick" type="button" data-k="4"><i></i>最终仿真</button></li>
-      </ol>
-    </div>
-  </div></div>
-</section>
-
-<!-- ======================= 02 数据采集 pipeline ======================= -->
-<section class="slide" id="datapipe" data-chapter="02" data-label="数据管线">
-  <div class="slide-inner">
-    <div class="head">
-      <h2>数据管线</h2>
-      <p class="lead">人类演示、遥操作与仿真直接生成三条来源，在仿真里补上力与物理可行性，汇成统一格式的训练与评测数据。</p>
-    </div>
-    <div class="dp">
-      <div class="dp-lanes">
-        <div class="dp-lane">
-          <div class="dp-lh"><b>人类演示</b><span class="badge ok"><svg><use href="#i-ok"/></svg>已跑通（NVIDIA CHORD）</span></div>
-          <ol class="dp-steps dp3">
-            <li><b>采集</b></li>
-            <li><b>重定向到灵巧手</b></li>
-            <li class="dp-key"><b>仿真物理修正</b></li>
-          </ol>
-        </div>
-        <div class="dp-lane">
-          <div class="dp-lh"><b>遥操作</b><span class="badge wip"><svg><use href="#i-wip"/></svg>进行中</span></div>
-          <ol class="dp-steps dp3">
-            <li><b>采集</b></li>
-            <li><b>重定向 / 数字孪生回放</b></li>
-            <li class="dp-key"><b>RL 修正与数据扩充</b></li>
-          </ol>
-        </div>
-        <div class="dp-lane">
-          <div class="dp-lh"><b>仿真直接生成</b><span class="badge ok"><svg><use href="#i-ok"/></svg>已并行化</span></div>
-          <ol class="dp-steps dp3">
-            <li class="dp-full dp-key"><b>并行采集 / RL 策略生成</b></li>
-          </ol>
-        </div>
-      </div>
-      <div class="dp-join" aria-hidden="true"></div>
-      <ol class="dp-out">
-        <li><b>统一数据格式</b><p>LeRobot v3.0</p></li>
-        <li><b>训练与评测</b><p>仿真与真机两端</p></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- ======================= 02 指标 ======================= -->
-<section class="slide" id="metrics" data-chapter="02" data-label="主指标">
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">指标</p>
-      <h2>主指标：Sim–Real policy-ranking correlation</h2>
-      <p class="lead">不追求仿真与真机成功率的绝对一致，而是看以下几项能否从仿真迁移到真机。</p>
-    </div>
-    <div class="grid g3 dims">
-      <div class="card dim"><b>policy 排名</b><p>不同策略在仿真与真机上的优劣次序是否一致</p></div>
-      <div class="card dim"><b>失败模式</b><p>失败类型的分布在仿真与真机上是否一致</p></div>
-      <div class="card dim"><b>关键结论的方向</b><p>包括触觉相关的结论在内，仿真与真机上得出的方向是否一致；具体设计会上介绍</p></div>
-    </div>
-    <h3 class="corr-h">相关性指标</h3>
+    <div class="head"><h2>评测物理响应，也评测科研结论</h2><p class="lead">不追求仿真与真机成功率的绝对一致，而是看仿真能否帮助选择方法，并清楚标出它还不能支持哪些判断。</p></div>
+    <div class="grid g3 pitch-grid"><article class="card"><h3>接触过程是否一致</h3><p>比较力—位移、转角—载荷和触觉事件时序，定位哪一段交互开始偏离真机。</p></article><article class="card"><h3>策略排序是否可靠</h3><p>以 Sim–Real policy-ranking correlation 为主指标，报告秩相关、Top-1 一致性与排序不确定性。</p></article><article class="card"><h3>触觉结论能否复现</h3><p>比较受控条件下触觉收益的方向、幅度与失败模式，寻找收益变化或策略排序反转的条件。</p></article></div>
+    <h3 class="corr-h">主指标：Sim–Real policy-ranking correlation</h3>
     <p class="note corr-src">排名一致性作为 sim-to-real 评测指标，参考 SIMPLER（Li et al., 2024）。</p>
     <div class="corr">
       <div><b>Spearman ρ</b><span class="formula mono">ρ = 1 − 6Σd² / n(n² − 1)</span><p>仿真与真机成功率排名的秩相关</p></div>
@@ -1278,239 +1336,35 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
       <div><b>MMRV</b><span class="formula">Mean Maximum Rank Violation</span><p>排名错位的平均最大代价</p></div>
       <div><b>Top-1 一致</b><span class="formula">best-policy agreement</span><p>仿真中最优的策略在真机上是否也最优</p></div>
     </div>
+    <div class="research-callout">即使排序不一致，也要交付可解释的结果：<strong>哪些接触条件、仿真误差或传感器差异使预测失效？</strong></div>
   </div>
 </section>
 
-<section class="slide" id="insights" data-chapter="02" data-label="初步判断">
-  <div class="slide-inner">
-    <div class="head">
-      <h2>初步判断</h2>
-    </div>
-    <ol class="ins">
-      <li><b>仿真成功率不能直接当作真机表现</b><p>已有工作（如 SIMPLER）在机械臂上观察到，仿真与真机的成功率会脱节；灵巧手加上接触与触觉，这个问题只会更突出。</p></li>
-      <li><b>相对结论比绝对成功率更可迁移</b><p>所以主指标看的是排名一致性，而不是成功率的绝对值。</p></li>
-      <li><b>触觉的价值高度依赖条件</b><p>我们判断：在部分条件下，加入触觉会改变策略的排名。这是 v1 要用真机验证的核心问题。</p></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ======================= 02 触觉与本体 ======================= -->
-<section class="slide" id="touch" data-chapter="02" data-label="触觉与本体">
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">触觉定位</p>
-      <h2 >触觉定位与 SharpaWave 的角色</h2>
-    </div>
-    <div class="grid touch-grid">
-      <div class="col">
-        <p class="kicker">研究问题 · 结论由实验给出</p>
-        <h3>触觉何时真正改变结论</h3>
-        <p class="sub">用经真机验证的统一评测，量化触觉对策略表现与排名的实际影响。具体条件设计会上详谈。</p>
-      </div>
-      <div class="col">
-        <p class="kicker">本体</p>
-        <h3>SharpaWave：主力本体与触觉来源</h3>
-        <p class="sub">SharpaWave 是 benchmark 的主力本体与触觉来源；计划加入多本体对照（如 Wuji 灵巧手 1 代），刻画 SharpaWave 触觉在哪些任务上带来差异。</p>
-        <span class="names">主力本体 · 触觉来源 · 多本体对照 · 22-DoF · 视触觉</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= 02 差异化 ======================= -->
-<section class="slide wide" id="related" data-chapter="02" data-label="与已有 benchmark 对比">
+<section class="slide wide" id="related" data-chapter="04" data-label="与已有 benchmark 对比">
   <div class="slide-inner">
     <div class="head">
       <p class="eyebrow">与已有工作的关系</p>
-      <h2>与已有灵巧手 benchmark 的对比</h2>
+      <h2>已有 benchmark 与我们的拟验证方向</h2>
       <p class="lead">已有工作各有侧重。我们的设计区别在于：把真实家庭场景重建进仿真，在 SharpaWave 真机上验证，并借鉴 SIMPLER 以 Sim–Real 排名一致性为主指标，把真机触觉纳入评测。</p>
     </div>
     <div class="table-wrap cmp-wrap">
       <table class="cmp">
         <thead><tr><th scope="col"></th><th scope="col" class="ours">我们</th><th scope="col">Bench2Dex</th><th scope="col">DexVerse</th><th scope="col">DexJoCo</th><th scope="col">LabDex</th><th scope="col">Labimus</th></tr></thead>
-        <tbody><tr><th scope="row">仿真平台</th><td class="ours">Isaac Sim + Newton</td><td>Isaac Lab</td><td>Isaac Lab</td><td>MuJoCo</td><td>未说明</td><td>Isaac Sim</td></tr><tr><th scope="row">真实场景 real2sim 重建</th><td class="ours"><span class="yes">✓</span> 4 个真实家庭场景</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span> 人工搭建的实验室孪生</td><td><span class="part">◐</span> 实验室资产与工位布局</td></tr><tr><th scope="row">真机评测</th><td class="ours"><span class="st">进行中</span> SharpaWave 真机验证，待真机到位</td><td><span class="no">✗</span> 仅仿真</td><td><span class="no">✗</span> 仅仿真</td><td><span class="no">✗</span> 仅仿真</td><td><span class="yes">✓</span> Franka + XHand</td><td><span class="no">✗</span> 仅仿真</td></tr><tr><th scope="row">Sim–Real 排名一致性指标</th><td class="ours"><span class="st">进行中</span> 主指标，首轮闭环进行中</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="part">◐</span> 仅定性比较趋势</td><td><span class="no">✗</span></td></tr><tr><th scope="row">触觉</th><td class="ours"><span class="st">进行中</span> 仿真触觉已接入；真机视触觉待 SharpaWave 到位</td><td><span class="part">◐</span> 仅仿真触觉</td><td><span class="part">◐</span> 仅仿真接触力</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr><tr><th scope="row">多本体</th><td class="ours"><span class="st">计划中</span> 以 SharpaWave 为主，加入对照本体（如 Wuji 1 代）</td><td><span class="yes">✓</span> 12 种，均为仿真</td><td><span class="yes">✓</span> 6 种手，均为仿真</td><td><span class="no">✗</span> Allegro</td><td><span class="no">✗</span> XHand</td><td><span class="no">✗</span> Revo 2</td></tr><tr><th scope="row">双手</th><td class="ours"><span class="st">计划中</span> 纳入 v1 任务范围</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="part">◐</span> 已定义，尚未评测</td></tr><tr><th scope="row">任务场景</th><td class="ours">家庭场景（4 个真实家庭场景重建）</td><td>桌面操作，家居与办公物体</td><td>桌面操作，家居物体</td><td>桌面操作，日常物体</td><td>化学实验室</td><td>化学实验室（通风橱工位）</td></tr></tbody>
+        <tbody><tr><th scope="row">仿真平台</th><td class="ours">Isaac Sim + Newton</td><td>Isaac Lab</td><td>Isaac Lab</td><td>MuJoCo</td><td>未说明</td><td>Isaac Sim</td></tr><tr><th scope="row">真实场景 real2sim 重建</th><td class="ours"><span class="yes">✓</span> 4 个真实家庭场景</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span> 人工搭建的实验室孪生</td><td><span class="part">◐</span> 实验室资产与工位布局</td></tr><tr><th scope="row">真机评测</th><td class="ours"><span class="st">待验证</span> 计划验证，待真机到位</td><td><span class="no">✗</span> 仅仿真</td><td><span class="no">✗</span> 仅仿真</td><td><span class="no">✗</span> 仅仿真</td><td><span class="yes">✓</span> Franka + XHand</td><td><span class="no">✗</span> 仅仿真</td></tr><tr><th scope="row">Sim–Real 排名一致性指标</th><td class="ours"><span class="st">待验证</span> 拟采用主指标，尚无真机结果</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="part">◐</span> 仅定性比较趋势</td><td><span class="no">✗</span></td></tr><tr><th scope="row">触觉</th><td class="ours"><span class="st">待验证</span> 仿真触觉已接入；真机视触觉待 SharpaWave 到位</td><td><span class="part">◐</span> 仅仿真触觉</td><td><span class="part">◐</span> 仅仿真接触力</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr><tr><th scope="row">多本体</th><td class="ours"><span class="st">计划中</span> 首轮固定 SharpaWave；后续扩展</td><td><span class="yes">✓</span> 12 种，均为仿真</td><td><span class="yes">✓</span> 6 种手，均为仿真</td><td><span class="no">✗</span> Allegro</td><td><span class="no">✗</span> XHand</td><td><span class="no">✗</span> Revo 2</td></tr><tr><th scope="row">双手</th><td class="ours"><span class="st">计划中</span> 后续扩展</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="part">◐</span> 已定义，尚未评测</td></tr><tr><th scope="row">任务场景</th><td class="ours">家庭场景（4 个真实家庭场景重建）</td><td>桌面操作，家居与办公物体</td><td>桌面操作，家居物体</td><td>桌面操作，日常物体</td><td>化学实验室</td><td>化学实验室（通风橱工位）</td></tr></tbody>
       </table>
     </div>
-    <p class="cite">「我们」一栏按当前状态标注：✓ 已完成，其余为进行中或计划中（见「当前进展」）。其余各栏依据各自 arXiv 论文：Bench2Dex 2609.15726 · DexVerse 2607.08751 · DexJoCo 2605.16257 · LabDex 2608.18618 · Labimus 2606.31037，截至 2026-09。</p>
+    <p class="evidence-note">本表是范围梳理，不能据此认定我们的规划优于已有结果。我们拟增加的证据是接触过程的物理一致性，以及仿真结论对真机的预测能力。</p><p class="cite">「我们」一栏按当前状态标注：✓ 已完成，其余为待验证或计划中（见「当前进展」）。其余各栏依据各自 arXiv 论文：Bench2Dex 2609.15726 · DexVerse 2607.08751 · DexJoCo 2605.16257 · LabDex 2608.18618 · Labimus 2606.31037，截至 2026-09。</p>
   </div>
 </section>
 
+<section class="slide" id="landscape" data-chapter="05" data-label="与 Sharpa 的研究一起推进" data-first><div class="slide-inner"><div class="head"><h2>与 Sharpa 的研究一起推进</h2><p class="lead">从 Sharpa 已关心的接触感知与泛化问题出发，增加经真机验证的统一比较与误差诊断。</p></div><div class="grid g2 pitch-grid"><article class="card"><h3>Sharpa 自身研究 · WM-Craftnet</h3><p>视触觉状态表征与仿真到真机的泛化、扰动恢复，为联合研究提供直接衔接。可共同研究：哪些接触扰动会改变其优势，仿真能否预测变化？<br><a href="https://www.sharpa.com/blogs/research/wm-craftnet-world-synesthesia-model-for-robust-and-generalizable-dexterous-in-hand-manipulation" target="_blank" rel="noopener">Sharpa 官方研究介绍</a></p></article><article class="card"><h3>生态研究 · Tacmap / T-Rex</h3><p>Tacmap 提供仿真触觉建模基础，T-Rex 探索时序触觉与快速反应。可共同检验：传感器对齐如何影响任务收益，静态与时序触觉的适用条件是什么？<br><a href="https://www.sharpa.com/blogs/research/t-rex-teaching-robots-to-feel-in-real-time-not-just-see-and-plan" target="_blank" rel="noopener">T-Rex 的 Sharpa 官方介绍</a></p></article></div><div class="research-callout">邀请 Sharpa 共同定义<strong>研究假设、接触条件与诊断协议</strong>，共同分析边界与负结果。方法接入范围按适用任务与开放条件确定。</div></div></section>
 
-
-<!-- ======================= 03 进展 ======================= -->
-<section class="slide wide" id="progress" data-chapter="03" data-label="当前进展" data-first>
+<section class="slide" id="value" data-chapter="05" data-label="Sharpa 将获得什么">
   <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">当前进展</p>
-      <h2 >当前进展</h2>
-    </div>
-    <div class="grid board">
-      <div >
-        <div class="col-head ok"><h3>已完成</h3><span class="badge ok"><svg><use href="#i-ok"/></svg>7</span></div>
-        <ul class="items">
-          <li>四个 real2sim 场景（厨房、卧室、客厅、卫生间）</li>
-          <li>Isaac Sim + Newton 环境</li>
-          <li>采集并行化与 RL 并行化</li>
-          <li>SharpaWave 仿真资产已接入（精确参数待 Sharpa 提供）</li>
-          <li>10 个 policy 已接入 SharpaWave（触觉 / 非触觉两种配置），见下一页</li>
-          <li>人手示范 → 仿真的管线跑通（NVIDIA CHORD）</li>
-          <li>统一数据格式 LeRobot v3.0</li>
-        </ul>
-      </div>
-      <div >
-        <div class="col-head wip"><h3>进行中</h3><span class="badge wip"><svg><use href="#i-wip"/></svg>5</span></div>
-        <ul class="items">
-          <li>首轮闭环
-            <div class="chain"><span>首批任务采集</span><i>→</i><span>π0.5 训练</span><i>→</i><span>真机部署</span><i>→</i><span>评测</span></div>
-            <div class="badges"><span class="badge tbc">【待确认：当前状态】</span></div></li>
-          <li>评测并行化<div class="badges"><span class="badge ok">observation 已并行</span><span class="badge plan">policy server 待改造</span></div></li>
-          <li>遥操作采集</li>
-          <li>Xpolicy、StarVLA 数据格式适配</li>
-          <li>RLinf 后训练接口</li>
-        </ul>
-      </div>
-      <div >
-        <div class="col-head plan"><h3>计划中</h3><span class="badge plan"><svg><use href="#i-plan"/></svg>3</span></div>
-        <ul class="items plan">
-          <li>带触觉的 baseline</li>
-          <li>触觉价值评测</li>
-          <li>多本体扩展</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="slide" id="policies" data-chapter="03" data-label="已接入的 policy">
-  <div class="slide-inner">
-    <div class="head">
-      <h2>已接入 SharpaWave 的 policy</h2>
-      <p class="lead">10 个 policy 已接入 SharpaWave，支持触觉与非触觉两种输入配置。</p>
-    </div>
-    <div class="pgroups"><div class="pgroup"><p class="kicker">模仿学习</p><ul><li><b>ACT</b><span>Action Chunking with Transformers</span></li><li><b>Diffusion Policy</b><span>DP</span></li></ul></div><div class="pgroup"><p class="kicker">视触觉 / 力感知</p><ul><li><b>ViTacFormer</b><span>视触觉策略，原论文使用 SharpaWave（开发版）</span></li><li><b>ForceVLA</b><span>力感知 VLA</span></li></ul></div><div class="pgroup"><p class="kicker">VLA</p><ul><li><b>OpenVLA</b></li><li><b>π0</b></li><li><b>π0.5</b></li><li><b>GR00T N1.7</b></li></ul></div><div class="pgroup"><p class="kicker">世界-动作模型</p><ul><li><b>LingBot-VA</b></li><li><b>Fast-WAM</b></li></ul></div></div>
-  </div>
-</section>
-
-<!-- ======================= 04 与 Sharpa 研究的衔接 ======================= -->
-<section class="slide wide" id="landscape" data-chapter="04" data-label="Sharpa 及合作者的研究" data-first>
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">与 Sharpa 研究的衔接</p>
-      <h2>Sharpa 及合作者围绕 SharpaWave 的研究</h2>
-    </div>
-    <div class="tree reveal">
-      <div class="t-root">
-        <span class="kick">平台</span>
-        <b>SharpaWave</b>
-        <span>22-DoF 视触觉灵巧手</span>
-      </div>
-      <div class="t-branches">
-        <div class="t-branch">
-          <div class="t-q"><span class="kick">Real → Sim</span><b>数据从哪来</b></div>
-          <div class="t-leaves">
-            <div class="t-leaf"><div class="t-lt"><b>人类视频学习</b><span class="names"><a href="https://do-as-i-do.com/" target="_blank" rel="noopener">Do as I Do</a> · <a href="https://research.nvidia.com/labs/gear/egoscale/" target="_blank" rel="noopener">EgoScale</a> · <a href="https://arxiv.org/abs/2606.17256" target="_blank" rel="noopener">CAIP</a></span></div><p>从单目视频重建手物交互、生成轨迹；人类视频预训练。重建的对象是"动作"。</p></div>
-            <div class="t-leaf"><div class="t-lt"><b>遥操作</b><span class="names"><a href="https://arxiv.org/abs/2603.05861" target="_blank" rel="noopener">DexEMG</a> · <a href="https://henryhcliu.github.io/dexteleop-0/" target="_blank" rel="noopener">DexTeleop-0</a></span></div><p>遥操作采集与轨迹生成。</p></div>
-          </div>
-        </div>
-        <div class="t-branch">
-          <div class="t-q"><span class="kick">Sim → Real</span><b>动作怎么学</b></div>
-          <div class="t-leaves">
-            <div class="t-leaf"><div class="t-lt"><b>仿真强化学习</b><span class="names"><a href="https://simtoolreal.github.io/" target="_blank" rel="noopener">SimToolReal</a> · <a href="https://play2perfect.github.io/" target="_blank" rel="noopener">Play2Perfect</a></span></div><p>仿真训练的策略迁移到 SharpaWave，sim2real 是训练手段。</p></div>
-          </div>
-        </div>
-        <div class="t-branch">
-          <div class="t-q"><span class="kick">触觉</span><b>接触怎么感知</b></div>
-          <div class="t-leaves">
-            <div class="t-leaf"><div class="t-lt"><b>仿真触觉对齐</b><span class="names"><a href="https://arxiv.org/abs/2602.21625" target="_blank" rel="noopener">Tacmap</a></span></div><p>在传感器层对齐仿真与真实触觉（以手内旋转为例）。</p></div>
-            <div class="t-leaf"><div class="t-lt"><b>触觉表征与策略</b><span class="names"><a href="https://jxbi1010.github.io/htt-gh-page/" target="_blank" rel="noopener">HTT</a> · <a href="https://ftp1-policy.github.io/" target="_blank" rel="noopener">FTP-1</a> · <a href="https://arxiv.org/abs/2510.14647" target="_blank" rel="noopener">SaTA</a> · <a href="https://tactile-rex.github.io/" target="_blank" rel="noopener">T-Rex</a> · <a href="https://arxiv.org/abs/2506.15953" target="_blank" rel="noopener">ViTacFormer</a></span></div><p>触觉空间定位（SaTA）、动态反馈（T-Rex）、通用触觉策略（FTP-1）等，各自解决触觉的一个侧面。</p></div>
-          </div>
-        </div>
-        <div class="t-branch t-gap">
-          <div class="t-q"><span class="kick">回到 Real · 评测</span><b>在统一条件下，这些方法在真机上谁更好？</b><span class="badge gap-tag">空白</span></div>
-          <div class="t-leaves">
-            <div class="t-leaf t-empty"><p>尚缺少统一、经真机验证的评测</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="note" style="margin-top:14px">依据我们对 Sharpa 及其合作者公开工作的调研整理；方法论文各有其评测设置，benchmark 是与之互补的一层。</p>
-  </div>
-</section>
-
-<section class="slide" id="bridge" data-chapter="04" data-label="我们能补上什么">
-  <div class="slide-inner">
-    <div class="head">
-      <h2>我们的 benchmark 能补上什么</h2>
-    </div>
-    <div class="grid g3 fill">
-      <div class="card"><h3>场景级 real2sim</h3><p>把真实家庭桌面环境整体变成可交互的仿真资产，补上"动作"之外的"场景"。</p><p class="note">衔接：Do as I Do · EgoScale · CAIP（重建的是动作）</p></div>
-      <div class="card"><h3>Sim–Real policy-ranking correlation</h3><p>仿真里得出的结论（哪个策略更好、触觉帮了多少）能否在真机上复现，让仿真成为可信的评测手段。</p><p class="note">衔接：SimToolReal · Play2Perfect（sim2real 作为训练手段）</p></div>
-      <div class="card"><h3>统一的比较场地</h3><p>比较各数据路线与触觉表征的贡献；在任务层检验触觉增益，与 Tacmap 的传感器层对齐上下游衔接。</p><p class="note">衔接：Tacmap · HTT · FTP-1 · SaTA · T-Rex</p></div>
-    </div>
-    <p class="lead bridge-lead">Sharpa 及其合作者围绕 SharpaWave，已在人类视频学习、遥操作、触觉建模和仿真强化学习四个方向积累了系统的方法工作。这些工作各自在特定任务上验证了有效性，但尚缺少一个共同的评测场地来回答：在统一条件下，不同数据路线和触觉表征各自带来多少收益？这些收益在真机上是否成立？</p>
-    <p class="shift">sim2real 是训练手段<span class="shift-arrow">→</span><b>sim 成为可信的评测手段</b></p>
-    <p class="note">核心问题：仿真上得出的结论，能否在真机上成立？</p>
-  </div>
-</section>
-
-<section class="slide" id="hook" data-chapter="04" data-label="合作提议">
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">提议</p>
-      <h2 >提议：让 Sharpa 的研究成为 benchmark 的一部分</h2>
-      <p class="note">提议 · 涉及代码与模型的开放程度，需双方确认</p>
-    </div>
-    <div class="grid g2">
-      <div class="card hook-card"><h3>触觉 baseline</h3><p>把 Sharpa 及合作者围绕 SharpaWave 的触觉策略接入 benchmark，作为触觉 baseline（视开源情况）。</p><span class="names">FTP-1 · HTT · T-Rex · SaTA</span></div>
-      <div class="card hook-card"><h3>数据来源对照</h3><p>把 Sharpa 及合作者的数据路线作为数据来源对照，比较各路线在同一任务上的贡献。</p><span class="names">Do as I Do · 遥操作 · 仿真 RL</span></div>
-    </div>
-    <ol class="loop" aria-label="Research → Benchmark → Product → Research">
-      <li><span class="kick">Research</span>Sharpa 提出新的触觉传感器、策略或硬件设计</li>
-      <li><span class="kick">Benchmark</span>在统一任务与 Sim–Real 协议下验证</li>
-      <li><span class="kick">Insight</span>系统定位失败模式与瓶颈</li>
-      <li><span class="kick">Product</span>反馈到下一代硬件与算法，进入新一轮研究</li>
-    </ol>
-    <p class="statement">让仿真从<em>训练工具</em>，升级为服务科研判断与硬件设计的<em>决策工具</em>。</p>
-  </div>
-</section>
-
-<section class="slide" id="why" data-chapter="05" data-label="为什么需要 SharpaWave" data-first>
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">为什么是 SharpaWave</p>
-      <h2>为什么需要 SharpaWave</h2>
-    </div>
-    <div class="grid g3 val">
-      <div class="card"><h3>它有触觉</h3><p>SharpaWave 带视触觉；我们目前没有带触觉的灵巧手。</p></div>
-      <div class="card"><h3>它的 Isaac Sim 模型很精准</h3><p>SharpaWave 的 Isaac Sim 模型做得好、精度高。仿真端能不能信，首先取决于本体模型，这让 Real2Sim2Real 里的 Sim 一环站得住。</p></div>
-      <div class="card"><h3>用它证明触觉在 Real2Sim2Real 中的作用</h3><p>要回答触觉在这条 pipeline 里到底起什么作用，需要一只带触觉的灵巧手贯穿始终：在仿真里采集和训练，在真机上验证。</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= 05 分析 ======================= -->
-<section class="slide" id="value" data-chapter="05" data-label="对 SharpaWave 意味着什么">
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">对 SharpaWave 的价值</p>
-      <h2>对 SharpaWave 意味着什么</h2>
-    </div>
-    <div class="grid g3 val">
-      <div class="card"><h3>首发本体</h3><p>SharpaWave 作为 benchmark 的首发与主力本体，出现在论文与开源 benchmark 中；排行榜随合作层级联合发布。</p></div>
-      <div class="card"><h3>触觉价值的官方证据</h3><p>用统一、经真机验证的评测，量化 SharpaWave 触觉在哪些任务与条件下带来增益。</p></div>
-      <div class="card"><h3>高质量数字孪生资产</h3><p>在合作中完成真机校验的 SharpaWave 仿真资产与真实家庭场景，经 Sharpa 同意后可提供给社区与 Sharpa 客户。</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="slide" id="analysis" data-chapter="05" data-label="我们能交付的分析">
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">我们能交付的分析</p>
-      <h2 >我们能交付的分析</h2>
-    </div>
-    <div class="banner">以下均为合作期内的可交付物，不代表已有结论。</div>
-    <div class="grid two-col">
+    <div class="head"><h2>Sharpa 将获得什么</h2><p class="lead">优先交付可用于科研判断和工程改进的结果，长期共建以 SharpaWave 为首发本体的开放 benchmark。</p></div>
+    <div class="grid g3 pitch-grid"><article class="card"><h3>首轮 gap 报告</h3><p>按一个任务族交付仿真与真机的接触响应差异、失败案例，以及最值得修正的模型与接口问题。</p></article><article class="card"><h3>触觉方法的适用边界</h3><p>在同一本体、受控数据与物理条件下，量化触觉何时有效、何时失效，以及不同方法的排序。</p></article><article class="card"><h3>共同定义研究与资产</h3><p>共同设计任务和诊断协议，沉淀可复现脚本、经校验的参数与场景；以实际研究贡献形成联合成果。</p></article></div>
+    <h3 class="corr-h">后续可扩展的分析 <span class="note">首轮交付范围为约定任务族的报告与复现材料；以下为扩展候选，不代表已有结论。</span></h3>
+    <div class="grid two-col deliv-compact">
       <div >
         <div class="col-title"><h3>学术侧</h3><span class="note">论文与社区</span></div>
         <ul class="deliv">
@@ -1527,54 +1381,26 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
           <li><span class="code">P2</span><span>真实任务中各自由度与触觉区域的使用频率</span></li>
           <li><span class="code">P3</span><span>典型失败模式与硬件相关的根因</span></li>
           <li><span class="code">P4</span><span>对 SDK / 仿真资产 / 触觉数据接口的易用性反馈</span></li>
-          <li><span class="code">P5</span><span>与 Wuji 灵巧手 1 代的同任务对照：成功率、触觉增益与失败模式的差异，刻画 SharpaWave 相对 Wuji 的优势与差距</span></li>
+          <li><span class="code">P5</span><span>与 Wuji 灵巧手 1 代的同任务对照：成功率、触觉增益与失败模式的差异，研究不同本体的表现边界；本体差异不直接归因于触觉</span></li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======================= 06 合作：对称 ======================= -->
-<section class="slide" id="exchange" data-chapter="06" data-label="合作方案" data-first>
-  <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">合作方案</p>
-      <h2 >双方投入 ↔ 双方获得</h2>
-    </div>
-    <div class="exchange">
-      <div class="ex-side">
-        <div><h3>Sharpa 提供</h3><p class="who">我们的需求</p></div>
-        <ul class="ex-list">
-          <li>SharpaWave 真机（含视触觉）<br><mark class="tbc">【待确认：数量 / 借用或采购方式】</mark></li>
-          <li>SharpaWave 的精确仿真资产（USD / URDF、关节与驱动参数）</li>
-          <li>触觉仿真模型、传感器规格与标定支持</li>
-          <li>控制与数据 SDK</li>
-          <li>工程对接人</li>
-        </ul>
-      </div>
-      <div class="ex-axis" aria-hidden="true">⇄<span>交换</span></div>
-      <div class="ex-side">
-        <div><h3>我们提供</h3><p class="who">Sharpa 获得</p></div>
-        <ul class="ex-list">
-          <li>以 SharpaWave 为主力本体的 benchmark 与开源代码</li>
-          <li>「我们能交付的分析」中列出的全部分析报告</li>
-          <li>定期使用反馈</li>
-          <li>将 Sharpa 及合作者的触觉策略与数据路线接入 benchmark，作为 baseline 与数据对照<br><span class="note">提议 · 需双方确认</span></li>
-          <li>CVPR 2027 论文中的联合署名或致谢<br><mark class="tbc">【待确认：署名方式】</mark></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="slide" id="pilot" data-chapter="06" data-label="首轮实验：从瓶盖旋拧开始" data-first><div class="slide-inner"><div class="head"><h2>首轮实验：从瓶盖旋拧开始</h2><p class="lead">先用已有螺纹交互演示建立一个可重复的小闭环，验证协议后再扩大规模。</p></div><div class="table-wrap"><table class="pilot-table"><tbody>
+<tr><th scope="row">任务与本体</th><td>SharpaWave 单手旋拧瓶盖，覆盖接触建立、旋拧、换握与脱离。</td></tr>
+<tr><th scope="row">交付内容</th><td>力 / 扭矩与运动曲线、触觉事件、策略排序和失败案例；同步给出重复次数与置信区间。</td></tr>
+</tbody></table></div></div></section>
 
-<!-- ======================= 05 合作层级 ======================= -->
-<section class="slide" id="tiers" data-chapter="06" data-label="合作层级">
+<section class="slide" id="exchange" data-chapter="06" data-label="建议先启动一个联合试点">
   <div class="slide-inner">
-    <div class="head">
-      <p class="eyebrow">可选合作层级</p>
-      <h2>可选合作层级：从轻到重</h2>
-    </div>
-    <div class="grid tiers">
+    <div class="head"><h2>建议先启动一个联合试点</h2></div>
+    <div class="exchange"><div class="ex-side"><div><h3>Sharpa 的投入</h3><p class="who">建议的最小合作范围</p></div><ul class="ex-list">
+<li>1 只含视触觉的 SharpaWave 借测；或提供可协作的真机测试时段</li><li>现有 USD / URDF、控制 SDK、可提供的驱动参数与触觉标定说明</li><li>一位技术联系人，参与启动与阶段结果评审</li></ul></div><div class="ex-axis" aria-hidden="true">⇄<span>共建</span></div>
+<div class="ex-side"><div><h3>我们承担</h3><p class="who">围绕首个任务族交付</p></div><ul class="ex-list"><li>任务与仿真搭建、数据采集、训练、评测及分析</li><li>试点就绪后第 2 / 4 / 6 周的部署、标定和对照产出</li><li>可复现脚本、参数清单、失败案例与报告 v0.1</li></ul></div></div>
+    <h3 class="corr-h">合作可以从轻到重 <span class="note">每一档包含上一档的内容。</span></h3>
+    <div class="grid tiers tiers-compact">
       <div class="card tier">
         <div class="lv"><span>L1</span><span class="depth"><i class="on"></i><i></i><i></i><i></i></span></div>
         <h3>技术对接</h3>
@@ -1597,11 +1423,13 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
         <ul><li>数据共享</li><li>联合发布排行榜</li></ul>
       </div>
     </div>
-    <p class="tier-arrow draft">每一档包含上一档的内容。</p>
+    <p class="evidence-note">联合研究署名依据实际贡献协商；硬件支持按贡献致谢。数据 / 代码开放范围及联合发布由双方确认，首轮不要求开放未公开模型。</p>
   </div>
 </section>
 
-</main>
+<section class="slide" id="milestones" data-chapter="06" data-label="六周内，形成第一份可讨论的结果"><div class="slide-inner"><div class="head"><h2>六周内，形成第一份可讨论的结果</h2><p class="lead">建议里程碑 · 以可检查的产出推进合作，后续扩展依据首轮结果决定。</p></div><div class="grid g3 pitch-grid milestone-grid"><article class="card"><h3>第 2 周 · 部署与测量</h3><p>完成控制 / 触觉接口检查，交付任务复现视频、测量通道清单与已发现的接口问题。</p></article><article class="card"><h3>第 4 周 · 标定与冻结</h3><p>交付接触曲线初步对照、参数标定记录与误差清单；冻结独立测试协议。</p></article><article class="card"><h3>第 6 周 · 报告 v0.1</h3><p>交付首轮 sim–real gap、代表性方法排序与不确定性、失败模式及下一轮改进建议。</p></article></div><p class="evidence-note">建议周期从真机与测试平台可用、SDK / 触觉数据可访问、双方确认首轮任务后起算。第 2 周复核可行性；若依赖未就绪，调整范围与排期并保留阶段报告。</p></div></section>
+
+<section class="slide" id="vision" data-chapter="07" data-label="合作愿景" data-first><div class="slide-inner"><div class="head"><h2>合作愿景：长期同行</h2></div><p class="proposal">首轮试点只是起点。我们希望与 Sharpa 长期合作，<em>共同推动灵巧手与触觉的发展</em>。</p><div class="grid g3 pitch-grid vision-grid"><article class="card"><p class="vision-step">起点</p><h3>一个经真机验证的闭环</h3><p>从瓶盖旋拧开始，在 SharpaWave 上跑通第一个 Sim–Real 对照，建立双方都信得过的评测协议。</p></article><article class="card"><p class="vision-step">共建</p><h3>以 SharpaWave 为首发本体的开放 benchmark</h3><p>把更多真实场景与接触任务纳入评测，联合发布，让社区在同一把尺子上比较灵巧手与触觉方法。</p></article><article class="card"><p class="vision-step">长期</p><h3>回答触觉何时、为何起作用</h3><p>持续积累经真机校验的物理交互与触觉数据，让仿真里的结论能够放心地用到真机上。</p></article></div><div class="research-callout"><strong>希望本次讨论达成：</strong>确定试点任务、真机支持方式和技术联系人，共同启动第一轮物理交互验证。</div></div></section>
 
 <!-- 演示模式 HUD -->
 <div class="hud no-print" id="hud" hidden>
@@ -1611,7 +1439,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   <div class="hud-right">
     <span class="hud-dots" id="hudDots" aria-hidden="true"></span>
     <button class="hud-nav" id="prevBtn" type="button" aria-label="上一步">‹</button>
-    <span class="hud-count" id="hudCount">01 / 23</span>
+    <span class="hud-count" id="hudCount">01 / 19</span>
     <button class="hud-nav" id="nextBtn" type="button" aria-label="下一步">›</button>
   </div>
   <div class="hud-hint" id="hudHint">← → 或空格翻页 · F 全屏 · T 深浅色 · B 黑屏 · Esc 退出</div>
@@ -1636,7 +1464,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   function safe(name, fn) { try { fn(); } catch (e) { console.warn('[proposal] ' + name + ' 初始化失败', e); } }
 
   var mqReduce = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
-  var slides = $$('.slide');
+  var slides = $$('#deck > .slide');
   var state = { present: false, idx: 0, step: 0 };
   var lenis = null, ctx = null;
   var fx = !mqReduce.matches && 'IntersectionObserver' in window && window.CSS && CSS.supports('position', 'sticky') &&
@@ -1651,7 +1479,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
   $('#themeBtn').addEventListener('click', toggleTheme);
 
   /* ---------------- 视频：进入视口播放，离开暂停；缺失则显示占位 ---------------- */
-  var videos = $$('video.demo-video');
+  var videos = $$('video.demo-video'), onScreen = new Set();
   function playSafe(v) { if (v.dataset.state === 'missing') return; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
   safe('video', function () {
     videos.forEach(function (v) {
@@ -1659,10 +1487,19 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
     });
     if (!('IntersectionObserver' in window)) return;
     var vio = new IntersectionObserver(function (es) {
-      es.forEach(function (en) { if (state.present) return; if (en.isIntersecting) playSafe(en.target); else en.target.pause(); });
+      es.forEach(function (en) {
+        if (en.isIntersecting) onScreen.add(en.target); else onScreen.delete(en.target);
+        if (state.present) return;
+        if (en.isIntersecting) playSafe(en.target); else en.target.pause();
+      });
     }, { threshold: 0.35 });
     videos.forEach(function (v) { vio.observe(v); });
-    document.addEventListener('visibilitychange', function () { if (document.hidden) videos.forEach(function (v) { v.pause(); }); });
+    // 切到后台时暂停；回到页面时，视口内的视频继续播放
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) videos.forEach(function (v) { v.pause(); });
+      else if (!state.present) onScreen.forEach(playSafe);
+      else $$('video.demo-video', slides[state.idx]).forEach(playSafe);
+    });
   });
 
   /* ---------------- 入场动画 ---------------- */
@@ -1814,7 +1651,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
     $$('a[href^="#"]').forEach(function (a) {
       a.addEventListener('click', function (e) {
         var el = document.getElementById(a.getAttribute('href').slice(1)); if (!el) return;
-        if (state.present) { e.preventDefault(); go(slides.indexOf(el), 0); return; }
+        if (state.present) { e.preventDefault(); var targetIndex = slides.indexOf(el); if (targetIndex >= 0) { go(targetIndex, 0); return; } exitPresent(); }
         if (lenis) { e.preventDefault(); lenis.scrollTo(el, { offset: 0 }); history.replaceState(null, '', '#' + el.id); }
       });
     });
@@ -1946,6 +1783,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
     if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); else scrollTo(0, y);
     if (fx) ScrollTrigger.refresh();
     try { history.replaceState(null, '', '#' + sl.id); } catch (e) {}
+    setTimeout(function () { onScreen.forEach(playSafe); }, 300);
   }
   function wake() {
     html.classList.add('hud-awake'); clearTimeout(idleTimer);
@@ -1969,6 +1807,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
       var t = e.target, tag = (t.tagName || '').toLowerCase();
       if ((tag === 'input' && t.type !== 'range') || tag === 'textarea' || tag === 'select' || t.isContentEditable) return;
       var k = e.key;
+      if (state.present && ((tag === 'video' && /^( |Enter|ArrowLeft|ArrowRight|ArrowUp|ArrowDown)$/.test(k)) || (/^(a|button|summary)$/.test(tag) && (k === ' ' || k === 'Enter')))) return;
       if (!state.present) { if (k === 'p' || k === 'P') { e.preventDefault(); enterPresent(); } return; }
       if (e.repeat && Date.now() - lastKey < 150) { e.preventDefault(); return; }
       lastKey = Date.now();
@@ -2001,6 +1840,7 @@ html.blackout .hud::before { content: ''; position: fixed; inset: 0; background:
       t0 = null;
     }, { passive: true });
   });
+
 
   /* ---------------- 启动 ---------------- */
   safe('reveal', initReveal);
